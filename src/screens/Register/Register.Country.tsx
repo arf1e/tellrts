@@ -104,6 +104,7 @@ const Country = ({
       title={t('register.location.apply')}
       style={styles.countryConfirmBtn}>
       <Emoji
+        // @ts-ignore
         name={`flag-${countrySelected.toLowerCase()}`}
         style={styles.countryConfirmBtnEmoji}
       />

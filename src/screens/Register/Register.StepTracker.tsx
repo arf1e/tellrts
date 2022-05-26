@@ -3,7 +3,7 @@ import {View} from 'react-native';
 
 import {schema} from './Register.utils';
 import styles from './Register.styles';
-import {REGISTER_FORM_VALUES} from './Register';
+import {REGISTER_FORM_VALUES} from './Register.types';
 import {FormikProps} from 'formik';
 
 type StepProps = {

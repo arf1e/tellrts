@@ -3,7 +3,7 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
 import {Subtitle} from '../../components/Typography';
-import {REGISTER_FORM_VALUES} from './Register';
+import {REGISTER_FORM_VALUES} from './Register.types';
 import City from './Register.City';
 import Country from './Register.Country';
 

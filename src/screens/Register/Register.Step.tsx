@@ -5,7 +5,7 @@ import styles from './Register.styles';
 import RegisterControlPanel from './Register.ControlPanel';
 import {BodyCopy, Title} from '../../components/Typography';
 import {FormikProps} from 'formik';
-import {REGISTER_FORM_VALUES} from './Register';
+import {REGISTER_FORM_VALUES} from './Register.types';
 import StepTracker from './Register.StepTracker';
 import Link from '../../components/Links';
 
@@ -19,12 +19,12 @@ interface Props {
   steps: string[];
   currentStep: number;
   formikProps: any;
-  isReviewing: boolean;
+  isReviewing?: boolean;
   toReview?: () => void;
 }
 
 type StepHeaderProps = {
-  isReviewing: boolean;
+  isReviewing?: boolean;
   toReview?: () => void;
   steps: string[];
   currentStep: number;

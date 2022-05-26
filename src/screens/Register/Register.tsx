@@ -2,7 +2,7 @@ import {useBackHandler} from '@react-native-community/hooks';
 import {ParamListBase} from '@react-navigation/native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import React, {useState} from 'react';
-import {Alert, Pressable, SafeAreaView, StatusBar, View} from 'react-native';
+import {Alert, SafeAreaView, StatusBar, View} from 'react-native';
 import moment from 'moment';
 
 import styles from './Register.styles';
@@ -10,7 +10,7 @@ import colors from '../../utils/colors';
 
 import DismissKeyboard from '../../components/DismissKeyboard';
 import {LOGIN_SCREEN} from '../../components/Navigation/AuthNavigator';
-import {Title, BodyCopy} from '../../components/Typography';
+import {BodyCopy} from '../../components/Typography';
 import {Formik} from 'formik';
 import {validateSchema, schema} from './Register.utils';
 import Step from './Register.Step';
@@ -22,11 +22,14 @@ import Photo from './Register.Photo';
 import Location from './Register.Location';
 import Password from './Register.Password';
 import Check from './Register.Check';
-import {gql, useMutation} from '@apollo/client';
+import {useMutation} from '@apollo/client';
 import errorCatcher from '../../utils/toasts';
 import {generateRNFile} from '../../utils/photo';
 import {logIn} from '../../utils/slices/authSlice';
 import {useDispatch} from 'react-redux';
+import {REGISTER_MUTATION} from './Register.graphql';
+import {GraphQLError} from 'graphql';
+import {REGISTER_FORM_VALUES} from './Register.types';
 
 export const stepMapper = [
   'name',
@@ -38,7 +41,7 @@ export const stepMapper = [
   'check',
 ];
 
-const REGISTER_FORM_INITIAL_VALUES = {
+const REGISTER_FORM_INITIAL_VALUES: REGISTER_FORM_VALUES = {
   name: '',
   birthday: null,
   birthdayInput: '',
@@ -51,49 +54,6 @@ const REGISTER_FORM_INITIAL_VALUES = {
   password: '',
   passwordConfirm: '',
   email: '',
-};
-
-const REGISTER_MUTATION = gql`
-  mutation createAccount(
-    $email: String!
-    $name: String!
-    $birthday: String!
-    $password: String!
-    $sex: Boolean!
-    $countryCode: String
-    $photo: Upload
-    $cityId: String
-  ) {
-    createAccount(
-      name: $name
-      birthday: $birthday
-      sex: $sex
-      photo: $photo
-      countryCode: $countryCode
-      cityId: $cityId
-      password: $password
-      email: $email
-    ) {
-      ok
-      error
-      token
-    }
-  }
-`;
-
-export type REGISTER_FORM_VALUES = {
-  name: string;
-  birthday: Date | null;
-  birthdayInput: string;
-  sex: boolean | null;
-  photo: any;
-  countryCode: string | null;
-  countryTitle: string;
-  cityId: string;
-  cityTitle: string;
-  password: string;
-  passwordConfirm: string;
-  email: string;
 };
 
 const Register = ({
@@ -146,7 +106,10 @@ const Register = ({
     }
   });
 
-  const onRegisterMutationCompleted = ({error, token}, reset) => {
+  const onRegisterMutationCompleted = (
+    {error, token}: {error: GraphQLError; token: string},
+    reset: () => void,
+  ) => {
     if (error) {
       errorCatcher({
         name: t('register.check.registerError'),
@@ -158,9 +121,10 @@ const Register = ({
 
     dispatch(logIn({token}));
   };
-
+  // @ts-ignore
   const [register, {loading: registerLoading, reset: registerReset}] =
     useMutation(REGISTER_MUTATION, {
+      // @ts-ignore
       onCompleted: data =>
         onRegisterMutationCompleted(data.createAccount, registerReset),
       onError: e => {
@@ -198,6 +162,7 @@ const Register = ({
           <Formik
             initialValues={{
               ...REGISTER_FORM_INITIAL_VALUES,
+              // @ts-ignore
               email: route.params?.email || '',
             }}
             onSubmit={values => console.log(values)}

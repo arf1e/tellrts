@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import FullScreenModal from '../../components/Modals';
-import {ActivityIndicator, ScrollView, View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 
 import styles from './Register.styles';
 import Field from '../../components/Field';
-import {REGISTER_FORM_VALUES} from './Register';
+import {REGISTER_FORM_VALUES} from './Register.types';
 import {FormikProps} from 'formik';
 import {BodyCopy} from '../../components/Typography';
 import Link, {ImageLink} from '../../components/Links';

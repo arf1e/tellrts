@@ -7,7 +7,7 @@ import styles from './Register.styles';
 import OptionWithIcon from '../../components/Option/OptionWithIcon';
 import {useTranslation} from 'react-i18next';
 import ImagePicker from 'react-native-image-crop-picker';
-import {REGISTER_FORM_VALUES} from './Register';
+import {REGISTER_FORM_VALUES} from './Register.types';
 import errorCatcher from '../../utils/toasts';
 
 type Props = {

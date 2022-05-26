@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {ActivityIndicator, Pressable, SectionList, View} from 'react-native';
+import {ActivityIndicator, Pressable, View} from 'react-native';
 import {GoogleAutoComplete} from 'react-native-google-autocomplete';
 
 import FullScreenModal from '../../components/Modals';
@@ -98,6 +98,7 @@ const City = ({countrySelected, setCity, currentCity}: Props) => {
           apiKey={GOOGLE_API_KEY}
           debounce={300}
           minLength={2}
+          // @ts-ignore
           components={`country:${countrySelected.toLowerCase()}`}
           queryTypes="(cities)">
           {({handleTextChange, locationResults, clearSearch, isSearching}) => (

@@ -6,7 +6,7 @@ import styles from './Register.styles';
 import Field from '../../components/Field';
 import {FormikProps} from 'formik';
 import Fieldcheck from './Register.Fieldcheck';
-import {REGISTER_FORM_VALUES} from './Register';
+import {REGISTER_FORM_VALUES} from './Register.types';
 
 type Props = {
   formikProps: FormikProps<REGISTER_FORM_VALUES>;
