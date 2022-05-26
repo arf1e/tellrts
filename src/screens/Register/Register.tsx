@@ -20,11 +20,18 @@ import SelectGender from './Register.SelectGender';
 import Datefield from '../../components/Field/Datefield';
 import Photo from './Register.Photo';
 import Location from './Register.Location';
+import Password from './Register.Password';
+import Check from './Register.Check';
+import {gql, useMutation} from '@apollo/client';
+import errorCatcher from '../../utils/toasts';
+import {generateRNFile} from '../../utils/photo';
+import {logIn} from '../../utils/slices/authSlice';
+import {useDispatch} from 'react-redux';
 
 export const stepMapper = [
   'name',
-  'birthday',
   'sex',
+  'birthday',
   'photo',
   'cityId',
   'password',
@@ -38,12 +45,55 @@ const REGISTER_FORM_INITIAL_VALUES = {
   sex: null,
   photo: '',
   countryCode: null,
-  countryInput: '',
+  countryTitle: '',
   cityId: '',
   cityTitle: '',
   password: '',
   passwordConfirm: '',
   email: '',
+};
+
+const REGISTER_MUTATION = gql`
+  mutation createAccount(
+    $email: String!
+    $name: String!
+    $birthday: String!
+    $password: String!
+    $sex: Boolean!
+    $countryCode: String
+    $photo: Upload
+    $cityId: String
+  ) {
+    createAccount(
+      name: $name
+      birthday: $birthday
+      sex: $sex
+      photo: $photo
+      countryCode: $countryCode
+      cityId: $cityId
+      password: $password
+      email: $email
+    ) {
+      ok
+      error
+      token
+    }
+  }
+`;
+
+export type REGISTER_FORM_VALUES = {
+  name: string;
+  birthday: Date | null;
+  birthdayInput: string;
+  sex: boolean | null;
+  photo: any;
+  countryCode: string | null;
+  countryTitle: string;
+  cityId: string;
+  cityTitle: string;
+  password: string;
+  passwordConfirm: string;
+  email: string;
 };
 
 const Register = ({
@@ -52,6 +102,7 @@ const Register = ({
 }: NativeStackScreenProps<ParamListBase>) => {
   const [step, setStep] = useState(0);
   const nextStep = () => setStep(step + 1);
+  const dispatch = useDispatch();
   const previousStep = () => {
     if (step === 0) {
       askIfGetBackToLoginPage();
@@ -62,10 +113,14 @@ const Register = ({
     }
   };
   const [isReviewing, setIsReviewing] = useState(false);
-  const [registerLoading, setRegisterLoading] = useState(false);
-  const [submitError, setSubmitError] = useState('');
+
   const {t} = useTranslation();
   const getToReviewStep = () => setStep(6);
+
+  const navigateFormDuringReview = (index: number) => {
+    setIsReviewing(true);
+    setStep(index);
+  };
 
   const askIfGetBackToLoginPage = () =>
     Alert.alert(t('register.quit.title'), t('register.quit.description'), [
@@ -90,6 +145,47 @@ const Register = ({
       return true;
     }
   });
+
+  const onRegisterMutationCompleted = ({error, token}, reset) => {
+    if (error) {
+      errorCatcher({
+        name: t('register.check.registerError'),
+        message: error,
+      });
+      reset();
+      return;
+    }
+
+    dispatch(logIn({token}));
+  };
+
+  const [register, {loading: registerLoading, reset: registerReset}] =
+    useMutation(REGISTER_MUTATION, {
+      onCompleted: data =>
+        onRegisterMutationCompleted(data.createAccount, registerReset),
+      onError: e => {
+        errorCatcher(e);
+        registerReset();
+      },
+    });
+
+  const handleRegister = async (values: REGISTER_FORM_VALUES) => {
+    const {birthdayInput} = values;
+    const photoFile = await generateRNFile(values.photo);
+    await register({
+      variables: {
+        name: values.name,
+        email: values.email,
+        birthday: birthdayInput,
+        sex: values.sex,
+        photo: photoFile,
+        countryCode: values.countryCode,
+        cityId: values.cityId,
+        password: values.password,
+      },
+      fetchPolicy: 'no-cache',
+    });
+  };
 
   return (
     <DismissKeyboard>
@@ -233,14 +329,58 @@ const Register = ({
                         schema.fields.cityId.isValidSync(
                           formikProps.values.cityId,
                         ) &&
-                        schema.fields.country.isValidSync({
-                          code: formikProps.values.countryCode,
-                          title: formikProps.values.countryInput,
-                        })
+                        schema.fields.countryCode.isValidSync(
+                          formikProps.values.countryCode,
+                        ) &&
+                        schema.fields.countryTitle.isValidSync(
+                          formikProps.values.countryTitle,
+                        )
                       )
                     }
                     description={t('register.location.description')}>
                     <Location formikProps={formikProps} />
+                  </Step>
+                )}
+                {step === 5 && (
+                  <Step
+                    steps={stepMapper}
+                    formikProps={formikProps}
+                    currentStep={step}
+                    isReviewing={isReviewing}
+                    toReview={getToReviewStep}
+                    title={t('register.password.title')}
+                    description={t('register.password.description')}
+                    primaryAction={nextStep}
+                    secondaryAction={previousStep}
+                    disabled={
+                      !(
+                        schema.fields.password.isValidSync(
+                          formikProps.values.password,
+                        ) &&
+                        formikProps.values.password ===
+                          formikProps.values.passwordConfirm
+                      )
+                    }>
+                    <Password formikProps={formikProps} />
+                  </Step>
+                )}
+                {step === 6 && (
+                  <Step
+                    steps={stepMapper}
+                    formikProps={formikProps}
+                    currentStep={step}
+                    title={t('register.check.title')}
+                    description={t('register.check.description')}
+                    primaryAction={() => handleRegister(formikProps.values)}
+                    disabled={
+                      !schema.isValidSync(formikProps.values) || registerLoading
+                    }
+                    secondaryAction={previousStep}>
+                    <Check
+                      formikProps={formikProps}
+                      registerLoading={registerLoading}
+                      navigateForm={navigateFormDuringReview}
+                    />
                   </Step>
                 )}
               </>

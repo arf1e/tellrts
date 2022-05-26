@@ -7,9 +7,11 @@ import styles from './Register.styles';
 import OptionWithIcon from '../../components/Option/OptionWithIcon';
 import {useTranslation} from 'react-i18next';
 import ImagePicker from 'react-native-image-crop-picker';
+import {REGISTER_FORM_VALUES} from './Register';
+import errorCatcher from '../../utils/toasts';
 
 type Props = {
-  formikProps: FormikProps<any>;
+  formikProps: FormikProps<REGISTER_FORM_VALUES>;
 };
 
 const pickerOptions = {
@@ -38,14 +40,16 @@ const Photo = ({formikProps}: Props) => {
           setChangePhotoActive(false);
           return null;
         }
-      } else {
-        throw new Error(t('register.photo.errors.photoEditError'));
+        throw new Error('wrong ext');
       }
     }
+    throw new Error('process photo');
   };
 
   const handleChoosePhoto = () => {
-    ImagePicker.openPicker(pickerOptions).then(image => processPhoto(image));
+    ImagePicker.openPicker(pickerOptions)
+      .then(image => processPhoto(image))
+      .catch(e => errorCatcher(e));
   };
 
   const handleTakePhoto = () => {

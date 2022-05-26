@@ -3,7 +3,11 @@ import React from 'react';
 
 import styles from './Register.styles';
 import RegisterControlPanel from './Register.ControlPanel';
-import {BodyCopy, Subtitle, Title} from '../../components/Typography';
+import {BodyCopy, Title} from '../../components/Typography';
+import {FormikProps} from 'formik';
+import {REGISTER_FORM_VALUES} from './Register';
+import StepTracker from './Register.StepTracker';
+import Link from '../../components/Links';
 
 interface Props {
   title: string;
@@ -15,17 +19,40 @@ interface Props {
   steps: string[];
   currentStep: number;
   formikProps: any;
-  isReviewing?: Boolean;
+  isReviewing: boolean;
   toReview?: () => void;
 }
 
-interface StepHeaderProps {
-  isReviewing?: boolean;
+type StepHeaderProps = {
+  isReviewing: boolean;
   toReview?: () => void;
   steps: string[];
   currentStep: number;
-  formikProps: any;
-}
+  formikProps: FormikProps<REGISTER_FORM_VALUES>;
+};
+
+const StepHeader = ({
+  isReviewing,
+  toReview,
+  steps,
+  currentStep,
+  formikProps,
+}: StepHeaderProps) => {
+  return (
+    <View style={styles.stepHeader}>
+      <StepTracker
+        formikProps={formikProps}
+        steps={steps}
+        currentStep={currentStep}
+      />
+      {isReviewing && (
+        <Link onPress={toReview} containerStyle={styles.reviewLinkContainer}>
+          Check
+        </Link>
+      )}
+    </View>
+  );
+};
 
 export default ({
   title,
@@ -42,6 +69,13 @@ export default ({
 }: Props): React.ReactElement => {
   return (
     <View style={styles.stepContainer}>
+      <StepHeader
+        formikProps={formikProps}
+        steps={steps}
+        currentStep={currentStep}
+        isReviewing={isReviewing}
+        toReview={toReview}
+      />
       <Title style={styles.stepTitle}>{title}</Title>
       <BodyCopy style={styles.stepDescription}>{description}</BodyCopy>
       {children}

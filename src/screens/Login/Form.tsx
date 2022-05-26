@@ -4,11 +4,8 @@ import {View} from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import {gql, useLazyQuery} from '@apollo/client';
-import Toast from 'react-native-toast-message';
 
-import PrimaryButton from '../../components/Buttons';
-import Field from '../../components/Field';
-import {BodyCopy, Subtitle} from '../../components/Typography';
+import {Subtitle} from '../../components/Typography';
 import LoginStyles from './Login.styles';
 import Email from './Email';
 import Password from './Password';

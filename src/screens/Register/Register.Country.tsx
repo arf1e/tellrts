@@ -10,7 +10,7 @@ import Reanimated, {
 import Emoji from 'react-native-emoji';
 
 import FullScreenModal from '../../components/Modals';
-import {BodyCopy, Subtitle} from '../../components/Typography';
+import {BodyCopy} from '../../components/Typography';
 import {
   getCountriesByName,
   getCountryNameByCode,
@@ -25,9 +25,9 @@ const AnimatedPressable = Reanimated.createAnimatedComponent(Pressable);
 
 type CountryProps = {
   setCountryCode: (code: string) => void;
-  countryInput?: string;
-  countrySelected: string;
-  setCountryInput: (name: string) => void;
+  countryTitle?: string;
+  countrySelected: string | null;
+  setcountryTitle: (name: string) => void;
   clearCitySelection: () => void;
 };
 
@@ -63,8 +63,8 @@ const CountryItem = ({
 
 const Country = ({
   setCountryCode,
-  countryInput,
-  setCountryInput,
+  countryTitle,
+  setcountryTitle,
   countrySelected,
   clearCitySelection,
 }: CountryProps) => {
@@ -74,14 +74,14 @@ const Country = ({
 
   const handleCountryNameInput = (countryName: string) => {
     setCountryCode('');
-    setCountryInput(countryName);
+    setcountryTitle(countryName);
     const matchedCountries = getCountriesByName(countryName).slice(0, 4);
     setCountriesResult(matchedCountries);
   };
 
   const handleCountryItemSelection = (country: CountryType) => {
     clearCitySelection();
-    setCountryInput(country.name);
+    setcountryTitle(country.name);
     setCountryCode(country.code);
     setCountriesResult([]);
   };
@@ -127,8 +127,8 @@ const Country = ({
         <Field
           placeholder="Start typing..."
           onChangeText={handleCountryNameInput}
-          style={styles.countryInput}
-          value={countryInput}
+          style={styles.countryTitle}
+          value={countryTitle}
           scrollEnabled={false}
         />
         {countriesResult.length > 0 && renderCountriesResult()}

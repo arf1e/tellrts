@@ -16,7 +16,7 @@ import PrimaryButton from '../../components/Buttons';
 const GOOGLE_API_KEY = 'AIzaSyDw6jMkY0hQFicfxsmzU1bKn-sFAHWUgS0';
 
 type Props = {
-  countrySelected: string;
+  countrySelected: string | null;
   setCity: (id: string, title: string) => void;
   currentCity: {
     id: string;

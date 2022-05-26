@@ -31,10 +31,9 @@ export const validateSchema = (schema: any) => (values: any) =>
 export const schema = yup.object().shape({
   name: yup
     .string()
-    .strip()
+    .required('requiredd')
     .min(2)
     .max(12)
-    .required()
     .matches(/[а-яА-ЯЁёa-zA-Z]/),
   birthdayInput: yup.string().required().length(10),
   birthday: yup
@@ -60,10 +59,8 @@ export const schema = yup.object().shape({
       width: yup.number().required(),
     })
     .required(),
-  country: yup.object().shape({
-    code: yup.string().required().length(2),
-    title: yup.string().required().min(2),
-  }),
+  countryCode: yup.string().required().length(2),
+  countryTitle: yup.string().required().min(2),
   cityId: yup.string().required(),
   cityTitle: yup.string().required(),
   password: yup

@@ -1,4 +1,4 @@
-import EStyleSheet, {hairlineWidth} from 'react-native-extended-stylesheet';
+import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
   screenWrapper: {
@@ -91,8 +91,6 @@ export default EStyleSheet.create({
     alignItems: 'center',
   },
 
-  countryInput: {},
-
   separator: {
     width: '100%',
     height: 0.4,
@@ -135,6 +133,86 @@ export default EStyleSheet.create({
   },
 
   cityApplyBtn: {
+    marginTop: 32,
+  },
+
+  passwordFieldContainer: {
+    width: 300,
+    marginBottom: 16,
+  },
+
+  fieldTitle: {
+    marginBottom: 8,
+    color: '$gray',
+  },
+
+  fieldcheckContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+
+  fieldcheckDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginRight: 12,
+  },
+
+  fieldcheckText: {
+    fontFamily: 'Roboto-Regular',
+    fontSize: '$bcMedium',
+  },
+
+  passwordChecksContainer: {
+    marginTop: 16,
+  },
+
+  stepDotsContainer: {
+    width: 140,
+    flexDirection: 'row',
+    paddingVertical: 4,
+    justifyContent: 'space-between',
+  },
+
+  stepDot: {
+    width: 12,
+    height: 12,
+    backgroundColor: '$gray',
+    borderRadius: 6,
+  },
+
+  stepDotActive: {
+    backgroundColor: '$primary',
+  },
+
+  stepDotChecked: {
+    backgroundColor: '$secondary',
+  },
+
+  checkTextField: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  checkTextFieldTitle: {
+    fontFamily: 'Roboto-Medium',
+    width: 70,
+  },
+
+  stepHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+
+  reviewLinkContainer: {
+    margin: 0,
+    padding: 0,
+    paddingVertical: 0,
+  },
+
+  emailModalFieldButton: {
     marginTop: 32,
   },
 });

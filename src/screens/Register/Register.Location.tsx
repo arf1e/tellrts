@@ -3,19 +3,19 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
 import {Subtitle} from '../../components/Typography';
+import {REGISTER_FORM_VALUES} from './Register';
 import City from './Register.City';
 import Country from './Register.Country';
-import styles from './Register.styles';
 
 type Props = {
-  formikProps: FormikProps<any>;
+  formikProps: FormikProps<REGISTER_FORM_VALUES>;
 };
 
 const Location = ({formikProps}: Props) => {
   const setCountryCode = (code: string) =>
     formikProps.setFieldValue('countryCode', code);
-  const setCountryInput = (name: string) =>
-    formikProps.setFieldValue('countryInput', name);
+  const setcountryTitle = (name: string) =>
+    formikProps.setFieldValue('countryTitle', name);
   const countrySelected = formikProps.values.countryCode;
   const setCity = (id: string, title: string) => {
     formikProps.setFieldValue('cityId', id);
@@ -32,8 +32,8 @@ const Location = ({formikProps}: Props) => {
       <Subtitle>{t('register.location.countryTitle')}</Subtitle>
       <Country
         setCountryCode={setCountryCode}
-        countryInput={formikProps.values.countryInput}
-        setCountryInput={setCountryInput}
+        countryTitle={formikProps.values.countryTitle}
+        setcountryTitle={setcountryTitle}
         countrySelected={countrySelected}
         clearCitySelection={clearCitySelection}
       />
