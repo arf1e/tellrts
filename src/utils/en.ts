@@ -11,6 +11,32 @@ export default {
       passwordFieldTitle: 'Password',
     },
   },
+  app: {
+    navigation: {
+      goBack: 'Back',
+    },
+    settings: {
+      confirmLogoutTitle: 'Confirm Logout',
+      confirmLogoutDesc: 'Please confirm logout',
+      cancelLogout: 'Cancel',
+      confirmLogout: 'Logout',
+      photo: {
+        title: 'Photo',
+        changePhoto: 'Change Photo',
+      },
+      socialLinks: {
+        title: 'Social Links',
+        addLink: 'Connect new social account',
+      },
+      profile: {
+        title: 'Profile',
+        email: 'E-mail',
+        city: 'City',
+        changePassword: 'Change Password',
+        logout: 'Logout',
+      },
+    },
+  },
   register: {
     name: {
       title: 'What is your name?',

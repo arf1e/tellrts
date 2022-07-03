@@ -115,6 +115,7 @@ const Register = ({
         name: t('register.check.registerError'),
         message: error,
       });
+      console.log(error);
       reset();
       return;
     }

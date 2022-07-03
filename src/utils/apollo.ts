@@ -18,16 +18,20 @@ const authLink = setContext((_, {headers}) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      token: token ? token : '',
     },
   };
 });
 
-const uploadLink = createUploadLink({uri: API_URL});
+const uploadLink = createUploadLink({
+  uri: API_URL,
+}) as unknown as ApolloLink;
 
 const client = new ApolloClient({
-  link: ApolloLink.from([uploadLink, httpLink, authLink]),
+  link: ApolloLink.from([authLink, uploadLink, httpLink]),
   cache: new InMemoryCache(),
+  name: 'Tellr Mobile App',
+  version: '0.1',
 });
 
 export default client;

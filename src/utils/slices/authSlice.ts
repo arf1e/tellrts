@@ -1,4 +1,5 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import client from '../apollo';
 
 export interface AuthState {
   token: string | null;
@@ -17,6 +18,7 @@ export const AuthSlice = createSlice({
     },
     logOut: state => {
       state.token = null;
+      client.clearStore();
     },
   },
 });
