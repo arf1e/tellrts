@@ -15,6 +15,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, {headers}) => {
   const token = store.getState().auth.token;
+  // const firebaseToken = store.getState().firebase.firebaseToken;
   return {
     headers: {
       ...headers,

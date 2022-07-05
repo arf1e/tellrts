@@ -9,6 +9,9 @@ import {BodyCopy} from '../Typography';
 import messaging from '@react-native-firebase/messaging';
 import errorCatcher from '../../utils/toasts';
 import {gql, useMutation} from '@apollo/client';
+import {useDispatch} from 'react-redux';
+import {saveToken} from '../../utils/slices/firebaseTokenSlice';
+import Toast from 'react-native-toast-message';
 
 const AppTabs = createBottomTabNavigator();
 
@@ -26,17 +29,30 @@ const SEND_DEVICE_TOKEN_TO_API = gql`
 `;
 
 const AppNavigator = () => {
+  const dispatch = useDispatch();
+
   const [sendTokenToApi, {data, loading, error}] = useMutation(
     SEND_DEVICE_TOKEN_TO_API,
   );
   useEffect(() => {
+    // TODO: Handle offline/errors
     const aquireDeviceTokenAndSendToApi = async () => {
       const token = await messaging().getToken();
+      dispatch(saveToken({firebaseToken: token}));
       sendTokenToApi({variables: {token}});
-      console.warn(token);
     };
 
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      const {notification} = remoteMessage;
+      const {title, body} = notification;
+      if (notification) {
+        Toast.show({type: 'info', text1: title, text2: body});
+      }
+    });
+
     aquireDeviceTokenAndSendToApi().catch(e => errorCatcher(e));
+
+    return unsubscribe;
   }, []);
 
   return (
