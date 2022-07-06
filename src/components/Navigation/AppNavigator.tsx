@@ -31,9 +31,9 @@ const SEND_DEVICE_TOKEN_TO_API = gql`
 const AppNavigator = () => {
   const dispatch = useDispatch();
 
-  const [sendTokenToApi, {data, loading, error}] = useMutation(
-    SEND_DEVICE_TOKEN_TO_API,
-  );
+  // PUSH NOTIFICATIONS
+  const [sendTokenToApi] = useMutation(SEND_DEVICE_TOKEN_TO_API);
+
   useEffect(() => {
     // TODO: Handle offline/errors
     const aquireDeviceTokenAndSendToApi = async () => {
@@ -44,7 +44,7 @@ const AppNavigator = () => {
 
     const unsubscribe = messaging().onMessage(async remoteMessage => {
       const {notification} = remoteMessage;
-      const {title, body} = notification;
+      const [title, body] = [notification?.title, notification?.body];
       if (notification) {
         Toast.show({type: 'info', text1: title, text2: body});
       }

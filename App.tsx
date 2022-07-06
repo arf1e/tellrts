@@ -21,7 +21,7 @@ import {Provider} from 'react-redux';
 import {storePersistor, store} from './src/utils/store';
 import {PersistGate} from 'redux-persist/integration/react';
 
-import initialize from './src/utils/i18n';
+import initializeI18n from './src/utils/i18n';
 import {colorVariables} from './src/utils/colors';
 import client from './src/utils/apollo';
 
@@ -63,7 +63,7 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
   useEffect(() => {
-    initialize();
+    initializeI18n();
   }, []);
 
   return (
