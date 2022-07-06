@@ -45,7 +45,13 @@ const Password = ({emailExists, email, goBack}: Props) => {
 
   const dispatch = useDispatch();
 
-  const onLoginMutationCompleted = ({ok, error, token}) => {
+  const onLoginMutationCompleted = ({
+    error,
+    token,
+  }: {
+    error: string;
+    token: string;
+  }) => {
     if (error) {
       errorCatcher(error);
       return;

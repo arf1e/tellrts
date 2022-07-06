@@ -1,5 +1,6 @@
 import {configureStore} from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
+import firebaseReducer from './slices/firebaseTokenSlice';
 import {
   persistStore,
   persistReducer,
@@ -12,17 +13,28 @@ import {
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const persistConfig = {
+const persistAuthConfig = {
   key: 'auth',
   version: 1,
   storage: AsyncStorage,
 };
 
-const persistedReducer = persistReducer(persistConfig, authReducer);
+const persistFirebaseConfig = {
+  key: 'firebase',
+  version: 1,
+  storage: AsyncStorage,
+};
+
+const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
+const persistedFirebaseReducer = persistReducer(
+  persistFirebaseConfig,
+  firebaseReducer,
+);
 
 export const store = configureStore({
   reducer: {
-    auth: persistedReducer,
+    auth: persistedAuthReducer,
+    firebase: persistedFirebaseReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

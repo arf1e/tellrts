@@ -1,11 +1,5 @@
 import React, {useState} from 'react';
 import {TextInputProps} from 'react-native';
-import {
-  interpolateColor,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
 import TextInputMask from 'react-native-text-input-mask';
 
 import styles from './Field.styles';
@@ -33,6 +27,7 @@ const Datefield = ({mask, onChangeText, ...rest}: Props) => {
       style={inputStyle}
       onChangeText={onChangeText}
       onFocus={handleFocus}
+      affinityCalculationStrategy={'WHOLE_STRING'}
       onBlur={handleBlur}
       {...rest}
     />
