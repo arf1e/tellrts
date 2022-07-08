@@ -5,6 +5,7 @@ export default StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 24,
     paddingTop: '20%',
+    backgroundColor: '$primary',
     flex: 1,
   },
 

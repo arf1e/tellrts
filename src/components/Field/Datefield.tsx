@@ -27,7 +27,6 @@ const Datefield = ({mask, onChangeText, ...rest}: Props) => {
       style={inputStyle}
       onChangeText={onChangeText}
       onFocus={handleFocus}
-      affinityCalculationStrategy={'WHOLE_STRING'}
       onBlur={handleBlur}
       {...rest}
     />

@@ -36,6 +36,9 @@ export default {
         logout: 'Logout',
       },
     },
+    questions: {
+      answerPlaceholder: 'Whatever you think. Really',
+    },
   },
   register: {
     name: {

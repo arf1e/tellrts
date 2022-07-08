@@ -7,9 +7,20 @@ export default EStyleSheet.create({
     paddingVertical: 16,
   },
 
+  paddingContainer: {
+    flex: 1,
+  },
+
   input: {
     fontSize: '$bcLarge',
     lineHeight: '$h3',
     color: '$gray',
   },
+
+  formContainer: {
+    flexGrow: 1,
+    flexDirection: 'column',
+  },
+
+  submitButton: {marginTop: 'auto', marginBottom: 32},
 });
