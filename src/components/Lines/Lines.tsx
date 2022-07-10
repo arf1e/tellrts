@@ -1,5 +1,11 @@
 import React from 'react';
-import {ActivityIndicator, Image, ScrollView, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Image,
+  Pressable,
+  ScrollView,
+  View,
+} from 'react-native';
 import ActionHeader from '../ActionHeader';
 import styles from './Lines.styles';
 import {useQuery} from '@apollo/client';
@@ -8,7 +14,7 @@ import GET_LINES_QUERY from './Lines.graphql';
 import {BodyCopy} from '../Typography';
 import colors from '../../utils/colors';
 import {useNavigation} from '@react-navigation/native';
-import {CATEGORIES} from '../Navigation/ProfileNavigator';
+import {CATEGORIES, EDIT_ANSWER, PROFILE} from '../Navigation/ProfileNavigator';
 
 type Line = {
   id: number;
@@ -34,21 +40,25 @@ type LinesData = {
   };
 };
 
-const LineCard = (line: Line) => {
+const LineCard = ({line, onPress}: {line: Line; onPress: () => void}) => {
   return (
-    <View style={styles.lineContainer}>
-      <View style={styles.lineQuestionBadge}>
-        <Image
-          source={{uri: line.question.category.image}}
-          style={styles.lineQuestionCategoryImage}
-        />
-        <BodyCopy style={styles.lineCategoryText}>
-          {line.question.category.title}
+    <Pressable onPress={onPress}>
+      <View style={styles.lineContainer}>
+        <View style={styles.lineQuestionBadge}>
+          <Image
+            source={{uri: line.question.category.image}}
+            style={styles.lineQuestionCategoryImage}
+          />
+          <BodyCopy style={styles.lineCategoryText}>
+            {line.question.category.title}
+          </BodyCopy>
+        </View>
+        <BodyCopy style={styles.lineQuestionText}>
+          {line.question.text}
         </BodyCopy>
+        <BodyCopy style={styles.lineAnswerText}>{line.answer.text}</BodyCopy>
       </View>
-      <BodyCopy style={styles.lineQuestionText}>{line.question.text}</BodyCopy>
-      <BodyCopy style={styles.lineAnswerText}>{line.answer.text}</BodyCopy>
-    </View>
+    </Pressable>
   );
 };
 
@@ -62,6 +72,19 @@ export default () => {
   if (error) {
     return <BodyCopy>{error.message}</BodyCopy>;
   }
+
+  const onLineCardPress = (line: Line) => {
+    navigation.navigate(
+      // @ts-ignore
+      EDIT_ANSWER,
+      {
+        title: line.question.text,
+        questionId: line.question.id,
+        answer: line.answer.text,
+        headerBackTitle: PROFILE,
+      },
+    );
+  };
   return (
     <View style={styles.container}>
       <ActionHeader
@@ -76,11 +99,13 @@ export default () => {
         showsHorizontalScrollIndicator={false}
         style={styles.linesContainer}>
         {data &&
-          data.me.lines.map(line => <LineCard {...line} key={line.id} />)}
-        {data &&
-          data.me.lines.map(line => <LineCard {...line} key={line.id} />)}
-        {data &&
-          data.me.lines.map(line => <LineCard {...line} key={line.id} />)}
+          data.me.lines.map(line => (
+            <LineCard
+              line={line}
+              key={line.id}
+              onPress={() => onLineCardPress(line)}
+            />
+          ))}
       </ScrollView>
     </View>
   );

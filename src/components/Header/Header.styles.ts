@@ -20,4 +20,9 @@ export default EStyleSheet.create({
       paddingBottom: 12,
     }),
   },
+
+  topLineContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
 });

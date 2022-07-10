@@ -36,6 +36,15 @@ export default {
         logout: 'Logout',
       },
     },
+    questions: {
+      answerPlaceholder: 'Whatever you think. Really',
+    },
+    search: {
+      modalTitle: 'User',
+      modalBio: 'Bio',
+      modalGoBack: 'Cancel',
+      modalStart: 'Start',
+    },
   },
   register: {
     name: {

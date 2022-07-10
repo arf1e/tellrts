@@ -5,6 +5,7 @@ export default EStyleSheet.create({
     paddingHorizontal: 20,
     flex: 1,
     paddingTop: 20,
+    paddingBottom: 20,
   },
 
   header: {
@@ -12,5 +13,10 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: 32,
+  },
+
+  content: {
+    flex: 1,
+    flexGrow: 1,
   },
 });

@@ -10,7 +10,6 @@ import styles from './Header.styles';
 const Header = (props: NativeStackHeaderProps) => {
   const {navigation, back, route, options} = props;
   const {t} = useTranslation();
-
   const renderBackButton = () => {
     return (
       back && (
@@ -21,11 +20,23 @@ const Header = (props: NativeStackHeaderProps) => {
     );
   };
 
+  const renderRightButton = () => {
+    const {rightButtonTitle, onPressRightButton} = options;
+    if (!rightButtonTitle || !onPressRightButton) {
+      return null;
+    }
+
+    return <Link onPress={onPressRightButton}>{rightButtonTitle}</Link>;
+  };
+
   return (
     <SafeAreaView style={styles.background}>
       <Container>
         <View style={styles.headerContainer}>
-          {renderBackButton()}
+          <View style={styles.topLineContainer}>
+            {renderBackButton()}
+            {renderRightButton()}
+          </View>
           <Subtitle style={styles.screenTitle}>
             {options.title ?? route.name}
           </Subtitle>

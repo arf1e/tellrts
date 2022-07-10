@@ -13,6 +13,16 @@ const errorCatcher = (
   });
 };
 
+export const showInfoToast = (text1: string, text2: string) => {
+  Toast.show({
+    type: 'info',
+    text1,
+    text2,
+    position: 'bottom',
+    bottomOffset: 90,
+  });
+};
+
 export const errorWrapper = (fn: () => any | void) => {
   try {
     fn();

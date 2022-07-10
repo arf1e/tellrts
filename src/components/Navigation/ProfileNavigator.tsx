@@ -53,18 +53,7 @@ const ProfileNavigator = () => (
       name={EDIT_ANSWER}
       component={EditAnswer}
       options={{
-        header: props => (
-          // @ts-ignore
-          <Header
-            {...props}
-            options={{
-              // @ts-ignore
-              title: props.route.params.title,
-              // @ts-ignore
-              headerBackTitle: props.route.params.headerBackTitle,
-            }}
-          />
-        ),
+        header: () => null,
       }}
     />
   </ProfileStackNavigator.Navigator>
