@@ -7,6 +7,7 @@ export default StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     flexDirection: 'row',
+    zIndex: 0,
   },
 
   btnText: {
@@ -19,7 +20,7 @@ export default StyleSheet.create({
   },
 
   disabled: {
-    opacity: 0.5,
+    backgroundColor: '$lightGray',
   },
 
   secondaryBtn: {

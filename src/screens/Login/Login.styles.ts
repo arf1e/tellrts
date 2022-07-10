@@ -11,7 +11,7 @@ export default StyleSheet.create({
 
   logo: {
     width: 300,
-    marginBottom: 32,
+    marginBottom: 40,
     alignSelf: 'center',
   },
 
@@ -25,6 +25,15 @@ export default StyleSheet.create({
     padding: 16,
     paddingTop: 20,
     borderRadius: 5,
+    shadowColor: '$darkGray',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+
+    elevation: 2,
   },
 
   formTitle: {

@@ -3,8 +3,9 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default EStyleSheet.create({
   inputContainer: {
     flex: 1,
-    backgroundColor: '$background',
     paddingVertical: 16,
+    backgroundColor: '$background',
+    height: '90%',
   },
 
   paddingContainer: {
@@ -14,13 +15,29 @@ export default EStyleSheet.create({
   input: {
     fontSize: '$bcLarge',
     lineHeight: '$h3',
-    color: '$gray',
+    color: '$darkGray',
+    fontFamily: 'Roboto-Regular',
   },
 
   formContainer: {
-    flexGrow: 1,
+    flex: 1,
     flexDirection: 'column',
   },
 
-  submitButton: {marginTop: 'auto', marginBottom: 32},
+  lengthCounter: {
+    marginVertical: 8,
+    alignSelf: 'flex-end',
+    fontSize: '$bcMedium',
+    color: '$gray',
+  },
+
+  incorrectLength: {
+    color: '$bad',
+  },
+
+  correctLength: {
+    color: '$good',
+  },
+
+  submitButton: {marginTop: 'auto'},
 });

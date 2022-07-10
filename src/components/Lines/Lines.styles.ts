@@ -9,7 +9,7 @@ export default EStyleSheet.create({
     flexDirection: 'column',
     elevation: 2,
     padding: 12,
-    width: 150,
+    width: 210,
     borderRadius: 5,
     marginHorizontal: 8,
     shadowColor: '$darkGray',

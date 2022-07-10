@@ -1,14 +1,16 @@
-import {SafeAreaView, View} from 'react-native';
+import {View} from 'react-native';
 import React from 'react';
-import {Title} from '../../components/Typography';
 import SearchHeader from './SearchHeader';
+import styles from './Search.styles';
+import SearchUsers from './SearchUsers';
+import {BodyCopy} from '../../components/Typography';
 
 const Search = () => {
   return (
-    <SafeAreaView>
+    <View style={styles.container}>
       <SearchHeader />
-      <Title>ass</Title>
-    </SafeAreaView>
+      <SearchUsers />
+    </View>
   );
 };
 

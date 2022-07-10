@@ -12,6 +12,7 @@ import {gql, useMutation} from '@apollo/client';
 import {useDispatch} from 'react-redux';
 import {saveToken} from '../../utils/slices/firebaseTokenSlice';
 import Toast from 'react-native-toast-message';
+import SearchNavigator from './SearchNavigator';
 
 const AppTabs = createBottomTabNavigator();
 
@@ -86,7 +87,7 @@ const AppNavigator = () => {
       />
       <AppTabs.Screen
         name={SEARCH}
-        component={Search}
+        component={SearchNavigator}
         options={{
           tabBarIcon: props => {
             return <NavigationIcon focused={props.focused} name="grid" />;
