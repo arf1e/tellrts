@@ -24,6 +24,16 @@ export default {
         title: 'Photo',
         changePhoto: 'Change Photo',
       },
+      bio: {
+        title: 'Bio',
+        changeBio: 'Update bio',
+        placeholder: 'So you like pizza and travelling? Wow, so unusual!',
+        btnTitle: 'Update bio',
+        successMessage: {
+          title: 'Success!',
+          body: 'Your bio was updated!',
+        },
+      },
       socialLinks: {
         title: 'Social Links',
         addLink: 'Connect new social account',

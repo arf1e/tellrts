@@ -20,6 +20,7 @@ export default EStyleSheet.create({
     shadowOpacity: 0.2,
     backgroundColor: '$background',
     shadowRadius: 1.41,
+    marginVertical: 16,
   },
 
   lineQuestionText: {
@@ -35,14 +36,11 @@ export default EStyleSheet.create({
     fontSize: '$bcMedium',
   },
 
-  linesContainer: {
-    paddingVertical: 16,
-  },
-
   lineQuestionCategoryImage: {
     width: 42,
     height: 42,
     borderRadius: 21,
+    marginRight: 12,
   },
 
   lineQuestionBadge: {

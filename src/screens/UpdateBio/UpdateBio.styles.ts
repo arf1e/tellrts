@@ -1,7 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
-  inputContainer: {
+  container: {
     flex: 1,
     paddingVertical: 16,
     backgroundColor: '$background',
@@ -18,25 +18,11 @@ export default EStyleSheet.create({
     fontFamily: 'Roboto-Regular',
   },
 
-  formContainer: {
+  formContent: {
     flex: 1,
-    flexDirection: 'column',
   },
 
-  lengthCounter: {
-    marginVertical: 8,
-    alignSelf: 'flex-end',
-    fontSize: '$bcMedium',
-    color: '$gray',
+  button: {
+    marginTop: 'auto',
   },
-
-  incorrectLength: {
-    color: '$bad',
-  },
-
-  correctLength: {
-    color: '$good',
-  },
-
-  submitButton: {marginTop: 'auto'},
 });

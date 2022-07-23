@@ -135,6 +135,7 @@ const PrimaryInfo = () => {
   const name = primaryInfoData?.me.name;
   const birthday = primaryInfoData?.me.birthday;
   const cityTitle = primaryInfoData?.me.cityTitle;
+  const bio = primaryInfoData?.me.bio;
   const age = birthday && getAge(birthday);
   if (primaryInfoLoading) {
     return <BodyCopy>ass)</BodyCopy>;
@@ -142,13 +143,8 @@ const PrimaryInfo = () => {
   return (
     <Container>
       <Subtitle style={styles.primaryInfo}>{`${name}, ${age}`}</Subtitle>
-      <BodyCopy style={styles.cityTitle}>{cityTitle}</BodyCopy>
-      <BodyCopy style={styles.bio}>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut iste
-        explicabo, dolorem minima adipisci molestiae maxime culpa nesciunt
-        placeat, quisquam, labore sapiente quos quod iusto beatae praesentium
-        natus necessitatibus commodi?
-      </BodyCopy>
+      <BodyCopy style={styles.cityTitle}>{cityTitle || ''}</BodyCopy>
+      <BodyCopy style={styles.bio}>{bio || ''}</BodyCopy>
     </Container>
   );
 };

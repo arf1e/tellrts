@@ -55,6 +55,7 @@ export default () => {
       variables: {
         categoryId,
       },
+      fetchPolicy: 'cache-and-network',
     },
   );
 

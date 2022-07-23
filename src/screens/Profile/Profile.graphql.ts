@@ -30,6 +30,7 @@ export const PRIMARY_INFO_QUERY = gql`
       id
       name
       birthday
+      bio
       cityTitle
       countryCode
     }
