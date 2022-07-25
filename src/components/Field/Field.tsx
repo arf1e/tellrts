@@ -1,5 +1,10 @@
-import React from 'react';
-import {TextInput, TextInputProps} from 'react-native';
+import React, {SyntheticEvent} from 'react';
+import {
+  NativeSyntheticEvent,
+  TextInput,
+  TextInputFocusEventData,
+  TextInputProps,
+} from 'react-native';
 import FieldStyles from './Field.styles';
 import Reanimated, {
   interpolateColor,
@@ -26,13 +31,19 @@ const Field = ({...rest}: TextInputProps) => {
   );
   const inputStyle = [FieldStyles.field, rest.style, animatedStyle];
 
-  const handleFocus = () => {
+  const handleFocus = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    if (rest.onFocus) {
+      rest.onFocus(e);
+    }
     isActiveSharedValue.value = withTiming(1, {
       duration: animationConstants.BUTTON_IN,
     });
   };
 
-  const handleBlur = () => {
+  const handleBlur = (e: NativeSyntheticEvent<TextInputFocusEventData>) => {
+    if (rest.onBlur) {
+      rest.onBlur(e);
+    }
     isActiveSharedValue.value = withTiming(0, {
       duration: animationConstants.BUTTON_OUT,
     });

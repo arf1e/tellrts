@@ -4,7 +4,11 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, ScrollView, StatusBar} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {UPDATE_BIO} from '../../components/Navigation/ProfileNavigator';
+import {
+  UPDATE_BIO,
+  UPDATE_PASSWORD,
+  UPDATE_PHOTO,
+} from '../../components/Navigation/ProfileNavigator';
 import colors from '../../utils/colors';
 import {logOut} from '../../utils/slices/authSlice';
 import {store} from '../../utils/store';
@@ -58,7 +62,7 @@ const Settings = () => {
         links={[
           {
             linkTitle: t('app.settings.photo.changePhoto'),
-            onPress: () => console.warn('Change Photo'),
+            onPress: () => navigation.navigate(UPDATE_PHOTO),
           },
         ]}
       />
@@ -95,7 +99,7 @@ const Settings = () => {
           },
           {
             linkTitle: t('app.settings.profile.changePassword'),
-            onPress: () => console.warn('change pwd'),
+            onPress: () => navigation.navigate(UPDATE_PASSWORD),
           },
           {
             linkTitle: t('app.settings.profile.logout'),

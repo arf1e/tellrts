@@ -45,6 +45,10 @@ export default {
         changePassword: 'Change Password',
         logout: 'Logout',
       },
+      password: {
+        description:
+          'You have to enter your current password in order to update it.',
+      },
     },
     questions: {
       answerPlaceholder: 'Whatever you think. Really',
