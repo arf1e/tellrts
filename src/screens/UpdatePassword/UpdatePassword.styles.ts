@@ -17,4 +17,8 @@ export default EStyleSheet.create({
   formContainer: {
     marginTop: 16,
   },
+
+  submitFormBtn: {
+    marginTop: 16,
+  },
 });

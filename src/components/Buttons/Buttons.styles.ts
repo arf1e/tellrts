@@ -20,7 +20,7 @@ export default StyleSheet.create({
   },
 
   disabled: {
-    backgroundColor: '$lightGray',
+    backgroundColor: '$gray',
   },
 
   secondaryBtn: {

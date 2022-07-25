@@ -11,6 +11,9 @@ default one is to let me view multiple errors at once
 Exactly this one is used to make dynamic password checking @ Register screen.
 ----------------------- */
 
+export const MIN_PWD_LENGTH = 8;
+export const MAX_PWD_LENGTH = 32;
+
 export const validateSchema = (schema: any) => (values: any) =>
   schema
     .validate(values, {
