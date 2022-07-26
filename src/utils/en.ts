@@ -46,6 +46,10 @@ export default {
         logout: 'Logout',
       },
       password: {
+        currentPassword: 'Current Password',
+        newPassword: 'New Password',
+        newPasswordConfirm: 'Confirm New Password',
+        apply: 'Change Password',
         description:
           'You have to enter your current password in order to update it.',
       },

@@ -1,12 +1,20 @@
 import React from 'react';
-import {View} from 'react-native';
-import {Subtitle} from '../../components/Typography';
+import {ScrollView, View} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import PrimaryButton from '../../components/Buttons';
+import {BodyCopy, Subtitle} from '../../components/Typography';
+import {AnketState, clearAnket} from '../../utils/slices/anketSlice';
+import styles from './Anket.styles';
 
 const Anket = () => {
+  const anket = useSelector((state: {anket: AnketState}) => state.anket.anket);
+  const dispatch = useDispatch();
   return (
-    <View>
+    <ScrollView style={styles.container}>
       <Subtitle>Anket</Subtitle>
-    </View>
+      <BodyCopy>{JSON.stringify(anket)}</BodyCopy>
+      <PrimaryButton onPress={() => dispatch(clearAnket())} title="нахуй)" />
+    </ScrollView>
   );
 };
 

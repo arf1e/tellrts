@@ -1,4 +1,4 @@
-import {useQuery} from '@apollo/client';
+import {useLazyQuery, useQuery} from '@apollo/client';
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
@@ -10,14 +10,90 @@ import {
   ScrollView,
   View,
 } from 'react-native';
+import {useDispatch} from 'react-redux';
 import PrimaryButton, {SecondaryButton} from '../../components/Buttons';
 import Container from '../../components/Container';
 import FullScreenModal from '../../components/Modals';
 import {ANKET} from '../../components/Navigation/SearchNavigator';
 import {BodyCopy} from '../../components/Typography';
+import useFiniteState from '../../hooks/useFiniteState';
 import colors from '../../utils/colors';
-import {SearchQueryResult, SEARCH_USERS_QUERY, User} from './Search.graphql';
+import {setAnket} from '../../utils/slices/anketSlice';
+import {
+  Anket,
+  GetAnketResult,
+  GET_ANKET_QUERY,
+  SearchQueryResult,
+  SEARCH_USERS_QUERY,
+  User,
+} from './Search.graphql';
 import styles from './Search.styles';
+
+const ActiveUser = ({
+  user,
+  onClose,
+  onProceed,
+}: {
+  user: User;
+  onClose: () => void;
+  onProceed: (anket: Anket) => void;
+}) => {
+  const {t} = useTranslation();
+
+  const [
+    state,
+    {setLoading, setError, setIdle},
+    currentError,
+    {IDLE, LOADING, ERROR},
+  ] = useFiniteState();
+
+  const [getAnket] = useLazyQuery<GetAnketResult>(GET_ANKET_QUERY, {
+    onCompleted: async data => {
+      await setIdle();
+      const anket = data.getAnket;
+      onProceed(anket);
+    },
+    onError(error) {
+      setError(error.message);
+    },
+  });
+
+  const handleChooseUser = async () => {
+    setLoading();
+    await getAnket({variables: {id: user.id}});
+    setIdle();
+  };
+
+  return (
+    <View style={styles.activeUserModalContainer}>
+      <View style={styles.activeUserModalContent}>
+        <Image source={{uri: user.photo}} style={styles.activeUserModalPhoto} />
+        <BodyCopy style={styles.activeUserModalBioTitle}>
+          {t('app.search.modalBio')}
+        </BodyCopy>
+        <ScrollView style={styles.activeUserModalBioContainer}>
+          <BodyCopy style={styles.activeUserModalBio}>
+            {user.bio ||
+              'lorem ipsum dolor sit amet lorem ipsum dolor sit amet'}
+          </BodyCopy>
+        </ScrollView>
+      </View>
+      <View style={styles.activeUserModalControls}>
+        <SecondaryButton
+          onPress={onClose}
+          title={t('app.search.modalGoBack')}
+          style={styles.activeUserModalCancelButton}
+        />
+        <PrimaryButton
+          onPress={handleChooseUser}
+          loading={state === LOADING}
+          title={t('app.search.modalStart')}
+          style={styles.activeUserModalPrimaryButton}
+        />
+      </View>
+    </View>
+  );
+};
 
 const UserCard = ({user, onPress}: {user: User; onPress: () => void}) => {
   return (
@@ -31,9 +107,7 @@ const UserCard = ({user, onPress}: {user: User; onPress: () => void}) => {
 
 const SearchUsers = () => {
   // --- SERVICE
-  const {t} = useTranslation();
-  const navigation = useNavigation();
-
+  const dispatch = useDispatch();
   // --- STATE
   const [refreshing, setRefreshing] = useState(false);
   const [isUserModalActive, setIsUserModalActive] = useState(false);
@@ -50,10 +124,9 @@ const SearchUsers = () => {
     setActiveUser(null);
   };
 
-  const onProceedUserModal = () => {
-    // @ts-ignore
-    navigation.navigate(ANKET, {user: activeUser});
-    setIsUserModalActive(false);
+  const handleSelectUser = async (anket: Anket) => {
+    await onCloseUserModal();
+    dispatch(setAnket({anket}));
   };
 
   const onRefresh = async () => {
@@ -76,44 +149,6 @@ const SearchUsers = () => {
   if (loading) {
     return <ActivityIndicator size="large" color={colors.primary} />;
   }
-
-  const renderActiveUserModalBody = (
-    user: User,
-    onClose: () => void,
-    onNext: () => void,
-  ) => {
-    return (
-      <View style={styles.activeUserModalContainer}>
-        <View style={styles.activeUserModalContent}>
-          <Image
-            source={{uri: user.photo}}
-            style={styles.activeUserModalPhoto}
-          />
-          <BodyCopy style={styles.activeUserModalBioTitle}>
-            {t('app.search.modalBio')}
-          </BodyCopy>
-          <ScrollView style={styles.activeUserModalBioContainer}>
-            <BodyCopy style={styles.activeUserModalBio}>
-              {user.bio ||
-                'lorem ipsum dolor sit amet lorem ipsum dolor sit amet'}
-            </BodyCopy>
-          </ScrollView>
-        </View>
-        <View style={styles.activeUserModalControls}>
-          <SecondaryButton
-            onPress={onClose}
-            title={t('app.search.modalGoBack')}
-            style={styles.activeUserModalCancelButton}
-          />
-          <PrimaryButton
-            onPress={onNext}
-            title={t('app.search.modalStart')}
-            style={styles.activeUserModalPrimaryButton}
-          />
-        </View>
-      </View>
-    );
-  };
 
   return (
     <ScrollView
@@ -140,12 +175,13 @@ const SearchUsers = () => {
           active={isUserModalActive}
           closeModal={onCloseUserModal}
           title="User">
-          {activeUser &&
-            renderActiveUserModalBody(
-              activeUser,
-              onCloseUserModal,
-              onProceedUserModal,
-            )}
+          {activeUser && (
+            <ActiveUser
+              user={activeUser}
+              onClose={onCloseUserModal}
+              onProceed={handleSelectUser}
+            />
+          )}
         </FullScreenModal>
       </Container>
     </ScrollView>

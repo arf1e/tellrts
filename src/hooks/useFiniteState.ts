@@ -14,6 +14,11 @@ type useFiniteStateReturn = [
     setIdle: () => void;
   },
   error: string,
+  states: {
+    IDLE: typeof IDLE;
+    LOADING: typeof LOADING;
+    ERROR: typeof ERROR;
+  },
 ];
 
 const useFiniteState = (): useFiniteStateReturn => {
@@ -34,7 +39,12 @@ const useFiniteState = (): useFiniteStateReturn => {
     setState(IDLE);
   };
 
-  return [state, {setLoading, setError, setIdle}, currentError];
+  return [
+    state,
+    {setLoading, setError, setIdle},
+    currentError,
+    {IDLE, LOADING, ERROR},
+  ];
 };
 
 export default useFiniteState;

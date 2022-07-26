@@ -1,6 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import firebaseReducer from './slices/firebaseTokenSlice';
+import anketReducer from './slices/anketSlice';
 import {
   persistStore,
   persistReducer,
@@ -12,6 +13,12 @@ import {
   REGISTER,
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const persistAnketConfig = {
+  key: 'anket',
+  version: 1,
+  storage: AsyncStorage,
+};
 
 const persistAuthConfig = {
   key: 'auth',
@@ -25,6 +32,7 @@ const persistFirebaseConfig = {
   storage: AsyncStorage,
 };
 
+const persistedAnketReducer = persistReducer(persistAnketConfig, anketReducer);
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
 const persistedFirebaseReducer = persistReducer(
   persistFirebaseConfig,
@@ -35,6 +43,7 @@ export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     firebase: persistedFirebaseReducer,
+    anket: persistedAnketReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

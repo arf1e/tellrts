@@ -1,6 +1,7 @@
 import {useMutation} from '@apollo/client';
 import {Formik} from 'formik';
 import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
 import * as yup from 'yup';
 import PrimaryButton from '../../components/Buttons';
@@ -16,9 +17,13 @@ import {
 import styles from './UpdatePassword.styles';
 
 const validationSchema = yup.object().shape({
-  currentPassword: yup.string().required().min(2),
+  currentPassword: yup.string().required().min(MIN_PWD_LENGTH),
   newPassword: yup.string().required().min(MIN_PWD_LENGTH).minUppercase(1),
-  newPasswordConfirm: yup.string().required().min(MIN_PWD_LENGTH),
+  newPasswordConfirm: yup
+    .string()
+    .required()
+    .min(MIN_PWD_LENGTH)
+    .oneOf([yup.ref('newPassword')], 'passwords should match'),
 });
 
 const FORM_INITIAL_VALUES = {
@@ -34,6 +39,7 @@ const ERROR = 'ERROR';
 type SCREEN_STATE = typeof IDLE | typeof LOADING | typeof ERROR;
 
 const Form = () => {
+  const {t} = useTranslation();
   const [state, setState] = useState<SCREEN_STATE>(IDLE);
 
   const [updatePassword] = useMutation<UpdatePasswordResponse>(
@@ -89,7 +95,7 @@ const Form = () => {
             secureTextEntry={true}
             autoCorrect={false}
             value={values.currentPassword}
-            title="current password"
+            title={t('app.settings.password.currentPassword')}
             error={errors.currentPassword}
           />
           <FormField
@@ -98,7 +104,7 @@ const Form = () => {
             secureTextEntry={true}
             autoCorrect={false}
             value={values.newPassword}
-            title="new password"
+            title={t('app.settings.password.newPassword')}
             error={errors.newPassword}
           />
           <FormField
@@ -107,11 +113,11 @@ const Form = () => {
             secureTextEntry={true}
             autoCorrect={false}
             value={values.newPasswordConfirm}
-            title="new password once again"
+            title={t('app.settings.password.newPasswordConfirm')}
             error={errors.newPasswordConfirm}
           />
           <PrimaryButton
-            title="Apply"
+            title={t('app.settings.password.apply')}
             loading={state === LOADING}
             style={styles.submitFormBtn}
             onPress={submitForm}

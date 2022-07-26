@@ -13,9 +13,6 @@ const UpdatePassword = () => {
     <DismissKeyboard>
       <View style={styles.container}>
         <Container>
-          <BodyCopy style={styles.description}>
-            {t('app.settings.password.description')}
-          </BodyCopy>
           <Form />
         </Container>
       </View>
