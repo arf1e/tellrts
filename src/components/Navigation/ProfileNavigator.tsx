@@ -7,6 +7,9 @@ import Categories from '../../screens/Categories';
 import Statistics from '../../screens/Statistics';
 import Questions from '../../screens/Questions';
 import EditAnswer from '../../screens/EditAnswer';
+import UpdateBio from '../../screens/UpdateBio';
+import UpdatePassword from '../../screens/UpdatePassword';
+import UpdatePhoto from '../../screens/UpdatePhoto';
 
 const ProfileStackNavigator = createNativeStackNavigator();
 
@@ -16,6 +19,9 @@ export const CATEGORIES = 'Categories';
 export const STATISTICS = 'Statistics';
 export const QUESTIONS = 'Questions';
 export const EDIT_ANSWER = 'EditAnswer';
+export const UPDATE_BIO = 'Update Bio';
+export const UPDATE_PHOTO = 'Update Photo';
+export const UPDATE_PASSWORD = 'Update Password';
 
 const ProfileNavigator = () => (
   <ProfileStackNavigator.Navigator>
@@ -54,6 +60,36 @@ const ProfileNavigator = () => (
       component={EditAnswer}
       options={{
         header: () => null,
+      }}
+    />
+    <ProfileStackNavigator.Screen
+      name={UPDATE_BIO}
+      component={UpdateBio}
+      options={{
+        header: props => (
+          // @ts-ignore
+          <Header {...props} />
+        ),
+      }}
+    />
+    <ProfileStackNavigator.Screen
+      name={UPDATE_PASSWORD}
+      component={UpdatePassword}
+      options={{
+        header: props => (
+          // @ts-ignore
+          <Header {...props} />
+        ),
+      }}
+    />
+    <ProfileStackNavigator.Screen
+      name={UPDATE_PHOTO}
+      component={UpdatePhoto}
+      options={{
+        header: props => (
+          // @ts-ignore
+          <Header {...props} />
+        ),
       }}
     />
   </ProfileStackNavigator.Navigator>

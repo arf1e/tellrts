@@ -1,27 +1,26 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
-import {User} from '../../screens/Search/Search.graphql';
+import {Anket} from '../../screens/Search/Search.graphql';
 
 export interface AnketState {
-  user: User;
+  anket: Anket | null;
 }
 
-const initialState: AuthState = {
-  token: null,
+const initialState: AnketState = {
+  anket: null,
 };
 
-export const AuthSlice = createSlice({
+export const AnketSlice = createSlice({
   name: 'anket',
   initialState,
   reducers: {
-    logIn: (state, action: PayloadAction<AuthState>) => {
-      state.token = action.payload.token;
+    setAnket: (state, action: PayloadAction<AnketState>) => {
+      state.anket = action.payload.anket;
     },
-    logOut: state => {
-      state.token = null;
-      client.clearStore();
+    clearAnket: state => {
+      state.anket = null;
     },
   },
 });
 
-export const {logIn, logOut} = AuthSlice.actions;
-export default AuthSlice.reducer;
+export const {setAnket, clearAnket} = AnketSlice.actions;
+export default AnketSlice.reducer;

@@ -1,4 +1,5 @@
 import {gql} from '@apollo/client';
+import {Question} from '../Questions/Questions.graphql';
 
 export type User = {
   id: number;
@@ -16,6 +17,54 @@ export type User = {
 export type SearchQueryResult = {
   searchUsers: User[];
 };
+
+export type Answer = {
+  id: number;
+  text: string;
+  question: Question;
+  sex: boolean;
+};
+
+export type Anket = {
+  id: number;
+  names: string[];
+  photo: string;
+  bio: string;
+  lines: {
+    question: Question;
+    answers: Answer[];
+  }[];
+};
+
+export type GetAnketResult = {
+  getAnket: Anket;
+};
+
+export const GET_ANKET_QUERY = gql`
+  query GetAnket($id: Int!) {
+    getAnket(id: $id) {
+      id
+      names
+      lines {
+        answers {
+          id
+          text
+        }
+        question {
+          id
+          text
+          closed
+          category {
+            id
+            title
+          }
+        }
+      }
+      photo
+      bio
+    }
+  }
+`;
 
 export const SEARCH_USERS_QUERY = gql`
   query SearchUsers {

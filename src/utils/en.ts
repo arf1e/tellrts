@@ -24,6 +24,16 @@ export default {
         title: 'Photo',
         changePhoto: 'Change Photo',
       },
+      bio: {
+        title: 'Bio',
+        changeBio: 'Update bio',
+        placeholder: 'So you like pizza and travelling? Wow, so unusual!',
+        btnTitle: 'Update bio',
+        successMessage: {
+          title: 'Success!',
+          body: 'Your bio was updated!',
+        },
+      },
       socialLinks: {
         title: 'Social Links',
         addLink: 'Connect new social account',
@@ -34,6 +44,14 @@ export default {
         city: 'City',
         changePassword: 'Change Password',
         logout: 'Logout',
+      },
+      password: {
+        currentPassword: 'Current Password',
+        newPassword: 'New Password',
+        newPasswordConfirm: 'Confirm New Password',
+        apply: 'Change Password',
+        description:
+          'You have to enter your current password in order to update it.',
       },
     },
     questions: {

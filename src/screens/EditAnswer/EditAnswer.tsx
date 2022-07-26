@@ -25,7 +25,7 @@ import {PROFILE} from '../../components/Navigation/ProfileNavigator';
 import errorCatcher, {showInfoToast} from '../../utils/toasts';
 import GET_LINES_QUERY from '../../components/Lines/Lines.graphql';
 import {BodyCopy} from '../../components/Typography';
-import Header from '../../components/Header';
+import AnswerHeader from './AnswerHeader';
 
 const MIN_ANSWER_LENGTH = 2;
 const MAX_ANSWER_LENGTH = 250;
@@ -84,54 +84,12 @@ export default () => {
 
   const initialValues = getInitialValues(route.params?.answer);
 
-  const shouldRenderRightButton = initialValues.answer.length > 0;
-
   const [submitForm] = useMutation<{
     updateOrCreateLine: EditAnswerResponse;
   }>(UPDATE_OR_CREATE_LINE_MUTATION, {
     refetchQueries: [GET_LINES_QUERY],
     onError: () => setScreenState(ERROR),
   });
-
-  const [deleteLine] = useMutation<{deleteLine: EditAnswerResponse}>(
-    DELETE_LINE_MUTATION,
-    {onError: () => setScreenState(ERROR), refetchQueries: [GET_LINES_QUERY]},
-  );
-
-  const handleDeleteLine = async () => {
-    setScreenState(LOADING);
-    const questionId = route.params.questionId;
-    if (questionId) {
-      try {
-        const {error} = await deleteLine({
-          variables: {questionId},
-        }).then(res => res.data?.deleteLine);
-
-        if (error) {
-          throw error;
-        }
-
-        setScreenState(IDLE);
-        showInfoToast('Success!', 'Your profile has been updated!');
-        // @ts-ignore
-        navigation.navigate(PROFILE);
-      } catch (e) {
-        errorCatcher(e);
-        setScreenState(ERROR);
-      }
-    }
-  };
-
-  const onDeleteLine = () => {
-    Alert.alert(
-      'Confirm Deletion',
-      'Do you really want to delete this answer?',
-      [
-        {text: 'Cancel', style: 'cancel', onPress: () => null},
-        {text: 'Delete', style: 'destructive', onPress: handleDeleteLine},
-      ],
-    );
-  };
 
   const onSubmitForm = async (values: {answer: string}) => {
     setScreenState(LOADING);
@@ -162,21 +120,7 @@ export default () => {
   return (
     <DismissKeyboard>
       <KeyboardAvoidingView behavior="height" style={styles.inputContainer}>
-        <Header
-          navigation={navigation}
-          route={route}
-          options={{
-            // @ts-ignore
-            title: route.params.title,
-            // @ts-ignore
-            headerBackTitle: route.params.headerBackTitle,
-            ...(shouldRenderRightButton && {
-              rightButtonTitle: 'Delete answer',
-              onPressRightButton: onDeleteLine,
-            }),
-          }}
-          back={{title: 'ass'}}
-        />
+        <AnswerHeader />
         <Container style={styles.paddingContainer}>
           <Formik
             initialValues={initialValues}

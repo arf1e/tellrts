@@ -2,28 +2,16 @@ import React, {useState} from 'react';
 import {View, Image, Pressable} from 'react-native';
 import {BodyCopy} from '../../components/Typography';
 import {FormikProps} from 'formik';
-import i18next from 'i18next';
 import styles from './Register.styles';
 import OptionWithIcon from '../../components/Option/OptionWithIcon';
 import {useTranslation} from 'react-i18next';
 import ImagePicker from 'react-native-image-crop-picker';
 import {REGISTER_FORM_VALUES} from './Register.types';
 import errorCatcher from '../../utils/toasts';
+import {pickerOptions} from '../../utils/photos';
 
 type Props = {
   formikProps: FormikProps<REGISTER_FORM_VALUES>;
-};
-
-const pickerOptions = {
-  width: 1000,
-  height: 1000,
-  cropping: true,
-  cropperToolbarColor: '#FDFFFF',
-  cropperStatusBarColor: '#1693A5',
-  cropperToolbarWidgetColor: '#1D2C2E',
-  cropperActiveWidgetColor: '#1693A5',
-  cropperCircleOverlay: true,
-  cropperToolbarTitle: i18next.t('register.photo.editPhoto'),
 };
 
 const Photo = ({formikProps}: Props) => {

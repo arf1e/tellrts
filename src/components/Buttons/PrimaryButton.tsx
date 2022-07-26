@@ -83,8 +83,8 @@ const PrimaryButton = ({title, ...rest}: ButtonProps) => {
     ButtonsStyles.skeleton,
     ButtonsStyles.primary,
     animatedStyle,
-    rest.disabled && ButtonsStyles.disabled,
     buttonLoadingStyle,
+    rest.disabled && ButtonsStyles.disabled,
     rest.style,
   ];
 

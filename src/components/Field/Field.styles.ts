@@ -15,4 +15,12 @@ export default StyleSheet.create({
   fieldActive: {
     borderColor: '$primary',
   },
+
+  formFieldContainer: {
+    marginBottom: 16,
+  },
+
+  formFieldTitle: {
+    marginBottom: 4,
+  },
 });

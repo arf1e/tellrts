@@ -2,7 +2,7 @@ import StyleSheet from 'react-native-extended-stylesheet';
 
 export default StyleSheet.create({
   skeleton: {
-    height: 40,
+    height: 44,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -20,7 +20,7 @@ export default StyleSheet.create({
   },
 
   disabled: {
-    backgroundColor: '$lightGray',
+    backgroundColor: '$gray',
   },
 
   secondaryBtn: {

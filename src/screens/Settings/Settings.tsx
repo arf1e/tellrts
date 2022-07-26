@@ -1,8 +1,14 @@
 import {useMutation} from '@apollo/client';
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, ScrollView, StatusBar} from 'react-native';
 import {useDispatch} from 'react-redux';
+import {
+  UPDATE_BIO,
+  UPDATE_PASSWORD,
+  UPDATE_PHOTO,
+} from '../../components/Navigation/ProfileNavigator';
 import colors from '../../utils/colors';
 import {logOut} from '../../utils/slices/authSlice';
 import {store} from '../../utils/store';
@@ -14,6 +20,7 @@ import SettingsSection from './SettingsSection';
 const Settings = () => {
   const dispatch = useDispatch();
   const {t} = useTranslation();
+  const navigation = useNavigation();
 
   const [logoutMutation, {loading, error, data}] =
     useMutation<LogoutMutationResult>(LOGOUT_MUTATION);
@@ -55,7 +62,16 @@ const Settings = () => {
         links={[
           {
             linkTitle: t('app.settings.photo.changePhoto'),
-            onPress: () => console.warn('Change Photo'),
+            onPress: () => navigation.navigate(UPDATE_PHOTO),
+          },
+        ]}
+      />
+      <SettingsSection
+        title={t('app.settings.bio.title')}
+        links={[
+          {
+            linkTitle: t('app.settings.bio.changeBio'),
+            onPress: () => navigation.navigate(UPDATE_BIO),
           },
         ]}
       />
@@ -83,7 +99,7 @@ const Settings = () => {
           },
           {
             linkTitle: t('app.settings.profile.changePassword'),
-            onPress: () => console.warn('change pwd'),
+            onPress: () => navigation.navigate(UPDATE_PASSWORD),
           },
           {
             linkTitle: t('app.settings.profile.logout'),
