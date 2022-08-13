@@ -5,7 +5,7 @@ export default StyleSheet.create({
     height: 44,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 4,
     flexDirection: 'row',
     zIndex: 0,
   },

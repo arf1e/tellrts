@@ -12,6 +12,9 @@ export default {
     },
   },
   app: {
+    anket: {
+      descriptionTitle: 'Profile Description',
+    },
     navigation: {
       goBack: 'Back',
     },
