@@ -14,6 +14,32 @@ export default {
   app: {
     anket: {
       descriptionTitle: 'Profile Description',
+      impressions: {
+        pretty: {
+          female: 'Beautiful',
+          male: 'Handsome',
+        },
+        cute: {
+          female: 'Cute',
+          male: 'Cute',
+        },
+        hot: {
+          female: 'Hot',
+          male: 'Hot',
+        },
+        shy: {
+          female: 'Shy',
+          male: 'Shy',
+        },
+        party: {
+          female: 'Partygirl',
+          male: 'Partyboy',
+        },
+        art: {
+          female: 'Artistic',
+          male: 'Artistic',
+        },
+      },
     },
     navigation: {
       goBack: 'Back',

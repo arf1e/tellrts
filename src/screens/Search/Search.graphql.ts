@@ -27,6 +27,7 @@ export type Answer = {
 
 export type Anket = {
   id: number;
+  sex: 'male' | 'female';
   names: string[];
   photo: string;
   bio: string;

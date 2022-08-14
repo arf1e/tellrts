@@ -17,7 +17,7 @@ export default EStyleSheet.create({
   },
 
   slide1: {
-    backgroundColor: 'green',
+    backgroundColor: '$background',
     width: DEVICE_WIDTH,
     flex: 1,
   },
