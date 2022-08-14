@@ -6,7 +6,6 @@ import {
   NativeScrollEvent,
   NativeSyntheticEvent,
   ScrollView,
-  Text,
   View,
 } from 'react-native';
 import {useSharedValue, withDelay, withTiming} from 'react-native-reanimated';
@@ -43,10 +42,13 @@ const AnketHeader = () => {
 
     const {nativeEvent} = e;
     const CURRENT_OFFSET = nativeEvent.contentOffset.x;
+    const TOTAL_SLIDES = Math.ceil(
+      nativeEvent.contentSize.width / SCREEN_WIDTH,
+    );
     const ACTIVE_SLIDE =
       CURRENT_OFFSET < SCREEN_WIDTH / 2
         ? 0
-        : Math.ceil(CURRENT_OFFSET / SCREEN_WIDTH);
+        : Math.min(Math.ceil(CURRENT_OFFSET / SCREEN_WIDTH), TOTAL_SLIDES - 1);
     setActiveSlide(ACTIVE_SLIDE);
   };
 
@@ -64,7 +66,6 @@ const AnketHeader = () => {
           snapToAlignment="center"
           pagingEnabled={true}
           showsHorizontalScrollIndicator={false}
-          bounces={false}
           onMomentumScrollEnd={handleScrollEnd}
           onScrollBeginDrag={handleScrollBegin}
           onScroll={handleScroll}

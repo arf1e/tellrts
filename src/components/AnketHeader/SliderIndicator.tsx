@@ -69,8 +69,8 @@ const SliderIndicator = ({
   const animatedStyles = useAnimatedStyle(
     () => ({
       position: 'absolute',
-      right: 24,
-      bottom: interpolate(shouldDisplay.value, [0, 1], [-32, 8]),
+      left: '41%',
+      bottom: 8,
       opacity: interpolate(shouldDisplay.value, [0, 1], [0, 1]),
     }),
     [shouldDisplay],

@@ -9,6 +9,7 @@ import {AnketState, clearAnket} from '../../utils/slices/anketSlice';
 import {Anket} from '../Search/Search.graphql';
 import styles from './Anket.styles';
 import AnketHeader from '../../components/AnketHeader';
+import AnketForm from './AnketForm';
 
 const generateAnketInitialValues = (anket: Anket) => {
   return {
@@ -18,7 +19,7 @@ const generateAnketInitialValues = (anket: Anket) => {
   };
 };
 
-const AnketForm = () => {
+const AnketScreen = () => {
   const anket = useSelector((state: {anket: AnketState}) => state.anket.anket);
   const dispatch = useDispatch();
   const initialValues = {
@@ -33,6 +34,7 @@ const AnketForm = () => {
           <>
             <AnketHeader />
             <BodyCopy>{JSON.stringify(formikProps.values)}</BodyCopy>
+            <AnketForm />
             <PrimaryButton
               onPress={() => dispatch(clearAnket())}
               title="нахуй)"
@@ -44,4 +46,4 @@ const AnketForm = () => {
   );
 };
 
-export default AnketForm;
+export default AnketScreen;
