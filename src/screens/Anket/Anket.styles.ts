@@ -12,6 +12,7 @@ export default EStyleSheet.create({
     flex: 1,
     flexGrow: 1,
     backgroundColor: '$background',
+    position: 'relative',
   },
 
   stepTitle: {
@@ -63,12 +64,10 @@ export default EStyleSheet.create({
 
   stepsContainer: {
     position: 'relative',
-    flexGrow: 1,
     flex: 1,
   },
 
   stepContainer: {
-    alignSelf: 'flex-start',
     paddingHorizontal: 16,
     paddingVertical: 20,
     borderRadius: 8,
@@ -84,5 +83,31 @@ export default EStyleSheet.create({
     marginTop: 32,
     marginHorizontal: 24,
     width: Dimensions.get('screen').width - 48,
+  },
+
+  stepControls: {
+    marginTop: 20,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  stepPreviousButton: {
+    flex: 2,
+  },
+
+  stepNextButton: {
+    flex: 3,
+    marginLeft: 20,
+  },
+
+  anketProgressBackground: {
+    height: 4,
+    width: Dimensions.get('screen').width,
+    backgroundColor: '$secondary',
+  },
+
+  anketProgressLine: {
+    height: 4,
+    backgroundColor: '$primary',
   },
 });

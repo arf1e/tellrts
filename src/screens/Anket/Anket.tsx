@@ -17,7 +17,7 @@ const AnketScreen = () => {
       <View style={styles.anketElementsContainer}>
         <AnketHeader />
         <AnketForm />
-        <PrimaryButton onPress={() => dispatch(clearAnket())} title="нахуй)" />
+        {/* <PrimaryButton onPress={() => dispatch(clearAnket())} title="нахуй)" /> */}
       </View>
     </View>
   );
