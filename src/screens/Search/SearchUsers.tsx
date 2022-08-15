@@ -40,12 +40,8 @@ const ActiveUser = ({
 }) => {
   const {t} = useTranslation();
 
-  const [
-    state,
-    {setLoading, setError, setIdle},
-    currentError,
-    {IDLE, LOADING, ERROR},
-  ] = useFiniteState();
+  const [state, {setLoading, setError, setIdle}, _, {LOADING}] =
+    useFiniteState();
 
   const [getAnket] = useLazyQuery<GetAnketResult>(GET_ANKET_QUERY, {
     onCompleted: async data => {
@@ -61,7 +57,6 @@ const ActiveUser = ({
   const handleChooseUser = async () => {
     setLoading();
     await getAnket({variables: {id: user.id}});
-    setIdle();
   };
 
   return (

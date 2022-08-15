@@ -14,6 +14,7 @@ const Login = () => {
           <Image
             source={require('../../../assets/img/logo.png')}
             style={styles.logo}
+            resizeMode="contain"
           />
           <Form />
         </View>

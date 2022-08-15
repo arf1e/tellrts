@@ -6,4 +6,14 @@ export default EStyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+
+  sectionTitle: {
+    fontSize: '$h4',
+    fontFamily: 'Roboto-Medium',
+  },
+
+  sectionLink: {
+    fontSize: '$bcLarge',
+    fontFamily: 'Roboto-Regular',
+  },
 });

@@ -4,7 +4,7 @@ export default EStyleSheet.create({
   btn: {
     padding: 12,
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 4,
     borderColor: '$secondary',
   },
 
