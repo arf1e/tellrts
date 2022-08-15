@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleProp, View} from 'react-native';
 import Container from '../Container';
-import {ArrowLink} from '../Links';
+import Link, {ArrowLink} from '../Links';
 import {Subtitle} from '../Typography';
 import styles from './ActionHeader.styles';
 
@@ -24,11 +24,11 @@ export default ({
     <View style={containerStyle}>
       <Container>
         <View style={styles.actionHeaderContainer}>
-          <Subtitle>{title}</Subtitle>
+          <Subtitle style={styles.sectionTitle}>{title}</Subtitle>
           {actionShown && (
-            <ArrowLink arrowPosition="forward" onPress={onLinkPress}>
+            <Link textStyle={styles.sectionLink} onPress={onLinkPress}>
               {linkTitle}
-            </ArrowLink>
+            </Link>
           )}
         </View>
       </Container>
