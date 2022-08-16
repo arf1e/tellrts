@@ -18,6 +18,7 @@ import {
 import AnketProgress from './AnketProgress';
 import AnketStep from './AnketStep';
 import ImpressionPicker from './Impression';
+import ProfileLine from './ProfileLine';
 
 const AnketForm = () => {
   const [activeStep, setActiveStep] = useState<STEP>(IMPRESSIONS);
@@ -89,21 +90,14 @@ const AnketForm = () => {
           heading="Профайлинг"
           key={item}
           description={`Тут нет ничего общего с профайлингом. ${'\n'}Просто слово красивое.`}>
-          <BodyCopy>
-            Проснувшись однажды утром после беспокойного сна, Грегор Замза
-            обнаружил, что он у себя в постели превратился в страшное насекомое.
-            Лежа на панцирнотвердой спине, он видел, стоило ему приподнять
-            голову, свой коричневый, выпуклый, разделенный дугообразными
-            чешуйками живот, на верхушке которого еле держалось готовое вот-вот
-            окончательно сползти одеяло. Его многочисленные, убого тонкие по
-            сравнению с Проснувшись однажды утром после беспокойного сна, Грегор
-            Замза обнаружил, что он у себя в постели превратился в страшное
-            насекомое. Лежа на панцирнотвердой спине, он видел, стоило ему
-            приподнять голову, свой коричневый, выпуклый, разделенный
-            дугообразными чешуйками живот, на верхушке которого еле держалось
-            готовое вот-вот окончательно сползти одеяло. Его многочисленные,
-            убого тонкие по сравнению с
-          </BodyCopy>
+          <>
+            <ProfileLine
+              question="Тебя зовут"
+              answer={formikProps.values.name}
+              options={anket.names}
+              handleChoose={name => formikProps.setFieldValue('name', name)}
+            />
+          </>
         </AnketStep>
       ),
       [QUESTIONS]: (
@@ -123,14 +117,12 @@ const AnketForm = () => {
   return (
     <Formik initialValues={initialValues} onSubmit={console.warn}>
       {formikProps => (
-        <>
-          <View style={styles.anketMainContainer}>
-            <AnketProgress progress={getCurrentProgress()} />
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {STEPS.map(step => renderStep(step, formikProps))}
-            </ScrollView>
-          </View>
-        </>
+        <View style={styles.anketMainContainer}>
+          <AnketProgress progress={getCurrentProgress()} />
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {STEPS.map(step => renderStep(step, formikProps))}
+          </ScrollView>
+        </View>
       )}
     </Formik>
   );

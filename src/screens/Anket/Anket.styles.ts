@@ -110,4 +110,20 @@ export default EStyleSheet.create({
     height: 4,
     backgroundColor: '$primary',
   },
+
+  profileLineQuestion: {
+    fontSize: '$bcMedium',
+    fontFamily: 'Roboto-Regular',
+    color: '$darkGray',
+  },
+
+  profileLineHeadingContainer: {
+    marginBottom: 12,
+  },
+
+  profileLineContentContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    flexWrap: 'wrap',
+  },
 });
