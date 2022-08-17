@@ -13,6 +13,6 @@ export const generateAnketInitialValues = (anket: Anket) => {
     userId: anket.id,
     name: '',
     impressions: [],
-    guesses: [],
+    guesses: {},
   };
 };

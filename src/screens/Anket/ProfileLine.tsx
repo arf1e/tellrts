@@ -1,4 +1,4 @@
-import React, {ReactChildren, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Text, View} from 'react-native';
 import Reanimated, {
   interpolate,
@@ -6,7 +6,6 @@ import Reanimated, {
   useAnimatedStyle,
   useSharedValue,
   withSequence,
-  withSpring,
   withTiming,
 } from 'react-native-reanimated';
 import Option from '../../components/Option/Option';
@@ -26,7 +25,6 @@ const Answer = ({answer = '...'}: {answer?: string}) => {
   const switchShared = useSharedValue(0);
 
   useEffect(() => {
-    console.log('answer changed');
     switchShared.value = withSequence(
       withTiming(1, {duration: 200}),
       withTiming(0),
@@ -71,7 +69,6 @@ const ProfileLine = ({question, answer, options, handleChoose}: Props) => {
             isActive={option === answer}
             key={i}
             onPress={() => handleChoose(option)}
-            pressable={{}}
           />
         ))}
       </View>

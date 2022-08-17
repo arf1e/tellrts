@@ -13,11 +13,20 @@ type Props = {
   children?: ReactNode;
   navigation: {
     previousStep: () => void;
+    previousStepTitle?: string;
     nextStep: () => void;
+    nextStepTitle?: string;
   };
+  buttonDisabled?: boolean;
 };
 
-const AnketStep = ({heading, description, children, navigation}: Props) => {
+const AnketStep = ({
+  heading,
+  description,
+  children,
+  navigation,
+  buttonDisabled,
+}: Props) => {
   return (
     <AnimatedView
       style={styles.stepContainer}
@@ -31,12 +40,13 @@ const AnketStep = ({heading, description, children, navigation}: Props) => {
       <View style={styles.stepControls}>
         <SecondaryButton
           style={styles.stepPreviousButton}
-          title="previous"
+          title={navigation.previousStepTitle || 'Previous'}
           onPress={navigation.previousStep}
         />
         <PrimaryButton
           style={styles.stepNextButton}
-          title="next"
+          title={navigation.nextStepTitle || 'Next'}
+          disabled={buttonDisabled}
           onPress={navigation.nextStep}
         />
       </View>

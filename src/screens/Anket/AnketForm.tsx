@@ -1,11 +1,12 @@
 import {Formik, FormikProps} from 'formik';
 import React, {useState} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {Alert, ScrollView, Text, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {BodyCopy} from '../../components/Typography';
 import {toggleArrayElement} from '../../utils/arrays';
-import {AnketState} from '../../utils/slices/anketSlice';
+import {AnketState, clearAnket} from '../../utils/slices/anketSlice';
 import {Anket} from '../Search/Search.graphql';
+import AnketLine from './Anket.Line';
 import styles from './Anket.styles';
 import {
   BRIEFING,
@@ -20,13 +21,20 @@ import AnketStep from './AnketStep';
 import ImpressionPicker from './Impression';
 import ProfileLine from './ProfileLine';
 
+type MaybeHasValue = string | null;
+
+const checkIfFieldsHaveValues = (...fields: MaybeHasValue[]) => {
+  const fieldsWithValues = fields.filter(elt => Boolean(elt));
+  return fieldsWithValues.length === fields.length;
+};
+
 const AnketForm = () => {
   const [activeStep, setActiveStep] = useState<STEP>(IMPRESSIONS);
   const anket = useSelector((state: {anket: AnketState}) => state.anket.anket);
   if (!anket) {
     return null;
   }
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const initialValues = anket && generateAnketInitialValues(anket);
 
   const getCurrentStepIndex = () => STEPS.indexOf(activeStep);
@@ -52,6 +60,21 @@ const AnketForm = () => {
     }
   };
 
+  const handleQuitForm = () => {
+    Alert.alert(
+      'Отменить заполнение анкеты',
+      'Пожалуйста, подтвердите это действие. \n В случае выхода весь прогресс будет сброшен, а список пользователей на предыдущем экране обновится.',
+      [
+        {
+          text: 'Отменить заполнение',
+          style: 'destructive',
+          onPress: () => dispatch(clearAnket()),
+        },
+        {text: 'Продолжить заполнение', style: 'cancel', onPress: () => null},
+      ],
+    );
+  };
+
   const formNavigation = {
     nextStep: setNextStep,
     previousStep: setPreviousStep,
@@ -69,7 +92,12 @@ const AnketForm = () => {
     const elementMapper = {
       [IMPRESSIONS]: (
         <AnketStep
-          navigation={formNavigation}
+          navigation={{
+            nextStep: setNextStep,
+            previousStep: handleQuitForm,
+            previousStepTitle: 'Выйти',
+          }}
+          buttonDisabled={formikProps.values.impressions.length < 1}
           key={item}
           heading="Первое впечатление"
           description={`Начнём с комплиментов! ${'\n'}Допустимы любые комбинации.`}>
@@ -89,6 +117,7 @@ const AnketForm = () => {
           navigation={formNavigation}
           heading="Профайлинг"
           key={item}
+          buttonDisabled={!checkIfFieldsHaveValues(formikProps.values.name)}
           description={`Тут нет ничего общего с профайлингом. ${'\n'}Просто слово красивое.`}>
           <>
             <ProfileLine
@@ -105,8 +134,20 @@ const AnketForm = () => {
           navigation={formNavigation}
           key={item}
           heading="Вопросы"
-          description={`Тут нет ничего общего с профайлингом. ${'\n'}Просто слово красивое.`}>
-          <BodyCopy>privet)</BodyCopy>
+          description={'Описание этого шага \nв две строчки'}>
+          {anket.lines.map((line, i) => (
+            <AnketLine
+              question={line.question}
+              answers={line.answers}
+              chosenAnswer={formikProps.values.guesses[i].answer}
+              chooseAnswer={(answer: string) =>
+                formikProps.setFieldValue(`guesses[${i}]`, {
+                  questionId: line.question.id,
+                  answer: answer,
+                })
+              }
+            />
+          ))}
         </AnketStep>
       ),
     };
