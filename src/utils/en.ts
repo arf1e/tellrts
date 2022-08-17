@@ -15,6 +15,8 @@ export default {
     anket: {
       descriptionTitle: 'Profile Description',
       impressions: {
+        title: 'First Impression',
+        description: 'You can pick as many as you like',
         pretty: {
           female: 'Beautiful',
           male: 'Handsome',
@@ -38,6 +40,13 @@ export default {
         art: {
           female: 'Artistic',
           male: 'Artistic',
+        },
+      },
+      profiling: {
+        title: 'Profiling',
+        description: `This actually has nothing to do with profiling. ${'\n'}We just like the word.`,
+        name: {
+          question: 'Your name is',
         },
       },
     },

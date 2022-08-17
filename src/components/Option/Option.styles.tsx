@@ -22,9 +22,9 @@ export default EStyleSheet.create({
   },
 
   text: {
-    color: '$darkGray',
+    color: '$gray',
     fontFamily: 'Roboto-Regular',
-    fontSize: '$bcBig',
+    fontSize: '$bcSmall',
   },
 
   textActive: {

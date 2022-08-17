@@ -45,7 +45,6 @@ export default ({title, onPress, isActive, pressable}: Props) => {
         [0, 1],
         [colors.secondary, colors.primary],
       ),
-      borderWidth: interpolate(colorChange.value, [0, 1], [1, 2]),
       padding: interpolate(colorChange.value, [0, 1], [12, 11]),
       transform: [
         {
