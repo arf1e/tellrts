@@ -10,6 +10,7 @@ import Reanimated, {
 } from 'react-native-reanimated';
 import Option from '../../components/Option/Option';
 import colors from '../../utils/colors';
+import {AnswerOption} from './Anket.Line';
 import styles from './Anket.styles';
 
 const AnimatedText = Reanimated.createAnimatedComponent(Text);
@@ -57,17 +58,17 @@ const ProfileLine = ({question, answer, options, handleChoose}: Props) => {
   return (
     <View style={styles.profileLineContainer}>
       <View style={styles.profileLineHeadingContainer}>
-        <AnimatedText style={styles.profileLineQuestion}>
+        <AnimatedText style={styles.lineQuestion}>
           {question}
           <Answer answer={answer} />
         </AnimatedText>
       </View>
       <View style={styles.profileLineContentContainer}>
         {options.map((option, i) => (
-          <Option
-            title={option}
-            isActive={option === answer}
+          <AnswerOption
             key={i}
+            text={option}
+            isActive={option === answer}
             onPress={() => handleChoose(option)}
           />
         ))}

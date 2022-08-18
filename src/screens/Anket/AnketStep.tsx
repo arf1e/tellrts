@@ -5,6 +5,12 @@ import Reanimated, {SlideInDown, SlideOutDown} from 'react-native-reanimated';
 
 import styles from './Anket.styles';
 import PrimaryButton, {SecondaryButton} from '../../components/Buttons';
+import {BRIEFING, IMPRESSIONS, QUESTIONS} from './Anket.types';
+import Impressions from './Anket.Impressions';
+import Profiling from './Anket.Profiling';
+import QuestionsStep from './Anket.Questions';
+import {ANKET_FORMIK_PROPS} from './AnketForm';
+import {Anket} from '../Search/Search.graphql';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 type Props = {
@@ -12,9 +18,9 @@ type Props = {
   description: string;
   children?: ReactNode;
   navigation: {
-    previousStep: () => void;
+    setPreviousStep: () => void;
     previousStepTitle?: string;
-    nextStep: () => void;
+    setNextStep: () => void;
     nextStepTitle?: string;
   };
   buttonDisabled?: boolean;
@@ -41,17 +47,50 @@ const AnketStep = ({
         <SecondaryButton
           style={styles.stepPreviousButton}
           title={navigation.previousStepTitle || 'Previous'}
-          onPress={navigation.previousStep}
+          onPress={navigation.setPreviousStep}
         />
         <PrimaryButton
           style={styles.stepNextButton}
           title={navigation.nextStepTitle || 'Next'}
           disabled={buttonDisabled}
-          onPress={navigation.nextStep}
+          onPress={navigation.setNextStep}
         />
       </View>
     </AnimatedView>
   );
+};
+
+export const stepMapper = (
+  navigation: {setNextStep: () => void; setPreviousStep: () => void},
+  handleQuitForm: () => void,
+  formikProps: ANKET_FORMIK_PROPS,
+  anket: Anket,
+) => {
+  const elementMapper = {
+    [IMPRESSIONS]: (
+      <Impressions
+        setNextStep={navigation.setNextStep}
+        handleQuitForm={handleQuitForm}
+        formikProps={formikProps}
+      />
+    ),
+    [BRIEFING]: (
+      <Profiling
+        formNavigation={navigation}
+        formikProps={formikProps}
+        anket={anket}
+      />
+    ),
+    [QUESTIONS]: (
+      <QuestionsStep
+        formNavigation={navigation}
+        formikProps={formikProps}
+        anket={anket}
+      />
+    ),
+  };
+
+  return elementMapper;
 };
 
 export default AnketStep;
