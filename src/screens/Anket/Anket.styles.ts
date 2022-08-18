@@ -11,7 +11,7 @@ export default EStyleSheet.create({
   anketMainContainer: {
     flex: 1,
     flexGrow: 1,
-    backgroundColor: '$background',
+    backgroundColor: '$unsaturatedPrimary',
     position: 'relative',
   },
 
@@ -111,19 +111,42 @@ export default EStyleSheet.create({
     backgroundColor: '$primary',
   },
 
-  profileLineQuestion: {
-    fontSize: '$bcMedium',
-    fontFamily: 'Roboto-Regular',
+  lineQuestion: {
+    fontSize: '$bcLarge',
     color: '$darkGray',
   },
 
   profileLineHeadingContainer: {
-    marginBottom: 12,
+    marginBottom: 6,
   },
 
   profileLineContentContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     flexWrap: 'wrap',
+  },
+
+  anketLineHeading: {
+    marginBottom: 6,
+  },
+
+  anketLineContainer: {
+    marginBottom: 20,
+  },
+
+  answerOptionContainer: {
+    padding: 12,
+    maxHeight: 150,
+    maxWidth: 250,
+    borderColor: '$secondary',
+    borderWidth: 1,
+    marginRight: 12,
+    marginVertical: 6,
+    borderRadius: 4,
+  },
+
+  answerOptionText: {
+    fontSize: '$bcSmall',
+    lineHeight: 18,
   },
 });

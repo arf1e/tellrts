@@ -1,12 +1,11 @@
 import {Formik, FormikProps} from 'formik';
 import React, {useState} from 'react';
-import {Alert, ScrollView, Text, View} from 'react-native';
+import {Alert, ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {BodyCopy} from '../../components/Typography';
-import {toggleArrayElement} from '../../utils/arrays';
 import {AnketState, clearAnket} from '../../utils/slices/anketSlice';
-import {Anket} from '../Search/Search.graphql';
-import AnketLine from './Anket.Line';
+import Impressions from './Anket.Impressions';
+import Profiling from './Anket.Profiling';
+import QuestionsStep from './Anket.Questions';
 import styles from './Anket.styles';
 import {
   BRIEFING,
@@ -17,24 +16,21 @@ import {
   STEPS,
 } from './Anket.types';
 import AnketProgress from './AnketProgress';
-import AnketStep from './AnketStep';
-import ImpressionPicker from './Impression';
-import ProfileLine from './ProfileLine';
 
-type MaybeHasValue = string | null;
-
-const checkIfFieldsHaveValues = (...fields: MaybeHasValue[]) => {
-  const fieldsWithValues = fields.filter(elt => Boolean(elt));
-  return fieldsWithValues.length === fields.length;
-};
+export type ANKET_FORMIK_PROPS = FormikProps<{
+  userId: number;
+  name: string;
+  impressions: never[];
+  guesses: never[];
+}>;
 
 const AnketForm = () => {
   const [activeStep, setActiveStep] = useState<STEP>(IMPRESSIONS);
   const anket = useSelector((state: {anket: AnketState}) => state.anket.anket);
+  const dispatch = useDispatch();
   if (!anket) {
     return null;
   }
-  const dispatch = useDispatch();
   const initialValues = anket && generateAnketInitialValues(anket);
 
   const getCurrentStepIndex = () => STEPS.indexOf(activeStep);
@@ -76,79 +72,35 @@ const AnketForm = () => {
   };
 
   const formNavigation = {
-    nextStep: setNextStep,
-    previousStep: setPreviousStep,
+    setNextStep: setNextStep,
+    setPreviousStep: setPreviousStep,
   };
 
-  const renderStep = (
-    item: STEP,
-    formikProps: FormikProps<{
-      userId: number;
-      name: string;
-      impressions: never[];
-      guesses: never[];
-    }>,
-  ) => {
+  const renderStep = (item: STEP, formikProps: ANKET_FORMIK_PROPS) => {
     const elementMapper = {
       [IMPRESSIONS]: (
-        <AnketStep
-          navigation={{
-            nextStep: setNextStep,
-            previousStep: handleQuitForm,
-            previousStepTitle: 'Выйти',
-          }}
-          buttonDisabled={formikProps.values.impressions.length < 1}
-          key={item}
-          heading="Первое впечатление"
-          description={`Начнём с комплиментов! ${'\n'}Допустимы любые комбинации.`}>
-          <ImpressionPicker
-            activeImpressions={formikProps.values.impressions}
-            onPressImpression={impression =>
-              formikProps.setFieldValue(
-                'impressions',
-                toggleArrayElement(formikProps.values.impressions, impression),
-              )
-            }
-          />
-        </AnketStep>
+        <Impressions
+          key={IMPRESSIONS}
+          setNextStep={formNavigation.setNextStep}
+          handleQuitForm={handleQuitForm}
+          formikProps={formikProps}
+        />
       ),
       [BRIEFING]: (
-        <AnketStep
-          navigation={formNavigation}
-          heading="Профайлинг"
-          key={item}
-          buttonDisabled={!checkIfFieldsHaveValues(formikProps.values.name)}
-          description={`Тут нет ничего общего с профайлингом. ${'\n'}Просто слово красивое.`}>
-          <>
-            <ProfileLine
-              question="Тебя зовут"
-              answer={formikProps.values.name}
-              options={anket.names}
-              handleChoose={name => formikProps.setFieldValue('name', name)}
-            />
-          </>
-        </AnketStep>
+        <Profiling
+          key={BRIEFING}
+          formNavigation={formNavigation}
+          formikProps={formikProps}
+          anket={anket}
+        />
       ),
       [QUESTIONS]: (
-        <AnketStep
-          navigation={formNavigation}
-          key={item}
-          heading="Вопросы"
-          description={'Описание этого шага \nв две строчки'}>
-          {anket.lines.map((line, i) => (
-            <AnketLine
-              question={line.question}
-              answers={line.answers}
-              chosenAnswer={formikProps.values.guesses[i].answer}
-              chooseAnswer={(answer: string) =>
-                formikProps.setFieldValue(`guesses[${i}]`, {
-                  questionId: line.question.id,
-                  answer: answer,
-                })
-              }
-            />
-          ))}
-        </AnketStep>
+        <QuestionsStep
+          key={QUESTIONS}
+          formNavigation={formNavigation}
+          formikProps={formikProps}
+          anket={anket}
+        />
       ),
     };
 
