@@ -11,11 +11,20 @@ type Props = {
   formikProps: ANKET_FORMIK_PROPS;
 };
 
+const checkIfGuessesPass = (formikProps: ANKET_FORMIK_PROPS, anket: Anket) => {
+  const asMuschGuessesAsNeeded =
+    formikProps.values.guesses.length === anket.lines.length;
+  const everyLineHasAGuess =
+    formikProps.values.guesses.filter(guess => !guess.answer).length === 0;
+  return asMuschGuessesAsNeeded && everyLineHasAGuess;
+};
+
 const QuestionsStep = ({formNavigation, anket, formikProps}: Props) => {
   return (
     <AnketStep
       navigation={formNavigation}
       heading="Вопросы"
+      buttonDisabled={!checkIfGuessesPass(formikProps, anket)}
       description={'Описание этого шага \nв две строчки'}>
       {anket.lines.map(line => (
         <AnketLine

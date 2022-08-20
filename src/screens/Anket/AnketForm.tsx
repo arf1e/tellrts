@@ -1,8 +1,16 @@
+import {useMutation} from '@apollo/client';
+import {useNavigation} from '@react-navigation/native';
 import {Formik, FormikProps} from 'formik';
 import React, {useState} from 'react';
 import {Alert, ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import AnketHeader from '../../components/AnketHeader';
+import {SEARCH} from '../../components/Navigation/AppNavigator';
+import {UPDATE_PASSWORD} from '../../components/Navigation/ProfileNavigator';
+import {REQUEST_RESULT} from '../../components/Navigation/SearchNavigator';
 import {AnketState, clearAnket} from '../../utils/slices/anketSlice';
+import errorCatcher from '../../utils/toasts';
+import {SendRequestResponse, SEND_REQUEST_MUTATION} from './Anket.graphql';
 import Impressions from './Anket.Impressions';
 import Profiling from './Anket.Profiling';
 import QuestionsStep from './Anket.Questions';
@@ -15,6 +23,7 @@ import {
   STEP,
   STEPS,
 } from './Anket.types';
+import AnketLoading from './AnketLoading';
 import AnketProgress from './AnketProgress';
 
 export type ANKET_FORMIK_PROPS = FormikProps<{
@@ -25,6 +34,46 @@ export type ANKET_FORMIK_PROPS = FormikProps<{
 }>;
 
 const AnketForm = () => {
+  const navigation = useNavigation();
+
+  const onSubmitRequestCompleted = (
+    makeRequest: SendRequestResponse,
+    reset: () => void,
+  ) => {
+    const {ok, error, isMatch, requestId} = makeRequest;
+
+    if (!ok) {
+      errorCatcher(error, {
+        title: 'Cant perform request',
+        message: error || 'unknown error',
+      });
+      reset();
+      return;
+    }
+
+    // @ts-ignore
+    navigation.navigate(REQUEST_RESULT, {isMatch, requestId});
+    reset();
+    return;
+  };
+
+  const [
+    submitRequest,
+    {loading: makeRequestLoading, reset: makeRequestReset},
+  ] = useMutation<{
+    makeRequest: SendRequestResponse;
+  }>(SEND_REQUEST_MUTATION, {
+    onError: e => {
+      errorCatcher(e);
+      console.log(e);
+      makeRequestReset();
+    },
+    onCompleted: ({makeRequest}) => {
+      onSubmitRequestCompleted(makeRequest, makeRequestReset);
+    },
+    fetchPolicy: 'no-cache',
+  });
+
   const [activeStep, setActiveStep] = useState<STEP>(IMPRESSIONS);
   const anket = useSelector((state: {anket: AnketState}) => state.anket.anket);
   const dispatch = useDispatch();
@@ -97,27 +146,38 @@ const AnketForm = () => {
       [QUESTIONS]: (
         <QuestionsStep
           key={QUESTIONS}
-          formNavigation={formNavigation}
+          formNavigation={{
+            ...formNavigation,
+            nextStepTitle: 'Завершить',
+            setNextStep: () => submitRequest({variables: formikProps.values}),
+          }}
           formikProps={formikProps}
           anket={anket}
         />
       ),
     };
 
-    return activeStep === item && elementMapper[item];
+    return !makeRequestLoading && activeStep === item && elementMapper[item];
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={console.warn}>
-      {formikProps => (
-        <View style={styles.anketMainContainer}>
-          <AnketProgress progress={getCurrentProgress()} />
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {STEPS.map(step => renderStep(step, formikProps))}
-          </ScrollView>
-        </View>
-      )}
-    </Formik>
+    <View style={{flex: 1}}>
+      <AnketHeader />
+      <Formik initialValues={initialValues} onSubmit={console.warn}>
+        {formikProps => (
+          <View style={styles.anketMainContainer}>
+            <AnketProgress progress={getCurrentProgress()} />
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              style={{flex: 1, flexGrow: 1}}
+              contentContainerStyle={{flexGrow: 1}}>
+              {STEPS.map(step => renderStep(step, formikProps))}
+              {makeRequestLoading && <AnketLoading />}
+            </ScrollView>
+          </View>
+        )}
+      </Formik>
+    </View>
   );
 };
 

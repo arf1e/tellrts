@@ -149,4 +149,10 @@ export default EStyleSheet.create({
     fontSize: '$bcSmall',
     lineHeight: 18,
   },
+
+  anketLoadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

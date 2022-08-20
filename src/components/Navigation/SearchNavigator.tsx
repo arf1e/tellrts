@@ -4,11 +4,13 @@ import Search from '../../screens/Search';
 import Anket from '../../screens/Anket';
 import {useSelector} from 'react-redux';
 import {AnketState} from '../../utils/slices/anketSlice';
+import RequestResult from '../../screens/RequestResult';
 
 const SearchStackNavigator = createNativeStackNavigator();
 
 export const SEARCH = 'Search Index';
 export const ANKET = 'Anket';
+export const REQUEST_RESULT = 'Request Result';
 
 const SearchNavigator = () => {
   const anket = useSelector((state: {anket: AnketState}) => state.anket.anket);
@@ -28,6 +30,11 @@ const SearchNavigator = () => {
           options={{header: () => null}}
         />
       )}
+      <SearchStackNavigator.Screen
+        name={REQUEST_RESULT}
+        component={RequestResult}
+        options={{header: () => null}}
+      />
     </SearchStackNavigator.Navigator>
   );
 };

@@ -22,7 +22,7 @@ const AnketHeader = () => {
   const {t} = useTranslation();
 
   const SCREEN_WIDTH = useDimensions().window.width;
-  const [activeSlide, setActiveSlide] = useState(1);
+  const [activeSlide, setActiveSlide] = useState(0);
   const INDICATOR_ICONS_ARRAY = ['image', 'text'];
   const SHOULD_DISPLAY_INDICATOR_SHARED = useSharedValue(0);
 
