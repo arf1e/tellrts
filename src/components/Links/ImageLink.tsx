@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, Image, PressableProps, StyleProp} from 'react-native';
+import {Pressable, Image, PressableProps} from 'react-native';
 
 import Reanimated, {
   interpolate,
@@ -19,7 +19,7 @@ interface Props extends PressableProps {
 
 const AnimatedPressable = Reanimated.createAnimatedComponent(Pressable);
 
-const ImageLink = ({size, onPress, imageStyle, uri, ...rest}: Props) => {
+const ImageLink = ({size, onPress, imageStyle, uri}: Props) => {
   const pressedShared = useSharedValue(0);
 
   const animatedStyle = useAnimatedStyle(

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Search from '../../screens/Search/Search';
 import Contacts from '../../screens/Contacts';
 import ProfileNavigator from './ProfileNavigator';
 import NavigationIcon from './NavigationIcon';
@@ -9,10 +8,12 @@ import {BodyCopy} from '../Typography';
 import messaging from '@react-native-firebase/messaging';
 import errorCatcher from '../../utils/toasts';
 import {gql, useMutation} from '@apollo/client';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {saveToken} from '../../utils/slices/firebaseTokenSlice';
 import Toast from 'react-native-toast-message';
 import SearchNavigator from './SearchNavigator';
+import ContactsNavigator, {CHAT} from './ContactsNavigator';
+import {inChatState} from '../../utils/slices/inChatSlice';
 
 const AppTabs = createBottomTabNavigator();
 
@@ -31,7 +32,7 @@ const SEND_DEVICE_TOKEN_TO_API = gql`
 
 const AppNavigator = () => {
   const dispatch = useDispatch();
-
+  const {inChat} = useSelector((state: {inChat: inChatState}) => state.inChat);
   // PUSH NOTIFICATIONS
   const [sendTokenToApi] = useMutation(SEND_DEVICE_TOKEN_TO_API);
 
@@ -54,13 +55,17 @@ const AppNavigator = () => {
     aquireDeviceTokenAndSendToApi().catch(e => errorCatcher(e));
 
     return unsubscribe;
-  }, []);
+  }, [dispatch, sendTokenToApi]);
+
+  const shouldHideTabBar = inChat;
 
   return (
     <AppTabs.Navigator
-      screenOptions={{
-        header: () => null,
-        tabBarHideOnKeyboard: true,
+      screenOptions={({navigation, route}) => {
+        return {
+          header: () => null,
+          tabBarHideOnKeyboard: true,
+        };
       }}>
       <AppTabs.Screen
         name={PROFILE_NAVIGATOR}
@@ -107,7 +112,7 @@ const AppNavigator = () => {
       />
       <AppTabs.Screen
         name={CONTACTS}
-        component={Contacts}
+        component={ContactsNavigator}
         options={{
           tabBarIcon: props => {
             return <NavigationIcon focused={props.focused} name="list" />;
@@ -122,6 +127,9 @@ const AppNavigator = () => {
                 {CONTACTS}
               </BodyCopy>
             );
+          },
+          tabBarStyle: {
+            display: shouldHideTabBar ? 'none' : 'flex',
           },
         }}
       />

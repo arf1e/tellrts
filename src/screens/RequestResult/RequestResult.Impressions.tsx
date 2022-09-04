@@ -12,9 +12,16 @@ import ReviewSection from './ReviewSection';
 
 type Props = {
   impressions: ImpressionIcon[];
+  sex: 'female' | 'male';
 };
 
-const ImpressionCard = ({impression}: {impression: ImpressionIcon}) => {
+const ImpressionCard = ({
+  impression,
+  sex,
+}: {
+  impression: ImpressionIcon;
+  sex: 'female' | 'male';
+}) => {
   const {t} = useTranslation();
 
   return (
@@ -24,17 +31,17 @@ const ImpressionCard = ({impression}: {impression: ImpressionIcon}) => {
         style={styles.impressionCardImage}
       />
       <BodyCopy style={styles.impressionCardTitle}>
-        {t(getImpressionTitle(impression, 'female'))}
+        {t(getImpressionTitle(impression, sex))}
       </BodyCopy>
     </View>
   );
 };
 
-const ImpressionsResult = ({impressions}: Props) => {
+const ImpressionsResult = ({impressions, sex}: Props) => {
   return (
     <ReviewSection title="Impressions">
       {impressions.map(impression => (
-        <ImpressionCard key={impression} impression={impression} />
+        <ImpressionCard key={impression} sex={sex} impression={impression} />
       ))}
     </ReviewSection>
   );

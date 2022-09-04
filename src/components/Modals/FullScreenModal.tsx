@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import animationConstants from '../../utils/animationConstants';
 import colors from '../../utils/colors';
 import DismissKeyboard from '../DismissKeyboard';
-import {BodyCopy, Subtitle} from '../Typography';
+import {Subtitle} from '../Typography';
 
 import styles from './Modals.style';
 
@@ -74,7 +74,7 @@ const FullScreenModal = ({active, closeModal, title, children}: Props) => {
   return (
     <Modal animationType="slide" visible={active} onRequestClose={closeModal}>
       <DismissKeyboard>
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={styles.fullScreen}>
           <View style={styles.container}>
             <View style={styles.header}>
               <Subtitle>{title}</Subtitle>

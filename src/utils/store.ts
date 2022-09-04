@@ -2,6 +2,9 @@ import {configureStore} from '@reduxjs/toolkit';
 import authReducer from './slices/authSlice';
 import firebaseReducer from './slices/firebaseTokenSlice';
 import anketReducer from './slices/anketSlice';
+import inChatReducer from './slices/inChatSlice';
+import requestResultReducer from './slices/requestResultSlice';
+import requestStateReducer from './slices/requestStateSlice';
 import {
   persistStore,
   persistReducer,
@@ -32,6 +35,26 @@ const persistFirebaseConfig = {
   storage: AsyncStorage,
 };
 
+const persistRequestStateConfig = {
+  key: 'requestState',
+  version: 1,
+  storage: AsyncStorage,
+};
+
+const persistRequestResultConfig = {
+  key: 'requestResult',
+  version: 1,
+  storage: AsyncStorage,
+};
+
+const persistedRequestResultReducer = persistReducer(
+  persistRequestResultConfig,
+  requestResultReducer,
+);
+const persistedRequestStateReducer = persistReducer(
+  persistRequestStateConfig,
+  requestStateReducer,
+);
 const persistedAnketReducer = persistReducer(persistAnketConfig, anketReducer);
 const persistedAuthReducer = persistReducer(persistAuthConfig, authReducer);
 const persistedFirebaseReducer = persistReducer(
@@ -44,6 +67,9 @@ export const store = configureStore({
     auth: persistedAuthReducer,
     firebase: persistedFirebaseReducer,
     anket: persistedAnketReducer,
+    requestResult: persistedRequestResultReducer,
+    requestState: persistedRequestStateReducer,
+    inChat: inChatReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

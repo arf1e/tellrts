@@ -8,7 +8,6 @@ import Reanimated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import Option from '../../components/Option/Option';
 import colors from '../../utils/colors';
 import {AnswerOption} from './Anket.Line';
 import styles from './Anket.styles';

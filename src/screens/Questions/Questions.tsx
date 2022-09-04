@@ -1,8 +1,8 @@
 import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {ActivityIndicator, Pressable, ScrollView, View} from 'react-native';
 import Container from '../../components/Container';
-import {BodyCopy, Subtitle} from '../../components/Typography';
+import {BodyCopy} from '../../components/Typography';
 import {
   EDIT_ANSWER,
   QUESTIONS,

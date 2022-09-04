@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleProp, View} from 'react-native';
 import Container from '../Container';
-import Link, {ArrowLink} from '../Links';
+import Link from '../Links';
 import {Subtitle} from '../Typography';
 import styles from './ActionHeader.styles';
 

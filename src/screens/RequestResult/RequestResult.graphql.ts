@@ -7,6 +7,8 @@ export const SEE_REQUEST_QUERY = gql`
       id
       name
       impressions
+      isNameCorrect
+      successRate
       guesses {
         id
         question {
@@ -20,29 +22,35 @@ export const SEE_REQUEST_QUERY = gql`
         id
         photo
         name
+        sex
       }
     }
   }
 `;
 
-export type SeeRequestResult = {
-  seeRequest: {
+export type Request = {
+  id: number;
+  name: string;
+  impressions: [ImpressionIcon];
+  isNameCorrect: boolean;
+  successRate: number;
+  guesses: {
+    id: number;
+    question: {
+      id: number;
+      text: string;
+    };
+    answer: string;
+    isCorrect: boolean;
+  }[];
+  to: {
     id: number;
     name: string;
-    impressions: [ImpressionIcon];
-    guesses: {
-      id: number;
-      question: {
-        id: number;
-        text: string;
-      };
-      answer: string;
-      isCorrect: boolean;
-    }[];
-    to: {
-      id: number;
-      name: string;
-      photo: string;
-    };
+    photo: string;
+    sex: boolean;
   };
+};
+
+export type SeeRequestResult = {
+  seeRequest: Request;
 };

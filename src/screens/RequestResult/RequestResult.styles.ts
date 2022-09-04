@@ -13,7 +13,7 @@ export default EStyleSheet.create({
 
   resultCardContainer: {
     marginHorizontal: 24,
-    paddingVertical: 20,
+    paddingVertical: 48,
     paddingHorizontal: 16,
     backgroundColor: '$background',
     borderRadius: 8,
@@ -24,7 +24,7 @@ export default EStyleSheet.create({
     },
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
-
+    marginTop: '30%',
     elevation: 2,
   },
 
@@ -48,8 +48,8 @@ export default EStyleSheet.create({
   },
 
   correctAnswers: {
-    fontSize: 144,
-    lineHeight: 140,
+    fontSize: 84,
+    lineHeight: 104,
     fontFamily: 'Roboto-Bold',
     color: '$good',
   },
@@ -66,6 +66,10 @@ export default EStyleSheet.create({
 
   resultCardPrimaryBtn: {
     marginBottom: 12,
+  },
+
+  anketReviewContainer: {
+    paddingVertical: 32,
   },
 
   profileInfoPhoto: {
@@ -131,6 +135,7 @@ export default EStyleSheet.create({
     backgroundColor: '$background',
     padding: 12,
     marginVertical: 16,
+    minHeight: 90,
     marginHorizontal: 10,
     borderRadius: 4,
     width: 272,

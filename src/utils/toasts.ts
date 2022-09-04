@@ -6,6 +6,7 @@ const errorCatcher = (
   e: NetworkError | GraphQLError | any,
   manualError?: {title: string; message: string},
 ) => {
+  console.log(e);
   Toast.show({
     type: 'error',
     text1: e.name || manualError?.title,

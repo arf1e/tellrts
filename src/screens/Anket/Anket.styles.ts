@@ -5,6 +5,9 @@ export default EStyleSheet.create({
   container: {
     flex: 1,
   },
+  scrollable: {
+    flexGrow: 1,
+  },
   anketElementsContainer: {
     flex: 1,
   },
@@ -80,7 +83,7 @@ export default EStyleSheet.create({
     shadowOpacity: 0.2,
     shadowRadius: 1.41,
     elevation: 2,
-    marginTop: 32,
+    marginVertical: 32,
     marginHorizontal: 24,
     width: Dimensions.get('screen').width - 48,
   },

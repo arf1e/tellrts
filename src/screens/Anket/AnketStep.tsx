@@ -1,16 +1,11 @@
-import React, {ReactNode} from 'react';
-import {View} from 'react-native';
+import React, {ReactNode, useEffect} from 'react';
+import {BackHandler, View} from 'react-native';
 import {BodyCopy, Subtitle} from '../../components/Typography';
 import Reanimated, {SlideInDown, SlideOutDown} from 'react-native-reanimated';
 
 import styles from './Anket.styles';
 import PrimaryButton, {SecondaryButton} from '../../components/Buttons';
-import {BRIEFING, IMPRESSIONS, QUESTIONS} from './Anket.types';
-import Impressions from './Anket.Impressions';
-import Profiling from './Anket.Profiling';
-import QuestionsStep from './Anket.Questions';
-import {ANKET_FORMIK_PROPS} from './AnketForm';
-import {Anket} from '../Search/Search.graphql';
+import {useNavigation} from '@react-navigation/native';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 type Props = {
@@ -33,6 +28,16 @@ const AnketStep = ({
   navigation,
   buttonDisabled,
 }: Props) => {
+  useEffect(() => {
+    const onBackPress = () => {
+      navigation.setPreviousStep();
+      return true;
+    };
+    BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+  });
   return (
     <AnimatedView
       style={styles.stepContainer}
@@ -58,39 +63,6 @@ const AnketStep = ({
       </View>
     </AnimatedView>
   );
-};
-
-export const stepMapper = (
-  navigation: {setNextStep: () => void; setPreviousStep: () => void},
-  handleQuitForm: () => void,
-  formikProps: ANKET_FORMIK_PROPS,
-  anket: Anket,
-) => {
-  const elementMapper = {
-    [IMPRESSIONS]: (
-      <Impressions
-        setNextStep={navigation.setNextStep}
-        handleQuitForm={handleQuitForm}
-        formikProps={formikProps}
-      />
-    ),
-    [BRIEFING]: (
-      <Profiling
-        formNavigation={navigation}
-        formikProps={formikProps}
-        anket={anket}
-      />
-    ),
-    [QUESTIONS]: (
-      <QuestionsStep
-        formNavigation={navigation}
-        formikProps={formikProps}
-        anket={anket}
-      />
-    ),
-  };
-
-  return elementMapper;
 };
 
 export default AnketStep;

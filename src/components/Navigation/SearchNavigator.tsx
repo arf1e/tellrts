@@ -2,10 +2,14 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Search from '../../screens/Search';
 import Anket from '../../screens/Anket';
-import {useSelector} from 'react-redux';
-import {AnketState} from '../../utils/slices/anketSlice';
 import RequestResult from '../../screens/RequestResult';
-import Header from '../Header';
+import {useSelector} from 'react-redux';
+import {
+  requestStateState,
+  REQUEST_FILLING,
+  REQUEST_IDLE,
+  REQUEST_REVIEWING,
+} from '../../utils/slices/requestStateSlice';
 
 const SearchStackNavigator = createNativeStackNavigator();
 
@@ -14,28 +18,33 @@ export const ANKET = 'Anket';
 export const REQUEST_RESULT = 'Request Result';
 
 const SearchNavigator = () => {
-  const anket = useSelector((state: {anket: AnketState}) => state.anket.anket);
-  const activeAnket = Boolean(anket?.id);
+  const requestState = useSelector(
+    (state: {requestState: requestStateState}) =>
+      state.requestState.requestState,
+  );
   return (
     <SearchStackNavigator.Navigator>
-      {activeAnket ? (
-        <SearchStackNavigator.Screen
-          name={ANKET}
-          component={Anket}
-          options={{header: () => null}}
-        />
-      ) : (
+      {requestState === REQUEST_IDLE && (
         <SearchStackNavigator.Screen
           name={SEARCH}
           component={Search}
           options={{header: () => null}}
         />
       )}
-      <SearchStackNavigator.Screen
-        name={REQUEST_RESULT}
-        component={RequestResult}
-        options={{header: props => <Header {...props} />}}
-      />
+      {requestState === REQUEST_FILLING && (
+        <SearchStackNavigator.Screen
+          name={ANKET}
+          component={Anket}
+          options={{header: () => null}}
+        />
+      )}
+      {requestState === REQUEST_REVIEWING && (
+        <SearchStackNavigator.Screen
+          name={REQUEST_RESULT}
+          component={RequestResult}
+          options={{header: () => null}}
+        />
+      )}
     </SearchStackNavigator.Navigator>
   );
 };

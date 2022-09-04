@@ -46,6 +46,7 @@ export const GET_ANKET_QUERY = gql`
     getAnket(id: $id) {
       id
       names
+      sex
       lines {
         answers {
           id

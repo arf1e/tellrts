@@ -8,7 +8,6 @@ import Reanimated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {BodyCopy} from '../Typography';
 import animationConstants from '../../utils/animationConstants';
 import colors from '../../utils/colors';
 

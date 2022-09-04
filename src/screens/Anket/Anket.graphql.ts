@@ -16,6 +16,7 @@ export const SEND_REQUEST_MUTATION = gql`
       ok
       error
       requestId
+      successRate
       isMatch
     }
   }
@@ -24,6 +25,7 @@ export const SEND_REQUEST_MUTATION = gql`
 export type SendRequestResponse = {
   ok: boolean;
   error?: string;
+  successRate?: number;
   requestId?: number;
   isMatch?: boolean;
 };

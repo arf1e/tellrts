@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  Alert,
   KeyboardAvoidingView,
   TextInput,
   TextInputProps,
@@ -15,7 +14,6 @@ import {useTranslation} from 'react-i18next';
 import PrimaryButton from '../../components/Buttons';
 import colors from '../../utils/colors';
 import {
-  DELETE_LINE_MUTATION,
   EditAnswerResponse,
   UPDATE_OR_CREATE_LINE_MUTATION,
 } from './EditAnswer.graphql';
@@ -82,6 +80,7 @@ export default () => {
   const [route, navigation] = [useRoute(), useNavigation()];
   const [screenState, setScreenState] = useState<ScreenState>(IDLE);
 
+  // @ts-ignore
   const initialValues = getInitialValues(route.params?.answer);
 
   const [submitForm] = useMutation<{
@@ -97,6 +96,7 @@ export default () => {
     const questionId = route.params.questionId;
     if (questionId) {
       try {
+        // @ts-ignore
         const {error} = await submitForm({
           variables: {answerText: values.answer, questionId},
         }).then(res => res.data?.updateOrCreateLine);
@@ -127,7 +127,12 @@ export default () => {
             validateOnMount={true}
             validationSchema={validationSchema}
             onSubmit={onSubmitForm}>
-            {({isValid, values, handleChange, submitForm}) => (
+            {({
+              isValid,
+              values,
+              handleChange,
+              submitForm: formikSubmitForm,
+            }) => (
               <View style={styles.formContainer}>
                 <AnswerInput
                   value={values.answer}
@@ -137,7 +142,7 @@ export default () => {
                   <PrimaryButton
                     style={styles.submitButton}
                     title="Save Answer"
-                    onPress={submitForm}
+                    onPress={formikSubmitForm}
                     loading={screenState === LOADING}
                   />
                 )}

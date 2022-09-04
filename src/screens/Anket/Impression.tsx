@@ -1,7 +1,6 @@
 import React, {useEffect} from 'react';
 import {View, Pressable, Image, Text} from 'react-native';
 import Reanimated, {
-  Extrapolate,
   interpolate,
   interpolateColor,
   useAnimatedStyle,
@@ -111,9 +110,11 @@ const ImpressionOption = ({
 
 const ImpressionPicker = ({
   activeImpressions,
+  sex,
   onPressImpression,
 }: {
   activeImpressions: ImpressionIcon[];
+  sex: 'male' | 'female';
   onPressImpression: (impression: ImpressionIcon) => void;
 }) => {
   const isImpressionActive = (impression: ImpressionIcon) =>
@@ -124,7 +125,7 @@ const ImpressionPicker = ({
         <ImpressionOption
           icon={impression}
           isActive={isImpressionActive(impression)}
-          sex="female"
+          sex={sex}
           key={impression}
           onPress={() => onPressImpression(impression)}
         />

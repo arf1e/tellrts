@@ -1,5 +1,4 @@
 import {useLazyQuery, useQuery} from '@apollo/client';
-import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {
@@ -14,11 +13,11 @@ import {useDispatch} from 'react-redux';
 import PrimaryButton, {SecondaryButton} from '../../components/Buttons';
 import Container from '../../components/Container';
 import FullScreenModal from '../../components/Modals';
-import {ANKET} from '../../components/Navigation/SearchNavigator';
 import {BodyCopy} from '../../components/Typography';
 import useFiniteState from '../../hooks/useFiniteState';
 import colors from '../../utils/colors';
 import {setAnket} from '../../utils/slices/anketSlice';
+import {setRequestStateFilling} from '../../utils/slices/requestStateSlice';
 import {
   Anket,
   GetAnketResult,
@@ -122,6 +121,7 @@ const SearchUsers = () => {
   const handleSelectUser = async (anket: Anket) => {
     await onCloseUserModal();
     dispatch(setAnket({anket}));
+    dispatch(setRequestStateFilling());
   };
 
   const onRefresh = async () => {

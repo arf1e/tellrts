@@ -1,4 +1,5 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 import {Anket} from '../Search/Search.graphql';
 import AnketLine from './Anket.Line';
 import {getCurrentGuess, updateOrCreateGuess} from './Anket.utils';
@@ -15,17 +16,19 @@ const checkIfGuessesPass = (formikProps: ANKET_FORMIK_PROPS, anket: Anket) => {
   const asMuschGuessesAsNeeded =
     formikProps.values.guesses.length === anket.lines.length;
   const everyLineHasAGuess =
+    // @ts-ignore
     formikProps.values.guesses.filter(guess => !guess.answer).length === 0;
   return asMuschGuessesAsNeeded && everyLineHasAGuess;
 };
 
 const QuestionsStep = ({formNavigation, anket, formikProps}: Props) => {
+  const {t} = useTranslation();
   return (
     <AnketStep
       navigation={formNavigation}
-      heading="Вопросы"
+      heading={t('app.anket.questions.title')}
       buttonDisabled={!checkIfGuessesPass(formikProps, anket)}
-      description={'Описание этого шага \nв две строчки'}>
+      description={t('app.anket.questions.description')}>
       {anket.lines.map(line => (
         <AnketLine
           question={line.question}
