@@ -9,6 +9,7 @@ export type User = {
   photo: string;
   birthday: string;
   countryCode: string;
+  age: number;
   cityId: string;
   sex: boolean;
   cityTitle: string;

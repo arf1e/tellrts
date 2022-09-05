@@ -10,6 +10,30 @@ export type GetContactResult = {
   };
 };
 
+export type GetContactInfoResult = {
+  seeContact: {
+    matchId: number;
+    user: User;
+  };
+};
+
+export const GET_CONTACT_INFO_QUERY = gql`
+  query GetContact($userId: Int!) {
+    seeContact(userId: $userId) {
+      matchId
+      user {
+        id
+        cityTitle
+        name
+        sex
+        bio
+        age
+        photo
+      }
+    }
+  }
+`;
+
 export const GET_CONTACT_QUERY = gql`
   query GetContact($userId: Int!) {
     seeContact(userId: $userId) {

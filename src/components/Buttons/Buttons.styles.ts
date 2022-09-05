@@ -32,4 +32,10 @@ export default StyleSheet.create({
     color: '$primary',
     fontFamily: 'Roboto-Medium',
   },
+
+  circleButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '$primary',
+  },
 });

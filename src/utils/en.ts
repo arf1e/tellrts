@@ -15,6 +15,9 @@ export default {
     chat: {
       fieldPlaceholder: 'Write a message...',
     },
+    contact: {
+      descriptionTitle: 'Profile Description',
+    },
     anket: {
       descriptionTitle: 'Profile Description',
       rate: {
