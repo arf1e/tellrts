@@ -19,4 +19,8 @@ export default EStyleSheet.create({
     flex: 1,
     flexGrow: 1,
   },
+
+  fullScreen: {
+    flex: 1,
+  },
 });

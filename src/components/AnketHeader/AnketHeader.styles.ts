@@ -2,7 +2,9 @@ import {Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
-const ELEMENT_HEIGHT = 300;
+export const AVATAR_HEIGHT = 300;
+
+const ELEMENT_HEIGHT = AVATAR_HEIGHT;
 
 export default EStyleSheet.create({
   mainContainer: {

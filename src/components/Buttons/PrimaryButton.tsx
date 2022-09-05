@@ -5,12 +5,10 @@ import Reanimated, {
   interpolateColor,
   useAnimatedStyle,
   useSharedValue,
-  withSequence,
   withTiming,
 } from 'react-native-reanimated';
 import animationConstants from '../../utils/animationConstants';
 import colors from '../../utils/colors';
-import {BodyCopy} from '../Typography';
 import ButtonsStyles from './Buttons.styles';
 import ButtonProps from './Buttons.types';
 import useColorAnimation from './useColorAnimation';

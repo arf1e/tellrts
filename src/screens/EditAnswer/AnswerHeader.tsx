@@ -20,9 +20,11 @@ const AnswerHeader = ({}) => {
   );
 
   const handleDeleteLine = async () => {
+    //@ts-ignore
     const questionId = route.params.questionId;
     if (questionId) {
       try {
+        // @ts-ignore
         const {error} = await deleteLine({
           variables: {questionId},
         }).then(res => res.data?.deleteLine);
@@ -31,6 +33,7 @@ const AnswerHeader = ({}) => {
           throw error;
         }
         showInfoToast('Success!', 'Your profile has been updated!');
+        // @ts-ignore
         navigation.navigate(PROFILE);
       } catch (e) {
         errorCatcher(e);
@@ -51,6 +54,7 @@ const AnswerHeader = ({}) => {
 
   return (
     <Header
+      //@ts-ignore
       navigation={navigation}
       route={route}
       options={{

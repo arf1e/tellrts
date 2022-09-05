@@ -1,8 +1,18 @@
+import {useMutation} from '@apollo/client';
 import {Formik, FormikProps} from 'formik';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {Alert, ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import AnketHeader from '../../components/AnketHeader';
 import {AnketState, clearAnket} from '../../utils/slices/anketSlice';
+import {setRequestResult} from '../../utils/slices/requestResultSlice';
+import {
+  setRequestStateIdle,
+  setRequestStateReviewing,
+} from '../../utils/slices/requestStateSlice';
+import errorCatcher, {showInfoToast} from '../../utils/toasts';
+import {SendRequestResponse, SEND_REQUEST_MUTATION} from './Anket.graphql';
 import Impressions from './Anket.Impressions';
 import Profiling from './Anket.Profiling';
 import QuestionsStep from './Anket.Questions';
@@ -15,6 +25,7 @@ import {
   STEP,
   STEPS,
 } from './Anket.types';
+import AnketLoading from './AnketLoading';
 import AnketProgress from './AnketProgress';
 
 export type ANKET_FORMIK_PROPS = FormikProps<{
@@ -25,15 +36,55 @@ export type ANKET_FORMIK_PROPS = FormikProps<{
 }>;
 
 const AnketForm = () => {
+  const {t} = useTranslation();
+  const onSubmitRequestCompleted = (
+    makeRequest: SendRequestResponse,
+    reset: () => void,
+  ) => {
+    const {ok, error, isMatch} = makeRequest;
+    if (!ok) {
+      errorCatcher(error, {
+        title: 'Cant perform request',
+        message: error || 'unknown error',
+      });
+      reset();
+      return;
+    }
+    if (isMatch) {
+      showInfoToast('Match!', 'in my ass');
+    }
+    // REMOVE ACTIVE ANKET, SET ACTIVE REQUEST RESULT
+    dispatch(setRequestResult({requestResult: makeRequest}));
+    dispatch(setRequestStateReviewing());
+    reset(); // Reset mutation loading/error state
+    return;
+  };
+
+  const [
+    submitRequest,
+    {loading: makeRequestLoading, reset: makeRequestReset},
+  ] = useMutation<{
+    makeRequest: SendRequestResponse;
+  }>(SEND_REQUEST_MUTATION, {
+    onError: e => {
+      errorCatcher(e);
+      console.log(e);
+      makeRequestReset();
+    },
+    onCompleted: ({makeRequest}) => {
+      onSubmitRequestCompleted(makeRequest, makeRequestReset);
+    },
+    fetchPolicy: 'no-cache',
+  });
+
   const [activeStep, setActiveStep] = useState<STEP>(IMPRESSIONS);
   const anket = useSelector((state: {anket: AnketState}) => state.anket.anket);
   const dispatch = useDispatch();
-  if (!anket) {
-    return null;
-  }
-  const initialValues = anket && generateAnketInitialValues(anket);
 
-  const getCurrentStepIndex = () => STEPS.indexOf(activeStep);
+  const getCurrentStepIndex = useCallback(
+    () => STEPS.indexOf(activeStep),
+    [activeStep],
+  );
 
   const getCurrentProgress = () => {
     const totalSteps = STEPS.length;
@@ -49,38 +100,53 @@ const AnketForm = () => {
     }
   };
 
-  const setPreviousStep = () => {
+  const setPreviousStep = useCallback(() => {
     const currentIndex = getCurrentStepIndex();
     if (currentIndex - 1 > -1) {
       setActiveStep(STEPS[currentIndex - 1]);
     }
-  };
+  }, [getCurrentStepIndex]);
 
   const handleQuitForm = () => {
     Alert.alert(
-      'Отменить заполнение анкеты',
-      'Пожалуйста, подтвердите это действие. \n В случае выхода весь прогресс будет сброшен, а список пользователей на предыдущем экране обновится.',
+      t('app.anket.controls.quitTitle'),
+      t('app.anket.controls.quitDescription'),
       [
         {
-          text: 'Отменить заполнение',
+          text: t('app.anket.controls.quitConfirm'),
           style: 'destructive',
-          onPress: () => dispatch(clearAnket()),
+          onPress: () => {
+            dispatch(setRequestStateIdle());
+            dispatch(clearAnket());
+          },
         },
-        {text: 'Продолжить заполнение', style: 'cancel', onPress: () => null},
+        {
+          text: t('app.anket.controls.quitCancel'),
+          style: 'cancel',
+          onPress: () => null,
+        },
       ],
     );
   };
+
+  const initialValues = anket && generateAnketInitialValues(anket);
 
   const formNavigation = {
     setNextStep: setNextStep,
     setPreviousStep: setPreviousStep,
   };
 
+  if (!anket) {
+    dispatch(setRequestStateIdle());
+    return null;
+  }
+
   const renderStep = (item: STEP, formikProps: ANKET_FORMIK_PROPS) => {
     const elementMapper = {
       [IMPRESSIONS]: (
         <Impressions
           key={IMPRESSIONS}
+          sex={anket.sex}
           setNextStep={formNavigation.setNextStep}
           handleQuitForm={handleQuitForm}
           formikProps={formikProps}
@@ -97,27 +163,39 @@ const AnketForm = () => {
       [QUESTIONS]: (
         <QuestionsStep
           key={QUESTIONS}
-          formNavigation={formNavigation}
+          formNavigation={{
+            ...formNavigation,
+            nextStepTitle: t('app.anket.controls.complete'),
+            setNextStep: () => submitRequest({variables: formikProps.values}),
+          }}
           formikProps={formikProps}
           anket={anket}
         />
       ),
     };
 
-    return activeStep === item && elementMapper[item];
+    return !makeRequestLoading && activeStep === item && elementMapper[item];
   };
 
   return (
-    <Formik initialValues={initialValues} onSubmit={console.warn}>
-      {formikProps => (
-        <View style={styles.anketMainContainer}>
-          <AnketProgress progress={getCurrentProgress()} />
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {STEPS.map(step => renderStep(step, formikProps))}
-          </ScrollView>
-        </View>
-      )}
-    </Formik>
+    <View style={styles.container}>
+      <AnketHeader />
+      {/* @ts-ignore */}
+      <Formik initialValues={initialValues} onSubmit={console.warn}>
+        {formikProps => (
+          <View style={styles.anketMainContainer}>
+            <AnketProgress progress={getCurrentProgress()} />
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={styles.scrollable}>
+              {/* @ts-ignore */}
+              {STEPS.map(step => renderStep(step, formikProps))}
+              {makeRequestLoading && <AnketLoading />}
+            </ScrollView>
+          </View>
+        )}
+      </Formik>
+    </View>
   );
 };
 

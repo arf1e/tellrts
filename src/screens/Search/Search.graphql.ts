@@ -9,6 +9,7 @@ export type User = {
   photo: string;
   birthday: string;
   countryCode: string;
+  age: number;
   cityId: string;
   sex: boolean;
   cityTitle: string;
@@ -46,6 +47,7 @@ export const GET_ANKET_QUERY = gql`
     getAnket(id: $id) {
       id
       names
+      sex
       lines {
         answers {
           id

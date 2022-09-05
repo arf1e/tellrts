@@ -76,6 +76,7 @@ const Password = ({emailExists, email, goBack}: Props) => {
   const renderSignUpButton = () => (
     <PrimaryButton
       title={t('login.form.signUpBtn')}
+      // @ts-ignore
       onPress={() => navigation.navigate(SIGNUP_SCREEN, {email})}
     />
   );

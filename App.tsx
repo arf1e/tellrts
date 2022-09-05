@@ -9,13 +9,11 @@
  */
 
 import React, {useEffect} from 'react';
-import {useColorScheme} from 'react-native';
-import {LinkingOptions, NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import Toast from 'react-native-toast-message';
 import {ApolloProvider} from '@apollo/client';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import RootNavigator from './src/components/Navigation/RootNavigator';
 import {Provider} from 'react-redux';
 import {storePersistor, store} from './src/utils/store';
@@ -25,10 +23,7 @@ import initializeI18n from './src/utils/i18n';
 import {colorVariables} from './src/utils/colors';
 import client from './src/utils/apollo';
 
-import {
-  PROFILE_NAVIGATOR,
-  SEARCH,
-} from './src/components/Navigation/AppNavigator';
+import {SEARCH} from './src/components/Navigation/AppNavigator';
 import {BodyCopy} from './src/components/Typography';
 import {PROFILE} from './src/components/Navigation/ProfileNavigator';
 
@@ -63,6 +58,9 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
   useEffect(() => {
+    // if (!i18next.isInitialized) {
+    // initializeI18n();
+    // }
     initializeI18n();
   }, []);
 

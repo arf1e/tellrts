@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  View,
   Pressable,
   PressableProps,
   StyleProp,
@@ -25,6 +24,7 @@ interface Props extends PressableProps {
   arrowPosition?: 'forward' | 'back';
   containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  color?: string;
 }
 
 const AnimatedPressable = Reanimated.createAnimatedComponent(Pressable);
@@ -35,6 +35,7 @@ const ArrowLink = ({
   textStyle,
   onPress,
   arrowPosition = 'back',
+  color,
 }: Props) => {
   const pressedShared = useSharedValue(0);
 
@@ -71,7 +72,7 @@ const ArrowLink = ({
       : LinkStyles.arrowBack,
   ];
 
-  const textStyles = [LinkStyles.text, textStyle];
+  const textStyles = [LinkStyles.text, textStyle, color && {color}];
   return (
     <AnimatedPressable
       style={containerStyles}
@@ -79,7 +80,7 @@ const ArrowLink = ({
       onPressIn={onPressIn}
       onPressOut={onPressOut}>
       <Icon
-        color={colors.primary}
+        color={color || colors.primary}
         name={`chevron-${arrowPosition}`}
         size={24}
         style={arrowStyles}

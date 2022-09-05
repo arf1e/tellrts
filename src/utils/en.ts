@@ -12,8 +12,52 @@ export default {
     },
   },
   app: {
+    chat: {
+      fieldPlaceholder: 'Write a message...',
+    },
+    contact: {
+      descriptionTitle: 'Profile Description',
+    },
     anket: {
       descriptionTitle: 'Profile Description',
+      rate: {
+        low: {
+          title: 'At least you tried',
+          description: "Don't worry, it doesn't even matter that much.",
+        },
+        medium: {
+          title: 'Could be better!',
+          description: 'Actually, it is a quite good result.',
+        },
+        good: {
+          title: 'Woah!',
+          description: 'Brilliant result',
+        },
+        hundred: {
+          title: 'Hundred!',
+          description: 'I cant come up with description for it',
+        },
+      },
+      flashActions: {
+        seeRequest: 'See your request',
+        toIndex: 'Get to the index screen',
+      },
+      tip: {
+        button: 'Complete',
+        description:
+          'All the right answers to the anket will be available after receiving the request from user. ',
+      },
+      controls: {
+        quit: 'Quit',
+        previous: 'Go Back',
+        next: 'Next',
+        complete: 'Submit',
+        quitTitle: 'Cancel Form Submitting',
+        quitDescription:
+          'Please, confirm this action!\nAll the progress will be lost, and the users list on the initial screen will completely update if you quit.',
+        quitConfirm: 'Reset form',
+        quitCancel: 'Continue form submitting',
+      },
       impressions: {
         title: 'First Impression',
         description: 'You can pick as many as you like',
@@ -48,6 +92,10 @@ export default {
         name: {
           question: 'Your name is',
         },
+      },
+      questions: {
+        title: 'Questions',
+        description: 'Questions description',
       },
     },
     navigation: {

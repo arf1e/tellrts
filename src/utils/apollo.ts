@@ -1,21 +1,14 @@
-import {
-  ApolloClient,
-  ApolloLink,
-  createHttpLink,
-  InMemoryCache,
-} from '@apollo/client';
-import {API_URL} from './config';
+import {ApolloClient, ApolloLink, InMemoryCache, split} from '@apollo/client';
+import {API_URL, WS_URL} from './config';
 import {setContext} from '@apollo/client/link/context';
+import {GraphQLWsLink} from '@apollo/client/link/subscriptions';
+import {createClient} from 'graphql-ws';
 import {createUploadLink} from 'apollo-upload-client';
 import {store} from './store';
-
-const httpLink = createHttpLink({
-  uri: API_URL,
-});
+import {getMainDefinition} from '@apollo/client/utilities';
 
 const authLink = setContext((_, {headers}) => {
   const token = store.getState().auth.token;
-  // const firebaseToken = store.getState().firebase.firebaseToken;
   return {
     headers: {
       ...headers,
@@ -24,12 +17,34 @@ const authLink = setContext((_, {headers}) => {
   };
 });
 
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: WS_URL,
+    connectionParams: () => ({
+      headers: {
+        token: store.getState().auth.token,
+      },
+    }),
+  }),
+);
 const uploadLink = createUploadLink({
   uri: API_URL,
 }) as unknown as ApolloLink;
 
+const splitLink = split(
+  ({query}) => {
+    const definition = getMainDefinition(query);
+    return (
+      definition.kind === 'OperationDefinition' &&
+      definition.operation === 'subscription'
+    );
+  },
+  wsLink,
+  uploadLink,
+);
+
 const client = new ApolloClient({
-  link: ApolloLink.from([authLink, uploadLink, httpLink]),
+  link: ApolloLink.from([authLink, splitLink]),
   cache: new InMemoryCache(),
   name: 'Tellr Mobile App',
   version: '0.1',

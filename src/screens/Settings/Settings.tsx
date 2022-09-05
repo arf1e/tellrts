@@ -10,6 +10,7 @@ import {
   UPDATE_PHOTO,
 } from '../../components/Navigation/ProfileNavigator';
 import colors from '../../utils/colors';
+import {clearAnket} from '../../utils/slices/anketSlice';
 import {logOut} from '../../utils/slices/authSlice';
 import {store} from '../../utils/store';
 import errorCatcher from '../../utils/toasts';
@@ -30,6 +31,7 @@ const Settings = () => {
     console.log('ftoken', firebaseToken);
     try {
       await logoutMutation({variables: {token: firebaseToken}});
+      dispatch(clearAnket());
       dispatch(logOut());
     } catch (e) {
       console.log(e);

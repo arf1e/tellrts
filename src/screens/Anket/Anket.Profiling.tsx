@@ -1,7 +1,7 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 import {Anket} from '../Search/Search.graphql';
 
-import {BRIEFING} from './Anket.types';
 import {checkIfFieldsHaveValues} from './Anket.utils';
 import {ANKET_FORMIK_PROPS} from './AnketForm';
 import AnketStep from './AnketStep';
@@ -14,14 +14,16 @@ type Props = {
 };
 
 const Profiling = ({formNavigation, formikProps, anket}: Props) => {
+  const {t} = useTranslation();
+
   return (
     <AnketStep
       navigation={formNavigation}
-      heading="Профайлинг"
+      heading={t('app.anket.profiling.title')}
       buttonDisabled={!checkIfFieldsHaveValues(formikProps.values.name)}
-      description={`Тут нет ничего общего с профайлингом. ${'\n'}Просто слово красивое.`}>
+      description={t('app.anket.profiling.description')}>
       <ProfileLine
-        question="Тебя зовут"
+        question={t('app.anket.profiling.name.question')}
         answer={formikProps.values.name}
         options={anket.names}
         handleChoose={name => formikProps.setFieldValue('name', name)}

@@ -18,7 +18,7 @@ import Reanimated, {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Container from '../../components/Container';
 import {SETTINGS} from '../../components/Navigation/ProfileNavigator';
-import {BodyCopy, Subtitle, Title} from '../../components/Typography';
+import {BodyCopy, Subtitle} from '../../components/Typography';
 import animationConstants from '../../utils/animationConstants';
 import colors from '../../utils/colors';
 import getAge from '../../utils/getAge';
