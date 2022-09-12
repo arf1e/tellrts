@@ -1,16 +1,18 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Dimensions} from 'react-native';
+import {AVATAR_HEIGHT} from '../../utils/photos';
 
 const {width: DEVICE_WIDTH} = Dimensions.get('screen');
 
 export default EStyleSheet.create({
   profileContainer: {
     backgroundColor: '$background',
+    paddingBottom: 32,
   },
   headerContainer: {},
   headerPhoto: {
     width: DEVICE_WIDTH,
-    height: 300,
+    height: AVATAR_HEIGHT,
   },
 
   profileSettingsButton: {

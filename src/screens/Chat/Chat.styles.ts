@@ -1,9 +1,11 @@
+import {Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../utils/colors';
 
 export default EStyleSheet.create({
   container: {
     flex: 1,
+    flexGrow: 1,
   },
 
   messagesScrollable: {
@@ -72,7 +74,7 @@ export default EStyleSheet.create({
   messageCreatedAt: {
     marginTop: 8,
     color: '$background',
-    fontFamily: 'Roboto-Light',
+    fontFamily: 'Roboto-Regular',
     opacity: 0.6,
     fontSize: 10,
   },

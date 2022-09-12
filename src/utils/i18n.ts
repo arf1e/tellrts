@@ -1,9 +1,11 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import en from './en';
+import ru from './ru';
 
 const initialize = () =>
   i18n.use(initReactI18next).init({
+    lng: 'ru',
     debug: true,
     fallbackLng: 'en',
     compatibilityJSON: 'v3',
@@ -13,6 +15,9 @@ const initialize = () =>
     resources: {
       en: {
         translation: en,
+      },
+      ru: {
+        translation: ru,
       },
     },
   });

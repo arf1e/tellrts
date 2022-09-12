@@ -1,5 +1,10 @@
 import {View} from 'react-native';
 import React from 'react';
+import Reanimated, {
+  FadeInDown,
+  FadeInUp,
+  FadeOutDown,
+} from 'react-native-reanimated';
 
 import styles from './Register.styles';
 import RegisterControlPanel from './Register.ControlPanel';
@@ -8,6 +13,8 @@ import {FormikProps} from 'formik';
 import {REGISTER_FORM_VALUES} from './Register.types';
 import StepTracker from './Register.StepTracker';
 import Link from '../../components/Links';
+
+const AnimatedView = Reanimated.createAnimatedComponent(View);
 
 interface Props {
   title: string;
@@ -68,7 +75,7 @@ export default ({
   toReview,
 }: Props): React.ReactElement => {
   return (
-    <View style={styles.stepContainer}>
+    <AnimatedView style={styles.stepContainer}>
       <StepHeader
         formikProps={formikProps}
         steps={steps}
@@ -76,14 +83,18 @@ export default ({
         isReviewing={isReviewing}
         toReview={toReview}
       />
-      <Title style={styles.stepTitle}>{title}</Title>
-      <BodyCopy style={styles.stepDescription}>{description}</BodyCopy>
-      {children}
+      <AnimatedView
+        entering={FadeInDown.duration(240).delay(240)}
+        exiting={FadeOutDown.duration(240)}>
+        <Title style={styles.stepTitle}>{title}</Title>
+        <BodyCopy style={styles.stepDescription}>{description}</BodyCopy>
+        {children}
+      </AnimatedView>
       <RegisterControlPanel
         primaryAction={primaryAction}
         disabled={disabled}
         secondaryAction={secondaryAction}
       />
-    </View>
+    </AnimatedView>
   );
 };

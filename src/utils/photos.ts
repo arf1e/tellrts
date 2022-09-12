@@ -30,3 +30,6 @@ export const handleTakePhoto = (
     .then(image => onSuccess(image))
     .catch(e => onError(e));
 };
+
+export const AVATAR_HEIGHT = 370;
+export const ANKET_AVATAR_HEIGHT = 320;

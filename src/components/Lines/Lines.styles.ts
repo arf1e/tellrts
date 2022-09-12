@@ -7,39 +7,41 @@ export default EStyleSheet.create({
 
   lineContainer: {
     flexDirection: 'column',
-    elevation: 2,
-    padding: 12,
-    width: 210,
-    borderRadius: 5,
+    width: 200,
     marginHorizontal: 8,
-    shadowColor: '$darkGray',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    backgroundColor: '$background',
-    shadowRadius: 1.41,
+    borderWidth: 1,
+    borderColor: '$secondary',
+    borderRadius: 4,
     marginVertical: 16,
+    paddingHorizontal: 12,
+    paddingTop: 20,
+    paddingBottom: 16,
   },
 
   lineQuestionText: {
     fontFamily: 'Roboto-Medium',
     fontSize: '$bcMedium',
-    color: '$gray',
-    lineHeight: '$bcLarge',
+    color: '$black',
+    lineHeight: 20,
     marginBottom: 16,
   },
 
-  lineCategoryText: {
-    color: '$gray',
+  lineAnswerText: {
     fontSize: '$bcMedium',
+    lineHeight: 20,
+    color: '$darkGray',
+  },
+
+  lineCategoryText: {
+    color: '$black',
+    fontFamily: 'Roboto-Regular',
+    fontSize: '$bcSmall',
   },
 
   lineQuestionCategoryImage: {
     width: 42,
     height: 42,
-    borderRadius: 21,
+    borderRadius: 2,
     marginRight: 12,
   },
 

@@ -43,15 +43,27 @@ const Password = ({formikProps}: Props) => {
         keyboardVerticalOffset={100}>
         <Fieldcheck
           title={t('register.password.minLength')}
-          isPassing={!formikProps.errors?.password?.includes('min-length')}
+          isPassing={
+            !formikProps.errors?.password?.includes(
+              t('register.password.minLength'),
+            )
+          }
         />
         <Fieldcheck
           title={t('register.password.uppercase')}
-          isPassing={!formikProps.errors?.password?.includes('uppercase')}
+          isPassing={
+            !formikProps.errors?.password?.includes(
+              t('register.password.uppercase'),
+            )
+          }
         />
         <Fieldcheck
           title={t('register.password.number')}
-          isPassing={!formikProps.errors?.password?.includes('numbers')}
+          isPassing={
+            !formikProps.errors?.password?.includes(
+              t('register.password.number'),
+            )
+          }
         />
         <Fieldcheck
           title={t('register.password.passwordsShouldBeEqual')}

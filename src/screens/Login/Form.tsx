@@ -4,12 +4,15 @@ import {View} from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
 import {gql, useLazyQuery} from '@apollo/client';
+import Reanimated, {FadeInUp, Layout} from 'react-native-reanimated';
 
 import {Subtitle} from '../../components/Typography';
 import LoginStyles from './Login.styles';
 import Email from './Email';
 import Password from './Password';
 import errorCatcher from '../../utils/toasts';
+
+const AnimatedView = Reanimated.createAnimatedComponent(View);
 
 const CHECK_EMAIL_QUERY = gql`
   query emailExists($email: String!) {
@@ -31,9 +34,13 @@ const initialValues = {
 const Form = () => {
   const {t} = useTranslation();
   const [step, setStep] = useState<0 | 1>(0);
-  const [checkEmail, {data}] = useLazyQuery(CHECK_EMAIL_QUERY);
+  const [checkEmail, {data, loading: checkEmailLoading}] =
+    useLazyQuery(CHECK_EMAIL_QUERY);
   return (
-    <View style={LoginStyles.formContainer}>
+    <AnimatedView
+      entering={FadeInUp.duration(240).damping(240)}
+      layout={Layout.easing()}
+      style={LoginStyles.formContainer}>
       <Subtitle style={LoginStyles.formTitle}>{t('login.form.title')}</Subtitle>
       <Formik
         initialValues={initialValues}
@@ -45,15 +52,18 @@ const Form = () => {
           }
         }}
         validationSchema={schema}
+        validateOnBlur={true}
         validateOnChange={false}>
-        {({handleChange, handleSubmit, errors, values}) => (
+        {({handleChange, handleSubmit, errors, values, ...formikProps}) => (
           <>
             {step === 0 && (
               <Email
                 value={values.email}
-                handleChange={handleChange('email')}
+                isInvalid={Boolean(errors.email)}
                 error={errors.email}
+                handleChange={handleChange('email')}
                 handleSubmit={handleSubmit}
+                loading={checkEmailLoading}
               />
             )}
             {step === 1 && (
@@ -66,7 +76,7 @@ const Form = () => {
           </>
         )}
       </Formik>
-    </View>
+    </AnimatedView>
   );
 };
 

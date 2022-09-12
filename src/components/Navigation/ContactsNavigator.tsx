@@ -28,7 +28,6 @@ const ContactsNavigator = () => (
       component={Chat}
       options={{
         header: props => <Header {...props} />,
-        tabBarStyle: {display: 'none'},
       }}
     />
   </ContactsStackNavigator.Navigator>

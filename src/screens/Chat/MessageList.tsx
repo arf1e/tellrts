@@ -40,15 +40,6 @@ const MessageList = ({userId}: Props) => {
         />
       </DismissKeyboard>
       <ChatInput userId={userId} chatRef={sRef.current} />
-      {Platform.OS === 'ios' && (
-        <KeyboardSpacer
-          onToggle={toggleState => {
-            if (toggleState === true) {
-              sRef.current && sRef.current.scrollToEnd({animated: true});
-            }
-          }}
-        />
-      )}
     </>
   );
 };

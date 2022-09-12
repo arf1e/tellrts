@@ -10,6 +10,7 @@ export default EStyleSheet.create({
   sectionTitle: {
     fontSize: '$h4',
     fontFamily: 'Roboto-Medium',
+    color: '$black',
   },
 
   sectionLink: {

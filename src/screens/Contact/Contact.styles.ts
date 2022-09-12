@@ -1,5 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {AVATAR_HEIGHT} from '../../components/AnketHeader/AnketHeader.styles';
+import {AVATAR_HEIGHT} from '../../utils/photos';
 
 export default EStyleSheet.create({
   screenContainer: {
@@ -34,9 +34,9 @@ export default EStyleSheet.create({
     fontSize: '$h3',
     marginBottom: 4,
     fontFamily: 'Roboto-Medium',
-    textShadowColor: '$darkGray',
-    textShadowOffset: {width: -1, height: 1},
-    textShadowRadius: 10,
+    textShadowColor: 'rgba(0,0,0,0.6)',
+    textShadowOffset: {width: 1, height: 1},
+    textShadowRadius: 1,
   },
 
   contactHeaderCity: {
@@ -58,5 +58,36 @@ export default EStyleSheet.create({
     color: '$gray',
     fontSize: '$bcMedium',
     lineHeight: 20,
+  },
+
+  anketSwitchContainer: {
+    flexDirection: 'row',
+    height: 44,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    marginBottom: 24,
+  },
+
+  anketOptionContainer: {
+    height: 44,
+    marginRight: 16,
+    paddingVertical: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    borderBottomWidth: 2,
+    borderBottomColor: '$background',
+  },
+
+  anketOptionText: {
+    color: '$primary',
+  },
+
+  anketOptionTextActive: {
+    color: '$darkGray',
+  },
+
+  anketOptionContainerActive: {
+    borderBottomColor: '$primary',
   },
 });

@@ -1,22 +1,41 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
+import Reanimated, {
+  FadeInLeft,
+  FadeOutLeft,
+  SlideInLeft,
+} from 'react-native-reanimated';
 import PrimaryButton from '../../components/Buttons';
+import ErrorDisplay from '../../components/ErrorDisplay';
 import Field from '../../components/Field';
 import {BodyCopy} from '../../components/Typography';
 import LoginStyles from './Login.styles';
+
+const AnimatedView = Reanimated.createAnimatedComponent(View);
 
 interface Props {
   value: string;
   handleChange: (field: string) => any;
   handleSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
   error?: string;
+  loading?: boolean;
+  isInvalid?: boolean;
 }
 
-const Email = ({value, handleChange, handleSubmit, error}: Props) => {
+const Email = ({
+  value,
+  handleChange,
+  handleSubmit,
+  error,
+  loading,
+  isInvalid,
+}: Props) => {
   const {t} = useTranslation();
   return (
-    <View>
+    <AnimatedView
+      entering={FadeInLeft.duration(320).delay(120)}
+      exiting={FadeOutLeft.duration(320).damping(5000)}>
       <BodyCopy style={LoginStyles.fieldTitle}>
         {t('login.form.emailFieldTitle')}
       </BodyCopy>
@@ -27,10 +46,16 @@ const Email = ({value, handleChange, handleSubmit, error}: Props) => {
         placeholder={t('login.form.emailPlaceholder')}
         style={LoginStyles.emailField}
         onChangeText={handleChange}
+        isInvalid={isInvalid}
       />
-      {error && <BodyCopy>{error}</BodyCopy>}
-      <PrimaryButton title={t('login.form.btnTitle')} onPress={handleSubmit} />
-    </View>
+      {error && <ErrorDisplay error={error} />}
+      <PrimaryButton
+        title={t('login.form.btnTitle')}
+        onPress={handleSubmit}
+        loading={loading}
+        // style={LoginStyles.formBtn}
+      />
+    </AnimatedView>
   );
 };
 

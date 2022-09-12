@@ -4,6 +4,7 @@ import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
 import {Formik} from 'formik';
 import * as yup from 'yup';
+import Reanimated, {FadeInRight} from 'react-native-reanimated';
 
 import PrimaryButton from '../../components/Buttons';
 import {SIGNUP_SCREEN} from '../../components/Navigation/AuthNavigator';
@@ -13,7 +14,11 @@ import LoginStyles from './Login.styles';
 import {gql, useMutation} from '@apollo/client';
 import {useDispatch} from 'react-redux';
 import {logIn} from '../../utils/slices/authSlice';
-import errorCatcher from '../../utils/toasts';
+import {YUP_PASSWORD_CHECK_FIELD} from '../Register/Register.utils';
+import ErrorDisplay from '../../components/ErrorDisplay';
+import {ArrowLink} from '../../components/Links';
+
+const AnimatedView = Reanimated.createAnimatedComponent(View);
 
 interface Props {
   emailExists: boolean;
@@ -22,7 +27,7 @@ interface Props {
 }
 
 const passwordValidationSchema = yup.object({
-  password: yup.string().required(),
+  password: YUP_PASSWORD_CHECK_FIELD,
 });
 
 const initialValues = {
@@ -45,15 +50,18 @@ const Password = ({emailExists, email, goBack}: Props) => {
 
   const dispatch = useDispatch();
 
-  const onLoginMutationCompleted = ({
-    error,
-    token,
-  }: {
-    error: string;
-    token: string;
-  }) => {
+  const onLoginMutationCompleted = (
+    {
+      error,
+      token,
+    }: {
+      error: string;
+      token: string;
+    },
+    setError: (message: string) => void,
+  ) => {
     if (error) {
-      errorCatcher(error);
+      setError(error);
       return;
     }
 
@@ -63,14 +71,18 @@ const Password = ({emailExists, email, goBack}: Props) => {
     }
   };
 
-  const [login, {data, loading, error}] = useMutation(LOGIN_MUTATION, {
-    onCompleted: loginMutationData =>
-      onLoginMutationCompleted(loginMutationData.login),
-    onError: errorCatcher,
-  });
+  const [login, {loading: loginLoading}] = useMutation(LOGIN_MUTATION, {});
 
-  const handleLogin = (password: string) => {
-    login({variables: {email, password}});
+  const handleLogin = (
+    password: string,
+    setError: (message: string) => void,
+  ) => {
+    login({
+      variables: {email, password},
+      onCompleted: loginMutationData =>
+        onLoginMutationCompleted(loginMutationData.login, setError),
+      onError: error => setError(error.message),
+    });
   };
 
   const renderSignUpButton = () => (
@@ -89,9 +101,14 @@ const Password = ({emailExists, email, goBack}: Props) => {
         </BodyCopy>
         <Formik
           initialValues={initialValues}
+          validateOnChange={false}
           validationSchema={passwordValidationSchema}
-          onSubmit={values => handleLogin(values.password)}>
-          {({handleChange, handleSubmit}) => (
+          onSubmit={(values, {setFieldError}) =>
+            handleLogin(values.password, (message: string) =>
+              setFieldError('password', message),
+            )
+          }>
+          {({handleChange, handleSubmit, errors}) => (
             <>
               <Field
                 secureTextEntry
@@ -99,8 +116,10 @@ const Password = ({emailExists, email, goBack}: Props) => {
                 style={LoginStyles.emailField}
                 onChangeText={handleChange('password')}
               />
+              {errors.password && <ErrorDisplay error={errors.password} />}
               <PrimaryButton
                 title={t('login.form.loginBtn')}
+                loading={loginLoading}
                 onPress={handleSubmit}
               />
             </>
@@ -110,13 +129,14 @@ const Password = ({emailExists, email, goBack}: Props) => {
     );
   };
   return (
-    <View>
+    <AnimatedView entering={FadeInRight.duration(320).delay(450)}>
+      {/* <ArrowLink arrowPosition='back' onPress={goBack}>{email}</ArrowLink> */}
       <BodyCopy
         onPress={goBack}
         style={LoginStyles.emailBtn}>{`< ${email}`}</BodyCopy>
       {!emailExists && renderSignUpButton()}
       {emailExists && renderLoginForm()}
-    </View>
+    </AnimatedView>
   );
 };
 

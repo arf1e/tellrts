@@ -23,6 +23,7 @@ const Profile = () => {
   return (
     <ScrollView
       style={styles.profileContainer}
+      contentContainerStyle={{paddingBottom: 32}}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>

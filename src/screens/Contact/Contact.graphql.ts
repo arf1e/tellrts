@@ -1,9 +1,11 @@
 import {gql} from '@apollo/client';
+import {ImpressionIcon} from '../../assets/impressions';
+import {Guess} from '../Anket/Anket.types';
 import {User} from '../Search/Search.graphql';
 
 export type GetContactResult = {
   seeContact: {
-    matchId: number;
+    id: number;
     user: User;
     otherRequest: Request;
     myRequest: Request;
@@ -12,7 +14,7 @@ export type GetContactResult = {
 
 export type GetContactInfoResult = {
   seeContact: {
-    matchId: number;
+    id: number;
     user: User;
   };
 };
@@ -20,7 +22,7 @@ export type GetContactInfoResult = {
 export const GET_CONTACT_INFO_QUERY = gql`
   query GetContact($userId: Int!) {
     seeContact(userId: $userId) {
-      matchId
+      id
       user {
         id
         cityTitle
@@ -29,6 +31,74 @@ export const GET_CONTACT_INFO_QUERY = gql`
         bio
         age
         photo
+      }
+    }
+  }
+`;
+
+export type SeeReuestResult = {
+  seeRequest: Request;
+};
+
+export type GetRequestsIdsResult = {
+  seeContact: {
+    id: number;
+    myRequest: {
+      id: number;
+    };
+    otherRequest: {
+      id: number;
+    };
+  };
+};
+
+export const GET_REQUESTS_IDS = gql`
+  query GetContact($userId: Int!) {
+    seeContact(userId: $userId) {
+      id
+      myRequest {
+        id
+      }
+      otherRequest {
+        id
+      }
+    }
+  }
+`;
+
+export type SeeRequestResult = {
+  seeRequest: {
+    id: number;
+    name: string;
+    isNameCorrect: boolean;
+    to: User;
+    successRate: number;
+    impressions: ImpressionIcon[];
+    guesses: Guess[];
+  };
+};
+
+export const SEE_REQUEST_QUERY = gql`
+  query SeeRequest($requestId: Int!) {
+    seeRequest(id: $requestId) {
+      id
+      name
+      isNameCorrect
+      impressions
+      to {
+        id
+        sex
+      }
+      successRate
+      guesses {
+        id
+        question {
+          id
+          text
+        }
+        answer
+        isCorrect
+        correct
       }
     }
   }
@@ -47,24 +117,12 @@ export const GET_CONTACT_QUERY = gql`
         photo
       }
       otherRequest {
+        id
         successRate
-        isNameCorrect
-        name
       }
       myRequest {
-        successRate
         id
-        isNameCorrect
-        impressions
-        guesses {
-          id
-          question {
-            text
-          }
-          answer
-          isCorrect
-          correct
-        }
+        successRate
       }
     }
   }

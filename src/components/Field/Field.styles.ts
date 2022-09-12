@@ -16,6 +16,10 @@ export default StyleSheet.create({
     borderColor: '$primary',
   },
 
+  invalid: {
+    borderColor: 'red',
+  },
+
   formFieldContainer: {
     marginBottom: 16,
   },

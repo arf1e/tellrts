@@ -1,6 +1,9 @@
 import * as yup from 'yup';
 import YupPassword from 'yup-password';
 import moment from 'moment';
+import {FormikProps} from 'formik';
+import {REGISTER_FORM_VALUES} from './Register.types';
+import {t} from 'i18next';
 
 // Add minUppercase && minNumbers support to yup
 YupPassword(yup);
@@ -11,8 +14,55 @@ default one is to let me view multiple errors at once
 Exactly this one is used to make dynamic password checking @ Register screen.
 ----------------------- */
 
+export const REGISTER_FORM_INITIAL_VALUES: REGISTER_FORM_VALUES = {
+  name: '',
+  birthday: null,
+  birthdayInput: '',
+  sex: null,
+  photo: '',
+  countryCode: null,
+  countryTitle: '',
+  cityId: '',
+  cityTitle: '',
+  password: '',
+  passwordConfirm: '',
+  email: '',
+};
+
+export const YUP_PASSWORD_CHECK_FIELD = yup
+  .string()
+  .required('Please enter your password')
+  .min(8, t('register.password.minLength'))
+  .minUppercase(1, t('register.password.uppercase'))
+  .minNumbers(1, t('register.password.number'));
+
 export const MIN_PWD_LENGTH = 8;
 export const MAX_PWD_LENGTH = 32;
+
+export type REGISTER_FORM_FORMIK_TYPE = FormikProps<{
+  email: any;
+  name: string;
+  birthday: Date | null;
+  birthdayInput: string;
+  sex: boolean | null;
+  photo: any;
+  countryCode: string | null;
+  countryTitle: string;
+  cityId: string;
+  cityTitle: string;
+  password: string;
+  passwordConfirm: string;
+}>;
+
+export const stepMapper = [
+  'name',
+  'sex',
+  'birthday',
+  'photo',
+  'cityId',
+  'password',
+  'check',
+];
 
 export const validateSchema = (schema: any) => (values: any) =>
   schema
@@ -66,12 +116,7 @@ export const schema = yup.object().shape({
   countryTitle: yup.string().required().min(2),
   cityId: yup.string().required(),
   cityTitle: yup.string().required(),
-  password: yup
-    .string()
-    .required()
-    .min(8, 'min-length')
-    .minUppercase(1, 'uppercase')
-    .minNumbers(1, 'numbers'),
+  password: YUP_PASSWORD_CHECK_FIELD,
   passwordConfirm: yup.string().required(),
   email: yup.string().email().required(),
 });

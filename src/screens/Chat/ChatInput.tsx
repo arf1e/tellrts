@@ -42,6 +42,7 @@ const ChatInput = ({userId, chatRef}: Props) => {
             value={formikProps.values.text}
             onChangeText={formikProps.handleChange('text')}
             placeholder={t('app.chat.fieldPlaceholder')}
+            autoCorrect={false}
           />
           <Link
             onPress={formikProps.submitForm}

@@ -65,6 +65,10 @@ const AppNavigator = () => {
         return {
           header: () => null,
           tabBarHideOnKeyboard: true,
+          tabBarStyle: {
+            display: shouldHideTabBar ? 'none' : 'flex',
+            ...(shouldHideTabBar && {height: 0}),
+          },
         };
       }}>
       <AppTabs.Screen
@@ -127,9 +131,6 @@ const AppNavigator = () => {
                 {CONTACTS}
               </BodyCopy>
             );
-          },
-          tabBarStyle: {
-            display: shouldHideTabBar ? 'none' : 'flex',
           },
         }}
       />

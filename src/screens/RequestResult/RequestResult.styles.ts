@@ -91,37 +91,6 @@ export default EStyleSheet.create({
     lineHeight: '$h3',
   },
 
-  impressionCardContainer: {
-    shadowColor: '$darkGray',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
-    elevation: 1,
-    backgroundColor: '$background',
-    padding: 12,
-    marginVertical: 16,
-    marginHorizontal: 10,
-    borderRadius: 4,
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 78,
-    height: 78,
-  },
-
-  impressionCardImage: {
-    width: 32,
-    height: 32,
-    marginBottom: 8,
-  },
-
-  impressionCardTitle: {
-    fontSize: '$bcSmall',
-    color: '$darkGray',
-  },
-
   guessContainer: {
     shadowColor: '$darkGray',
     shadowOffset: {

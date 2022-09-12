@@ -12,10 +12,17 @@ import colors from '../../utils/colors';
 import {User} from '../Search/Search.graphql';
 import {GetContactInfoResult, GET_CONTACT_INFO_QUERY} from './Contact.graphql';
 import styles from './Contact.styles';
+import Reanimated, {
+  FadeInDown,
+  FadeInLeft,
+  SlideInDown,
+} from 'react-native-reanimated';
 
 type Props = {
   userId: number;
 };
+
+const ReanimatedView = Reanimated.createAnimatedComponent(View);
 
 const ContactGoBack = () => {
   const navigation = useNavigation();
@@ -46,13 +53,15 @@ const ChatButton = ({userId}: {userId: number}) => {
 
 const ContactInfo = ({user}: {user: User}) => {
   return (
-    <View style={styles.contactHeaderInfo}>
+    <ReanimatedView
+      entering={FadeInLeft.duration(320).delay(200)}
+      style={styles.contactHeaderInfo}>
       <BodyCopy
         style={
           styles.contactHeaderName
         }>{`${user.name}, ${user.age}`}</BodyCopy>
       <BodyCopy style={styles.contactHeaderCity}>{user.cityTitle}</BodyCopy>
-    </View>
+    </ReanimatedView>
   );
 };
 
