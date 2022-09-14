@@ -16,3 +16,15 @@ export const GET_CONTACTS_QUERY = gql`
     }
   }
 `;
+
+export const GET_RECENT_CONTACTS_QUERY = gql`
+  query GetRecentContacts {
+    findRecentContacts {
+      id
+      photo
+      name
+      cityTitle
+      age
+    }
+  }
+`;

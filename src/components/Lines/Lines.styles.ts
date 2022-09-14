@@ -7,15 +7,31 @@ export default EStyleSheet.create({
 
   lineContainer: {
     flexDirection: 'column',
-    width: 200,
-    marginHorizontal: 8,
+    width: 240,
+    marginLeft: 24,
     borderWidth: 1,
-    borderColor: '$secondary',
+    borderColor: '$primary',
     borderRadius: 4,
     marginVertical: 16,
     paddingHorizontal: 12,
     paddingTop: 20,
     paddingBottom: 16,
+    marginHorizontal: 12,
+  },
+
+  addLineContainer: {
+    borderColor: '$primary',
+  },
+
+  addLineContainerText: {
+    color: '$primary',
+    fontSize: '$h4',
+    fontFamily: 'Roboto-Regular',
+    marginBottom: 12,
+  },
+
+  addLineDescription: {
+    color: '$darkGray',
   },
 
   lineQuestionText: {

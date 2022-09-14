@@ -15,6 +15,9 @@ import {BodyCopy} from '../Typography';
 import colors from '../../utils/colors';
 import {useNavigation} from '@react-navigation/native';
 import {CATEGORIES, EDIT_ANSWER, PROFILE} from '../Navigation/ProfileNavigator';
+import {useTranslation} from 'react-i18next';
+import Link from '../Links';
+import AddLine from './AddLine';
 
 type Line = {
   id: number;
@@ -65,6 +68,7 @@ const LineCard = ({line, onPress}: {line: Line; onPress: () => void}) => {
 export default () => {
   const navigation = useNavigation();
   const {loading, error, data} = useQuery<LinesData>(GET_LINES_QUERY);
+  const {t} = useTranslation();
   if (loading) {
     return <ActivityIndicator size="large" color={colors.primary} />;
   }
@@ -88,8 +92,8 @@ export default () => {
   return (
     <View style={styles.container}>
       <ActionHeader
-        title="Questions & Answers"
-        linkTitle="Add new"
+        title={t('app.profile.lines')}
+        linkTitle={t('app.profile.addNewLine')}
         // @ts-ignore
         onLinkPress={() => navigation.navigate(CATEGORIES)}
         containerStyle={styles.linesHeading}
@@ -106,6 +110,9 @@ export default () => {
               onPress={() => onLineCardPress(line)}
             />
           ))}
+        {data?.me.lines.length === 0 && (
+          <AddLine onPress={() => navigation.navigate(CATEGORIES)} />
+        )}
       </ScrollView>
     </View>
   );

@@ -5,6 +5,7 @@ import anketReducer from './slices/anketSlice';
 import inChatReducer from './slices/inChatSlice';
 import requestResultReducer from './slices/requestResultSlice';
 import requestStateReducer from './slices/requestStateSlice';
+import contactsInputReducer from './slices/contactsInputSlice';
 import {
   persistStore,
   persistReducer,
@@ -70,6 +71,7 @@ export const store = configureStore({
     requestResult: persistedRequestResultReducer,
     requestState: persistedRequestStateReducer,
     inChat: inChatReducer,
+    contactsInput: contactsInputReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

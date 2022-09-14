@@ -26,6 +26,7 @@ import client from './src/utils/apollo';
 import {SEARCH} from './src/components/Navigation/AppNavigator';
 import {BodyCopy} from './src/components/Typography';
 import {PROFILE} from './src/components/Navigation/ProfileNavigator';
+import i18next from 'i18next';
 
 const linkingConfig = {
   prefixes: ['tellr://'],
@@ -58,10 +59,10 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
   useEffect(() => {
-    // if (!i18next.isInitialized) {
+    if (!i18next.isInitialized) {
+      initializeI18n();
+    }
     // initializeI18n();
-    // }
-    initializeI18n();
   }, []);
 
   return (

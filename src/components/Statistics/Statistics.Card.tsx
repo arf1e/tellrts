@@ -1,23 +1,35 @@
 import React, {ReactNode} from 'react';
-import {View} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import {BodyCopy} from '../Typography';
 import styles from './Statistics.styles';
+
+import Reanimated, {FadeIn, Layout} from 'react-native-reanimated';
+import colors from '../../utils/colors';
+
+const AnimatedView = Reanimated.createAnimatedComponent(View);
 
 type Props = {
   children: ReactNode;
   title: string;
   description: string;
+  loading?: boolean;
 };
 
-const StatisticsCard = ({children, title, description}: Props) => {
+const StatisticsCard = ({loading, children, title, description}: Props) => {
   return (
-    <View style={styles.cardContainer}>
-      {children}
-      <View style={styles.cardInfo}>
-        <BodyCopy style={styles.cardTitle}>{title}</BodyCopy>
-        <BodyCopy style={styles.cardDescription}>{description}</BodyCopy>
-      </View>
-    </View>
+    <AnimatedView style={styles.cardContainer} layout={Layout}>
+      {loading ? (
+        <ActivityIndicator size="large" color={colors.primary} />
+      ) : (
+        <AnimatedView entering={FadeIn}>
+          {children}
+          <View style={styles.cardInfo}>
+            <BodyCopy style={styles.cardTitle}>{title}</BodyCopy>
+            <BodyCopy style={styles.cardDescription}>{description}</BodyCopy>
+          </View>
+        </AnimatedView>
+      )}
+    </AnimatedView>
   );
 };
 

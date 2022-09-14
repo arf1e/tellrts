@@ -36,3 +36,30 @@ export const PRIMARY_INFO_QUERY = gql`
     }
   }
 `;
+
+export const GET_MOST_POPULAR_IMPRESSION_QUERY = gql`
+  query SImpression {
+    getMostPopularImpression {
+      impression
+      sex
+    }
+  }
+`;
+
+export const GET_LAST_MONTH_INTERACTIONS_COUNT_QUERY = gql`
+  query SCount {
+    getLastMonthInteractionsCount
+  }
+`;
+
+export const GET_AVERAGE_SUCCESS_RATE_QUERY = gql`
+  query SSuccessRate {
+    getAverageSuccessRate
+  }
+`;
+
+export const SHOULD_GET_STATISTICS_QUERY = gql`
+  query ShouldGetStatistics {
+    shouldGetStatistics
+  }
+`;

@@ -1,6 +1,7 @@
 import {useQuery} from '@apollo/client';
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {
   View,
   Image,
@@ -17,7 +18,11 @@ import Reanimated, {
 } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Container from '../../components/Container';
-import {SETTINGS} from '../../components/Navigation/ProfileNavigator';
+import Link from '../../components/Links';
+import {
+  SETTINGS,
+  UPDATE_BIO,
+} from '../../components/Navigation/ProfileNavigator';
 import {BodyCopy, Subtitle} from '../../components/Typography';
 import animationConstants from '../../utils/animationConstants';
 import colors from '../../utils/colors';
@@ -122,6 +127,8 @@ const ProfileImage = () => {
 
 const PrimaryInfo = () => {
   const [isErrored, setIsErrored] = useState(false);
+  const {t} = useTranslation();
+  const navigation = useNavigation();
   const {
     loading: primaryInfoLoading,
     data: primaryInfoData,
@@ -144,7 +151,13 @@ const PrimaryInfo = () => {
     <Container>
       <Subtitle style={styles.primaryInfo}>{`${name}, ${age}`}</Subtitle>
       <BodyCopy style={styles.cityTitle}>{cityTitle || ''}</BodyCopy>
-      <BodyCopy style={styles.bio}>{bio || ''}</BodyCopy>
+      {Boolean(bio) ? (
+        <BodyCopy style={styles.bio}>{bio}</BodyCopy>
+      ) : (
+        <Link onPress={() => navigation.navigate(UPDATE_BIO)}>
+          {t('app.profile.setBio')}
+        </Link>
+      )}
     </Container>
   );
 };

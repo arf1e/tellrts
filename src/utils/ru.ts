@@ -1,6 +1,19 @@
 export default {
+  navigation: {
+    PROFILE_NAVIGATOR: 'Профиль',
+    SEARCH: 'Поиск',
+    CONTACTS: 'Контакты',
+    SETTINGS: 'Настройки',
+    UPDATE_PHOTO: 'Обновить фотографию',
+    CATEGORIES: 'Категории',
+    STATISTICS: 'Статистика',
+    QUESTIONS: 'Вопросы',
+    EDIT_ANSWER: 'Обновить ответ',
+    UPDATE_BIO: 'Обновить описание',
+    UPDATE_PASSWORD: 'Обновить пароль',
+  },
   login: {
-    description: 'Дэйтинг - это не так стрёмно, как ты думаешь',
+    description: 'Дэйтинг - это не так стрёмно как ты думаешь',
     form: {
       title: 'Войти или зарегистрироваться',
       emailFieldTitle: 'Электропочта',
@@ -12,8 +25,30 @@ export default {
     },
   },
   app: {
+    contacts: {
+      search: 'Поиск',
+      clear: 'Очистить',
+    },
+    profile: {
+      lines: 'Вопросы',
+      addNewLine: 'Добавить',
+      addFirstLine: 'Добавить первый ответ',
+      addFirstLineDescription: 'Это не больно',
+      setBio: 'Добавить описание профиля',
+      statistics: 'Статистика',
+      seeDetails: 'Детали',
+      displayImpression: 'Самое частое первое впечатление',
+      interactionTitle_0: 'Интеракция',
+      interactionTitle_1: 'Интеракции',
+      interactionTitle_2: 'Интеракций',
+      interactionTitle_4: 'Интеракции',
+      interactionTitle_5: 'Интеракций',
+      interactionsDescription: 'За последний месяц',
+      successRate: 'Правильных ответов',
+      successRateDescription: 'Других пользователей во входящих анкетах',
+    },
     chat: {
-      fieldPlaceholder: 'Write a message...',
+      fieldPlaceholder: 'Напиши сообщение...',
     },
     contact: {
       descriptionTitle: 'Описание профиля',

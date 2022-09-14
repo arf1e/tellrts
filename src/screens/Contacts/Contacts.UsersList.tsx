@@ -9,6 +9,12 @@ import {GetContactsResult, GET_CONTACTS_QUERY} from './Contacts.graphql';
 import styles from './Contacts.styles';
 import UserLine from './Contacts.UserLine';
 
+import Reanimated, {Layout} from 'react-native-reanimated';
+import {useSelector} from 'react-redux';
+import {ContactsInputState} from '../../utils/slices/contactsInputSlice';
+
+const AnimatedView = Reanimated.createAnimatedComponent(View);
+
 const UsersList = () => {
   const {
     data,
@@ -18,6 +24,9 @@ const UsersList = () => {
   } = useQuery<GetContactsResult>(GET_CONTACTS_QUERY);
 
   const navigation = useNavigation();
+  const {inputValue: contactsInputValue} = useSelector(
+    (state: {contactsInput: ContactsInputState}) => state.contactsInput,
+  );
 
   if (error) {
     return <BodyCopy>error)</BodyCopy>;
@@ -27,10 +36,20 @@ const UsersList = () => {
     navigation.navigate(CONTACT, {userId});
   };
 
+  const getProbablyFilteredUsers = () => {
+    if (contactsInputValue) {
+      return data?.findContacts.filter(user =>
+        user.name.startsWith(contactsInputValue.trim()),
+      );
+    }
+
+    return data?.findContacts;
+  };
+
   return (
-    <View style={styles.usersListContainer}>
+    <AnimatedView layout={Layout.easing()} style={styles.usersListContainer}>
       <FlatList
-        data={data?.findContacts}
+        data={getProbablyFilteredUsers()}
         onRefresh={refreshUsersList}
         style={{flex: 1, flexGrow: 1}}
         contentContainerStyle={styles.listScrollable}
@@ -43,7 +62,7 @@ const UsersList = () => {
           />
         )}
       />
-    </View>
+    </AnimatedView>
   );
 };
 

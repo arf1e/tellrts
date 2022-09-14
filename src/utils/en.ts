@@ -1,4 +1,17 @@
 export default {
+  navigation: {
+    PROFILE_NAVIGATOR: 'Profile',
+    SEARCH: 'Search',
+    CONTACTS: 'Contacts',
+    SETTINGS: 'Settings',
+    UPDATE_PHOTO: 'Update photo',
+    CATEGORIES: 'Categories',
+    STATISTICS: 'Statistics',
+    QUESTIONS: 'Questions',
+    EDIT_ANSWER: 'Edit Answer',
+    UPDATE_BIO: 'Update bio',
+    UPDATE_PASSWORD: 'Update password',
+  },
   login: {
     description: 'The dating app for introverts and weirdos',
     form: {
@@ -12,6 +25,24 @@ export default {
     },
   },
   app: {
+    profile: {
+      lines: 'Questions',
+      addNewLine: 'Add',
+      addFirstLine: 'Add your first answer',
+      addFirstLineDescription: "It's not that scary",
+      setBio: 'Drop a few lines ',
+      statistics: 'Statistics',
+      seeDetails: 'Details',
+      displayImpression: 'Most popular first impression',
+      interactionTitle_0: 'Interaction',
+      interactionTitle_1: 'Interactions',
+      interactionTitle_2: 'Interactions',
+      interactionTitle_4: 'Interactions',
+      interactionTitle_5: 'Interactions',
+      interactionsDescription: 'In the last month',
+      successRate: 'Correct guesses',
+      successRateDescription: 'In incoming requests',
+    },
     chat: {
       fieldPlaceholder: 'Write a message...',
     },

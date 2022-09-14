@@ -14,6 +14,7 @@ import Toast from 'react-native-toast-message';
 import SearchNavigator from './SearchNavigator';
 import ContactsNavigator, {CHAT} from './ContactsNavigator';
 import {inChatState} from '../../utils/slices/inChatSlice';
+import {useTranslation} from 'react-i18next';
 
 const AppTabs = createBottomTabNavigator();
 
@@ -59,6 +60,7 @@ const AppNavigator = () => {
 
   const shouldHideTabBar = inChat;
 
+  const {t} = useTranslation();
   return (
     <AppTabs.Navigator
       screenOptions={({navigation, route}) => {
@@ -75,6 +77,7 @@ const AppNavigator = () => {
         name={PROFILE_NAVIGATOR}
         component={ProfileNavigator}
         options={{
+          title: t('navigation.PROFILE_NAVIGATOR'),
           tabBarIcon: props => {
             return (
               <NavigationIcon focused={props.focused} name="person-circle" />
@@ -88,7 +91,7 @@ const AppNavigator = () => {
                   NavigationStyles.label,
                   props.focused && NavigationStyles.labelActive,
                 ]}>
-                {PROFILE_NAVIGATOR}
+                {t('navigation.PROFILE_NAVIGATOR')}
               </BodyCopy>
             );
           },
@@ -108,7 +111,7 @@ const AppNavigator = () => {
                   NavigationStyles.label,
                   props.focused && NavigationStyles.labelActive,
                 ]}>
-                {SEARCH}
+                {t('navigation.SEARCH')}
               </BodyCopy>
             );
           },
@@ -128,7 +131,7 @@ const AppNavigator = () => {
                   NavigationStyles.label,
                   props.focused && NavigationStyles.labelActive,
                 ]}>
-                {CONTACTS}
+                {t('navigation.CONTACTS')}
               </BodyCopy>
             );
           },

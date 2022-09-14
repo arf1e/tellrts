@@ -14,7 +14,7 @@ export default EStyleSheet.create({
   },
 
   sectionLink: {
-    fontSize: '$bcLarge',
+    fontSize: '$bcMedium',
     fontFamily: 'Roboto-Regular',
   },
 });

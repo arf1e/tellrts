@@ -3,7 +3,7 @@ import EStyleSheet from 'react-native-extended-stylesheet';
 export default EStyleSheet.create({
   text: {
     fontSize: '$bcBig',
-    fontFamily: 'Roboto-Medium',
+    fontFamily: 'Roboto-Regular',
     color: '$primary',
   },
 
