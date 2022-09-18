@@ -7,6 +7,7 @@ import Field from '../../components/Field';
 import {FormikProps} from 'formik';
 import Fieldcheck from './Register.Fieldcheck';
 import {REGISTER_FORM_VALUES} from './Register.types';
+import {YUP_PASSWORD_ERRORS} from './Register.utils';
 
 type Props = {
   formikProps: FormikProps<REGISTER_FORM_VALUES>;
@@ -44,25 +45,21 @@ const Password = ({formikProps}: Props) => {
         <Fieldcheck
           title={t('register.password.minLength')}
           isPassing={
-            !formikProps.errors?.password?.includes(
-              t('register.password.minLength'),
-            )
+            !formikProps.errors?.password?.includes(YUP_PASSWORD_ERRORS.min)
           }
         />
         <Fieldcheck
           title={t('register.password.uppercase')}
           isPassing={
             !formikProps.errors?.password?.includes(
-              t('register.password.uppercase'),
+              YUP_PASSWORD_ERRORS.uppercase,
             )
           }
         />
         <Fieldcheck
           title={t('register.password.number')}
           isPassing={
-            !formikProps.errors?.password?.includes(
-              t('register.password.number'),
-            )
+            !formikProps.errors?.password?.includes(YUP_PASSWORD_ERRORS.number)
           }
         />
         <Fieldcheck

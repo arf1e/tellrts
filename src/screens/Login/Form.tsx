@@ -34,12 +34,14 @@ const initialValues = {
 const Form = () => {
   const {t} = useTranslation();
   const [step, setStep] = useState<0 | 1>(0);
-  const [checkEmail, {data, loading: checkEmailLoading}] =
-    useLazyQuery(CHECK_EMAIL_QUERY);
+  const [checkEmail, {data, loading: checkEmailLoading}] = useLazyQuery(
+    CHECK_EMAIL_QUERY,
+    {fetchPolicy: 'network-only'},
+  );
   return (
     <AnimatedView
       entering={FadeInUp.duration(240).damping(240)}
-      layout={Layout.easing()}
+      layout={Layout}
       style={LoginStyles.formContainer}>
       <Subtitle style={LoginStyles.formTitle}>{t('login.form.title')}</Subtitle>
       <Formik

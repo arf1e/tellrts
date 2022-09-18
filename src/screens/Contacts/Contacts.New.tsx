@@ -50,7 +50,7 @@ const NewContacts = () => {
       </Container>
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         {data?.findRecentContacts.map(user => (
-          <NewUserCard user={user} />
+          <NewUserCard user={user} key={user.id} />
         ))}
       </ScrollView>
     </AnimatedView>

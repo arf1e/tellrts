@@ -1,5 +1,6 @@
 import {Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
 
 export default EStyleSheet.create({
   container: {
@@ -7,6 +8,7 @@ export default EStyleSheet.create({
   },
   scrollable: {
     flexGrow: 1,
+    paddingBottom: SCROLLABLE_PADDING_BOTTOM,
   },
   anketElementsContainer: {
     flex: 1,
@@ -42,14 +44,14 @@ export default EStyleSheet.create({
   },
 
   impressionOptionContainer: {
-    width: 93,
+    width: 95,
     padding: 12,
     paddingBottom: 8,
     flexDirection: 'column',
     alignItems: 'flex-start',
     borderWidth: 1,
     borderRadius: 4,
-    marginBottom: 16,
+    marginBottom: 12,
     borderColor: '$secondary',
   },
 
@@ -72,7 +74,7 @@ export default EStyleSheet.create({
 
   stepContainer: {
     paddingHorizontal: 16,
-    paddingVertical: 20,
+    paddingVertical: 24,
     borderRadius: 8,
     backgroundColor: '$background',
     shadowColor: '$darkGray',

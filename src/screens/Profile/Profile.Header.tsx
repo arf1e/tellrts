@@ -18,6 +18,7 @@ import Reanimated, {
 } from 'react-native-reanimated';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Container from '../../components/Container';
+import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
 import Link from '../../components/Links';
 import {
   SETTINGS,
@@ -107,7 +108,7 @@ const ProfileImage = () => {
 
   return (
     <>
-      <StatusBar backgroundColor="transparent" translucent={true} />
+      <FocusAwareStatusBar backgroundColor="transparent" translucent={true} />
       {photoLoading ||
         (!photoData?.me && (
           <View style={styles.headerPhoto}>

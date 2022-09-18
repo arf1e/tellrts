@@ -4,4 +4,6 @@ const animationConstants: {[key: string]: number} = {
   SCALE_ON_PRESS: 0.98,
 };
 
+export const SCROLLABLE_PADDING_BOTTOM = 120;
+
 export default animationConstants;

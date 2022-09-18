@@ -3,7 +3,6 @@ import YupPassword from 'yup-password';
 import moment from 'moment';
 import {FormikProps} from 'formik';
 import {REGISTER_FORM_VALUES} from './Register.types';
-import {t} from 'i18next';
 
 // Add minUppercase && minNumbers support to yup
 YupPassword(yup);
@@ -29,12 +28,19 @@ export const REGISTER_FORM_INITIAL_VALUES: REGISTER_FORM_VALUES = {
   email: '',
 };
 
+export const YUP_PASSWORD_ERRORS = {
+  required: 'register.password.required',
+  min: 'register.password.minLength',
+  uppercase: 'register.password.uppercase',
+  number: 'register.password.number',
+};
+
 export const YUP_PASSWORD_CHECK_FIELD = yup
   .string()
-  .required('Please enter your password')
-  .min(8, t('register.password.minLength'))
-  .minUppercase(1, t('register.password.uppercase'))
-  .minNumbers(1, t('register.password.number'));
+  .required(YUP_PASSWORD_ERRORS.required)
+  .min(8, YUP_PASSWORD_ERRORS.min)
+  .minUppercase(1, YUP_PASSWORD_ERRORS.uppercase)
+  .minNumbers(1, YUP_PASSWORD_ERRORS.number);
 
 export const MIN_PWD_LENGTH = 8;
 export const MAX_PWD_LENGTH = 32;

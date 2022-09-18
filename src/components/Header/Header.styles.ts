@@ -14,7 +14,7 @@ export default EStyleSheet.create({
   },
 
   headerContainer: {
-    paddingBottom: 16,
+    paddingBottom: 12,
     ...(Platform.OS === 'android' && {
       paddingTop: (StatusBar.currentHeight || 20) + 12,
       paddingBottom: 12,

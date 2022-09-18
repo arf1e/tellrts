@@ -23,7 +23,7 @@ const ContactsHeader = () => {
   const shouldRenderNewContacts =
     !isContactsSearchFocused && contactsSearchValue.length === 0;
   return (
-    <AnimatedView layout={Layout.easing()} style={styles.screenHeader}>
+    <AnimatedView layout={Layout} style={styles.screenHeader}>
       <Container>
         <Subtitle style={HeaderStyles.screenTitle}>
           {t('navigation.CONTACTS')}

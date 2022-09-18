@@ -2,7 +2,8 @@ import {useMutation} from '@apollo/client';
 import {Formik} from 'formik';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
-import {FlatList, View} from 'react-native';
+import {FlatList, Platform, View} from 'react-native';
+import KeyboardSpacer from 'react-native-keyboard-spacer';
 import {SecondaryButton} from '../../components/Buttons';
 import Field from '../../components/Field';
 import Link from '../../components/Links';
@@ -36,20 +37,23 @@ const ChatInput = ({userId, chatRef}: Props) => {
         actions.resetForm();
       }}>
       {formikProps => (
-        <View style={styles.chatInputContainer}>
-          <Field
-            style={styles.chatInputField}
-            value={formikProps.values.text}
-            onChangeText={formikProps.handleChange('text')}
-            placeholder={t('app.chat.fieldPlaceholder')}
-            autoCorrect={false}
-          />
-          <Link
-            onPress={formikProps.submitForm}
-            containerStyle={styles.chatInputButton}>
-            Send
-          </Link>
-        </View>
+        <>
+          <View style={styles.chatInputContainer}>
+            <Field
+              style={styles.chatInputField}
+              value={formikProps.values.text}
+              onChangeText={formikProps.handleChange('text')}
+              placeholder={t('app.chat.fieldPlaceholder')}
+              autoCorrect={false}
+            />
+            <Link
+              onPress={formikProps.submitForm}
+              containerStyle={styles.chatInputButton}>
+              Send
+            </Link>
+          </View>
+          {Platform.OS === 'ios' && <KeyboardSpacer />}
+        </>
       )}
     </Formik>
   );

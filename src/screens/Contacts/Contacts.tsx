@@ -4,14 +4,20 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import styles from './Contacts.styles';
 import UsersList from './Contacts.UsersList';
 import ContactsHeader from './Contacts.Header';
-import {View} from 'react-native';
+import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
+import colors from '../../utils/colors';
+import {Platform, View, ViewProps} from 'react-native';
 
 const Contacts = () => {
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <ContactsHeader />
+      <FocusAwareStatusBar
+        backgroundColor={colors.background}
+        barStyle="dark-content"
+      />
       <UsersList />
-    </SafeAreaView>
+    </View>
   );
 };
 

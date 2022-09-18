@@ -1,8 +1,10 @@
 import {useQuery} from '@apollo/client';
 import React, {useState} from 'react';
-import {RefreshControl, ScrollView} from 'react-native';
+import {RefreshControl, ScrollView, StatusBar} from 'react-native';
 import Lines from '../../components/Lines/Lines';
 import Statistics from '../../components/Statistics/Statistics';
+import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
+import colors from '../../utils/colors';
 import {PROFILE_QUERY} from './Profile.graphql';
 import ProfileHeader from './Profile.Header';
 import styles from './Profile.styles';
@@ -23,10 +25,11 @@ const Profile = () => {
   return (
     <ScrollView
       style={styles.profileContainer}
-      contentContainerStyle={{paddingBottom: 32}}
+      contentContainerStyle={{paddingBottom: SCROLLABLE_PADDING_BOTTOM}}
       refreshControl={
         <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
       }>
+      <StatusBar backgroundColor={'transparent'} />
       <ProfileHeader />
       <Lines />
       <Statistics />

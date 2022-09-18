@@ -12,6 +12,7 @@ import Field from '../../components/Field';
 import colors from '../../utils/colors';
 import {GoogleLocationResult} from 'react-native-google-autocomplete/dist/services/Google.service';
 import PrimaryButton from '../../components/Buttons';
+import i18next from 'i18next';
 
 const GOOGLE_API_KEY = 'AIzaSyDw6jMkY0hQFicfxsmzU1bKn-sFAHWUgS0';
 
@@ -47,6 +48,7 @@ const City = ({countrySelected, setCity, currentCity}: Props) => {
   const {t} = useTranslation();
   const [modalActive, setModalActive] = useState(false);
   const [cityValue, setCityValue] = useState(currentCity.title || '');
+  const language = i18next.language;
 
   const handleChooseCity = (
     id: string,
@@ -98,6 +100,7 @@ const City = ({countrySelected, setCity, currentCity}: Props) => {
           apiKey={GOOGLE_API_KEY}
           debounce={300}
           minLength={2}
+          language={language}
           // @ts-ignore
           components={`country:${countrySelected.toLowerCase()}`}
           queryTypes="(cities)">

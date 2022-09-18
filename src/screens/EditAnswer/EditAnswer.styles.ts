@@ -16,6 +16,7 @@ export default EStyleSheet.create({
     lineHeight: '$h3',
     color: '$darkGray',
     fontFamily: 'Roboto-Regular',
+    maxHeight: '$h3 * 8',
   },
 
   formContainer: {
@@ -38,5 +39,5 @@ export default EStyleSheet.create({
     color: '$good',
   },
 
-  submitButton: {marginTop: 'auto'},
+  submitButton: {marginTop: 24, marginBottom: 'auto'},
 });

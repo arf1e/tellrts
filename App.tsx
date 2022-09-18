@@ -27,6 +27,7 @@ import {SEARCH} from './src/components/Navigation/AppNavigator';
 import {BodyCopy} from './src/components/Typography';
 import {PROFILE} from './src/components/Navigation/ProfileNavigator';
 import i18next from 'i18next';
+import {toastConfig} from './src/components/Toasts';
 
 const linkingConfig = {
   prefixes: ['tellr://'],
@@ -62,7 +63,7 @@ const App = () => {
     if (!i18next.isInitialized) {
       initializeI18n();
     }
-    // initializeI18n();
+    initializeI18n();
   }, []);
 
   return (
@@ -74,7 +75,7 @@ const App = () => {
             fallback={<BodyCopy>TODO: Loading...</BodyCopy>}>
             <>
               <RootNavigator />
-              <Toast />
+              <Toast config={toastConfig} />
             </>
           </NavigationContainer>
         </PersistGate>

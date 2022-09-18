@@ -1,3 +1,5 @@
+import {MIN_PWD_LENGTH} from '../screens/Register/Register.utils';
+
 export default {
   navigation: {
     PROFILE_NAVIGATOR: 'Профиль',
@@ -146,15 +148,27 @@ export default {
       photo: {
         title: 'Фотография',
         changePhoto: 'Изменить фотографию',
+        successMessage: {
+          title: 'Отлично!',
+          body: 'Фотография обновлена.',
+        },
+        errorMessage: {
+          title: 'Не можем достучаться до сервера.',
+          body: 'Не удалось обновить фотографию.',
+        },
       },
       bio: {
         title: 'Описание',
         changeBio: 'Обновить описание профиля',
-        placeholder: 'Любишь пиццу и путешествия? Ого, как необычно!',
+        placeholder: 'Краткость - сестра таланта',
         btnTitle: 'Обновить описание',
         successMessage: {
           title: 'Отлично!',
           body: 'Описание профиля обновлено.',
+        },
+        errorMessage: {
+          title: 'Не можем достучаться до сервера.',
+          body: 'Не удалось обновить описание профиля.',
         },
       },
       socialLinks: {
@@ -174,11 +188,30 @@ export default {
         newPasswordConfirm: 'Новый пароль еще раз',
         apply: 'Изменить пароль',
         description: 'Введи свой текущий пароль для обновления',
+        schema: {
+          currentRequired: 'Введите ваш пароль',
+          minPassword: `Минимальная длина пароля - ${MIN_PWD_LENGTH} символов.`,
+          newRequired: 'Введите новый пароль',
+          newMinUppercase: 'Пароль должен содержать символ верхнего регистра',
+          confirmNewRequired: 'Введите новый пароль еще раз',
+          shouldMatch: 'Новый пароль и его подтверждение должны совпадать',
+        },
+        errorMessage: {
+          title: 'Не удалось обновить пароль',
+          message: 'Проверьте введенные данные.',
+        },
+        successMessage: {
+          title: 'Отлично!',
+          body: 'Пароль обновлён.',
+        },
       },
     },
     questions: {
-      answerPlaceholder:
-        'Писать можно всё что угодно, в рамках законодательства и здравого смысла.',
+      answerPlaceholder: 'Это почти как в твиттере',
+      deleteAnswer: 'Удалить ответ',
+      saveAnswer: 'Подтвердить',
+      notificationTitle: 'Принято!',
+      notificationDescription: 'Ответ на вопрос уже доступен в вашем профиле.',
     },
     search: {
       modalTitle: 'Анкета',

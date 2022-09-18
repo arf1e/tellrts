@@ -10,9 +10,9 @@ import Reanimated, {
 } from 'react-native-reanimated';
 import animationConstants from '../../utils/animationConstants';
 import colors from '../../utils/colors';
+import ErrorDisplay from '../ErrorDisplay';
 
 const FieldTitle = Reanimated.createAnimatedComponent(Text);
-const FieldError = Reanimated.createAnimatedComponent(Text);
 
 interface Props extends TextInputProps {
   title?: string;
@@ -52,7 +52,9 @@ const FormField = ({title, error, containerStyles, ...rest}: Props) => {
         </FieldTitle>
       )}
       <Field {...rest} onFocus={onFocus} onBlur={onBlur} />
-      {error && <FieldError style={styles.formFieldError}>{error}</FieldError>}
+      {Boolean(error) && (
+        <ErrorDisplay style={styles.formFieldError} error={error} />
+      )}
     </View>
   );
 };

@@ -1,10 +1,5 @@
 import React, {useState} from 'react';
-import {
-  KeyboardAvoidingView,
-  TextInput,
-  TextInputProps,
-  View,
-} from 'react-native';
+import {TextInput, TextInputProps, View} from 'react-native';
 import Container from '../../components/Container';
 import DismissKeyboard from '../../components/DismissKeyboard';
 import styles from './EditAnswer.styles';
@@ -24,6 +19,8 @@ import errorCatcher, {showInfoToast} from '../../utils/toasts';
 import GET_LINES_QUERY from '../../components/Lines/Lines.graphql';
 import {BodyCopy} from '../../components/Typography';
 import AnswerHeader from './AnswerHeader';
+import {FadeInDown, FadeOutDown} from 'react-native-reanimated';
+import animationConstants from '../../utils/animationConstants';
 
 const MIN_ANSWER_LENGTH = 2;
 const MAX_ANSWER_LENGTH = 250;
@@ -35,7 +32,6 @@ const validationSchema = yup.object({
 const getInitialValues = (text: string = '') => ({
   answer: text,
 });
-
 const getLengthStatus = (length: number) => {
   if (length < MIN_ANSWER_LENGTH) {
     return 'incorrectLength';
@@ -62,8 +58,13 @@ const AnswerInput = (props: TextInputProps) => {
         placeholder={t('app.questions.answerPlaceholder')}
         value={props.value}
         autoFocus
-        selectionColor={colors.darkGray}
+        autoCorrect={false}
+        keyboardType="default"
         multiline={true}
+        textAlign="left"
+        returnKeyType="done"
+        maxLength={MAX_ANSWER_LENGTH}
+        selectionColor={colors.primary}
         onChangeText={props.onChangeText}
       />
     </>
@@ -79,6 +80,7 @@ type ScreenState = typeof IDLE | typeof LOADING | typeof ERROR;
 export default () => {
   const [route, navigation] = [useRoute(), useNavigation()];
   const [screenState, setScreenState] = useState<ScreenState>(IDLE);
+  const {t} = useTranslation();
 
   // @ts-ignore
   const initialValues = getInitialValues(route.params?.answer);
@@ -106,7 +108,10 @@ export default () => {
         }
 
         setScreenState(IDLE);
-        showInfoToast('Success!', 'Your profile has been updated!');
+        showInfoToast(
+          t('app.questions.notificationTitle'),
+          t('app.questions.notificationDescription'),
+        );
         // @ts-ignore
         navigation.navigate(PROFILE);
       } catch (e) {
@@ -119,8 +124,8 @@ export default () => {
   };
   return (
     <DismissKeyboard>
-      <KeyboardAvoidingView behavior="height" style={styles.inputContainer}>
-        <AnswerHeader />
+      <View style={styles.inputContainer}>
+        <AnswerHeader leftLinkTitle={t('navigation.PROFILE_NAVIGATOR')} />
         <Container style={styles.paddingContainer}>
           <Formik
             initialValues={initialValues}
@@ -140,8 +145,13 @@ export default () => {
                 />
                 {isValid && (
                   <PrimaryButton
+                    // @ts-ignore
+                    entering={FadeInDown.duration(animationConstants.BUTTON_IN)}
+                    exiting={FadeOutDown.duration(
+                      animationConstants.BUTTON_OUT,
+                    )}
                     style={styles.submitButton}
-                    title="Save Answer"
+                    title={t('app.questions.saveAnswer')}
                     onPress={formikSubmitForm}
                     loading={screenState === LOADING}
                   />
@@ -150,7 +160,7 @@ export default () => {
             )}
           </Formik>
         </Container>
-      </KeyboardAvoidingView>
+      </View>
     </DismissKeyboard>
   );
 };

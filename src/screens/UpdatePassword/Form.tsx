@@ -7,8 +7,10 @@ import * as yup from 'yup';
 import PrimaryButton from '../../components/Buttons';
 
 import FormField from '../../components/Field/FormField';
-import {BodyCopy} from '../../components/Typography';
-import errorCatcher, {showInfoToast} from '../../utils/toasts';
+import errorCatcher, {
+  showInfoToast,
+  showSuccessToast,
+} from '../../utils/toasts';
 import {MIN_PWD_LENGTH} from '../Register/Register.utils';
 import {
   UpdatePasswordResponse,
@@ -17,13 +19,23 @@ import {
 import styles from './UpdatePassword.styles';
 
 const validationSchema = yup.object().shape({
-  currentPassword: yup.string().required().min(MIN_PWD_LENGTH),
-  newPassword: yup.string().required().min(MIN_PWD_LENGTH).minUppercase(1),
+  currentPassword: yup
+    .string()
+    .required('app.settings.password.schema.currentRequired')
+    .min(MIN_PWD_LENGTH, 'app.settings.password.schema.minPassword'),
+  newPassword: yup
+    .string()
+    .required('app.settings.password.schema.newRequired')
+    .min(MIN_PWD_LENGTH, 'app.settings.password.schema.minPassword')
+    .minUppercase(1, 'app.settings.password.schema.newMinUppercase'),
   newPasswordConfirm: yup
     .string()
-    .required()
-    .min(MIN_PWD_LENGTH)
-    .oneOf([yup.ref('newPassword')], 'passwords should match'),
+    .required('app.settings.password.schema.confirmNewRequired')
+    .min(MIN_PWD_LENGTH, 'app.settings.password.schema.minPassword')
+    .oneOf(
+      [yup.ref('newPassword')],
+      'app.settings.password.schema.shouldMatch',
+    ),
 });
 
 const FORM_INITIAL_VALUES = {
@@ -62,12 +74,17 @@ const Form = () => {
       onCompleted: ({updatePassword: {ok, error}}) => {
         if (!ok) {
           setState(ERROR);
-          console.warn(error);
-          errorCatcher(error);
+          errorCatcher(error, {
+            title: t('app.settings.password.errorMessage.title'),
+            message: error,
+          });
           return;
         }
         setState(IDLE);
-        showInfoToast('success', 'password has been updated');
+        showSuccessToast(
+          t('app.settings.password.successMessage.title'),
+          t('app.settings.password.successMessage.body'),
+        );
         resetForm();
         return;
       },
@@ -96,7 +113,7 @@ const Form = () => {
             autoCorrect={false}
             value={values.currentPassword}
             title={t('app.settings.password.currentPassword')}
-            error={errors.currentPassword}
+            error={t(errors.currentPassword)}
           />
           <FormField
             onChangeText={handleChange('newPassword')}
@@ -105,7 +122,7 @@ const Form = () => {
             autoCorrect={false}
             value={values.newPassword}
             title={t('app.settings.password.newPassword')}
-            error={errors.newPassword}
+            error={t(errors.newPassword)}
           />
           <FormField
             onChangeText={handleChange('newPasswordConfirm')}
@@ -114,7 +131,7 @@ const Form = () => {
             autoCorrect={false}
             value={values.newPasswordConfirm}
             title={t('app.settings.password.newPasswordConfirm')}
-            error={errors.newPasswordConfirm}
+            error={t(errors.newPasswordConfirm)}
           />
           <PrimaryButton
             title={t('app.settings.password.apply')}

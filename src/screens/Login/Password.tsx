@@ -16,7 +16,6 @@ import {useDispatch} from 'react-redux';
 import {logIn} from '../../utils/slices/authSlice';
 import {YUP_PASSWORD_CHECK_FIELD} from '../Register/Register.utils';
 import ErrorDisplay from '../../components/ErrorDisplay';
-import {ArrowLink} from '../../components/Links';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 
@@ -116,7 +115,7 @@ const Password = ({emailExists, email, goBack}: Props) => {
                 style={LoginStyles.emailField}
                 onChangeText={handleChange('password')}
               />
-              {errors.password && <ErrorDisplay error={errors.password} />}
+              {errors.password && <ErrorDisplay error={t(errors.password)} />}
               <PrimaryButton
                 title={t('login.form.loginBtn')}
                 loading={loginLoading}

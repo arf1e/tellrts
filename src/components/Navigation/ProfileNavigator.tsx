@@ -73,6 +73,7 @@ const ProfileNavigator = () => {
         component={EditAnswer}
         options={{
           header: () => null,
+          headerBackTitle: t('navigation.PROFILE_NAVIGATOR'),
           title: t('navigation.EDIT_ANSWER'),
         }}
       />

@@ -25,6 +25,7 @@ import {REGISTER_MUTATION} from './Register.graphql';
 import {GraphQLError} from 'graphql';
 import {REGISTER_FORM_VALUES} from './Register.types';
 import RegisterFormNavigation from './Register.FormNavigation';
+import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
 
 const Register = ({
   navigation,

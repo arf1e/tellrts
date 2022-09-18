@@ -1,11 +1,25 @@
 import {ApolloClient, ApolloLink, InMemoryCache, split} from '@apollo/client';
 import {API_URL, WS_URL} from './config';
 import {setContext} from '@apollo/client/link/context';
+import {onError} from '@apollo/client/link/error';
 import {GraphQLWsLink} from '@apollo/client/link/subscriptions';
 import {createClient} from 'graphql-ws';
 import {createUploadLink} from 'apollo-upload-client';
 import {store} from './store';
 import {getMainDefinition} from '@apollo/client/utilities';
+
+const errorLink = onError(({graphQLErrors, networkError}) => {
+  if (graphQLErrors) {
+    graphQLErrors.forEach(({message, locations, path}) =>
+      console.log(
+        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`,
+      ),
+    );
+  }
+  if (networkError) {
+    console.log(`[Network error]: ${networkError}`);
+  }
+});
 
 const authLink = setContext((_, {headers}) => {
   const token = store.getState().auth.token;

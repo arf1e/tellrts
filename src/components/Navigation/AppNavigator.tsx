@@ -69,6 +69,7 @@ const AppNavigator = () => {
           tabBarHideOnKeyboard: true,
           tabBarStyle: {
             display: shouldHideTabBar ? 'none' : 'flex',
+            position: 'absolute',
             ...(shouldHideTabBar && {height: 0}),
           },
         };

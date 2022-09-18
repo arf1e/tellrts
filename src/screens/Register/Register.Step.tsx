@@ -1,10 +1,6 @@
 import {View} from 'react-native';
 import React from 'react';
-import Reanimated, {
-  FadeInDown,
-  FadeInUp,
-  FadeOutDown,
-} from 'react-native-reanimated';
+import Reanimated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
 
 import styles from './Register.styles';
 import RegisterControlPanel from './Register.ControlPanel';

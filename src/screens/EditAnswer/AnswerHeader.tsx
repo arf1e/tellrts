@@ -1,16 +1,23 @@
 import {useMutation} from '@apollo/client';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import React from 'react';
+import React, {Props} from 'react';
 import {Alert} from 'react-native';
 import Header from '../../components/Header';
 import {DELETE_LINE_MUTATION, EditAnswerResponse} from './EditAnswer.graphql';
 import GET_LINES_QUERY from '../../components/Lines/Lines.graphql';
 import errorCatcher, {showInfoToast} from '../../utils/toasts';
 import {PROFILE} from '../../components/Navigation/ProfileNavigator';
+import {useTranslation} from 'react-i18next';
+import {string} from 'yup/lib/locale';
 
-const AnswerHeader = ({}) => {
+type Props = {
+  leftLinkTitle?: string;
+};
+
+const AnswerHeader = ({leftLinkTitle}: Props) => {
   const navigation = useNavigation();
   const route = useRoute();
+  const {t} = useTranslation();
   // @ts-ignore
   const shouldRenderRightButton = route.params?.answer?.length > 0;
 
@@ -61,13 +68,13 @@ const AnswerHeader = ({}) => {
         // @ts-ignore
         title: route.params.title,
         // @ts-ignore
-        headerBackTitle: route.params.headerBackTitle,
+        headerBackTitle: leftLinkTitle || route.params.headerBackTitle,
         ...(shouldRenderRightButton && {
-          rightButtonTitle: 'Delete answer',
+          rightButtonTitle: t('app.questions.deleteAnswer'),
           onPressRightButton: onDeleteLine,
         }),
       }}
-      back={{title: 'ass'}}
+      back={{title: t('app.navigation.goBack')}}
     />
   );
 };

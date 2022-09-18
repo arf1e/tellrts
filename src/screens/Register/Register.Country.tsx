@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {View, Pressable} from 'react-native';
 import Field from '../../components/Field';
 import Reanimated, {
+  FadeIn,
+  FadeOut,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
@@ -18,8 +20,9 @@ import {
 } from '../../components/Modals/countries';
 import styles from './Register.styles';
 import PrimaryButton from '../../components/Buttons';
-import {useTranslation} from 'react-i18next';
+import {I18nContext, useTranslation} from 'react-i18next';
 import Link from '../../components/Links/Link';
+import i18next from 'i18next';
 
 const AnimatedPressable = Reanimated.createAnimatedComponent(Pressable);
 
@@ -38,25 +41,15 @@ const CountryItem = ({
   country: CountryType;
   onPress: () => void;
 }) => {
-  const appearShared = useSharedValue(0);
-  useEffect(() => {
-    appearShared.value = withTiming(1, {duration: 200});
-    return function cleanup() {
-      appearShared.value = withTiming(0, {duration: 150});
-    };
-  }, [appearShared]);
-
-  const animatedStyle = useAnimatedStyle(
-    () => ({
-      opacity: interpolate(appearShared.value, [0, 1], [0, 1]),
-    }),
-    [appearShared],
-  );
-  const btnStyles = [styles.optionContainer, animatedStyle];
+  const language: 'ru' | 'en' = i18next.language;
   return (
-    <AnimatedPressable style={btnStyles} onPress={onPress}>
+    <AnimatedPressable
+      entering={FadeIn.duration(200)}
+      exiting={FadeOut.duration(150)}
+      style={styles.optionContainer}
+      onPress={onPress}>
       <Emoji name={`flag-${country.code.toLowerCase()}`} style={styles.flag} />
-      <BodyCopy style={styles.optionTitle}>{country.name}</BodyCopy>
+      <BodyCopy style={styles.optionTitle}>{country.name[language]}</BodyCopy>
     </AnimatedPressable>
   );
 };
@@ -71,6 +64,7 @@ const Country = ({
   const [isModalActive, setIsModalActive] = useState(false);
   const [countriesResult, setCountriesResult] = useState<CountryType[]>([]);
   const {t} = useTranslation();
+  const language: 'ru' | 'en' = i18next.language;
 
   const handleCountryNameInput = (countryName: string) => {
     setCountryCode('');
@@ -81,7 +75,7 @@ const Country = ({
 
   const handleCountryItemSelection = (country: CountryType) => {
     clearCitySelection();
-    setcountryTitle(country.name);
+    setcountryTitle(country.name[language]);
     setCountryCode(country.code);
     setCountriesResult([]);
   };

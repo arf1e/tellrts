@@ -1,8 +1,10 @@
+import {Platform} from 'react-native';
 import EStyleSheet, {hairlineWidth} from 'react-native-extended-stylesheet';
 
 export default EStyleSheet.create({
   container: {
     flex: 1,
+    ...(Platform.OS === 'android' && {paddingTop: 24}),
     backgroundColor: '$background',
   },
 
@@ -12,10 +14,6 @@ export default EStyleSheet.create({
 
   listScrollable: {
     flexGrow: 1,
-  },
-
-  screenHeader: {
-    marginBottom: 24,
   },
 
   userLineContainer: {
@@ -67,6 +65,10 @@ export default EStyleSheet.create({
     flexGrow: 1,
   },
 
+  screenHeader: {
+    paddingBottom: 4,
+  },
+
   inputAndClearContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -77,6 +79,7 @@ export default EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 8,
+    marginBottom: 4,
   },
 
   newContactAvatar: {

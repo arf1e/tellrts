@@ -17,7 +17,7 @@ export default EStyleSheet.create({
   },
 
   stepTitle: {
-    marginTop: 16,
+    marginTop: 8,
     marginBottom: 16,
   },
 
@@ -138,7 +138,7 @@ export default EStyleSheet.create({
 
   passwordFieldContainer: {
     width: 300,
-    marginBottom: 16,
+    marginBottom: 12,
   },
 
   fieldTitle: {
@@ -149,7 +149,7 @@ export default EStyleSheet.create({
   fieldcheckContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
   },
 
   fieldcheckDot: {
@@ -161,7 +161,7 @@ export default EStyleSheet.create({
 
   fieldcheckText: {
     fontFamily: 'Roboto-Regular',
-    fontSize: '$bcMedium',
+    fontSize: 13,
   },
 
   passwordChecksContainer: {
@@ -172,6 +172,7 @@ export default EStyleSheet.create({
     width: 140,
     flexDirection: 'row',
     paddingVertical: 4,
+    marginTop: 8,
     justifyContent: 'space-between',
   },
 
@@ -197,7 +198,6 @@ export default EStyleSheet.create({
 
   checkTextFieldTitle: {
     fontFamily: 'Roboto-Medium',
-    width: 70,
   },
 
   stepHeader: {
