@@ -41,7 +41,7 @@ export default EStyleSheet.create({
 
   bio: {
     color: '$gray',
-    fontSize: '$bcBig',
+    fontSize: '$bcMedium',
     lineHeight: '$h4',
   },
 });

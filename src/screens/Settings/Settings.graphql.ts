@@ -15,3 +15,13 @@ export const LOGOUT_MUTATION = gql`
     }
   }
 `;
+
+export const SETTINGS_ME_QUERY = gql`
+  query Me {
+    me {
+      id
+      cityTitle
+      email
+    }
+  }
+`;

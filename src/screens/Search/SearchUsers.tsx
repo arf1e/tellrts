@@ -18,6 +18,7 @@ import useFiniteState from '../../hooks/useFiniteState';
 import colors from '../../utils/colors';
 import {setAnket} from '../../utils/slices/anketSlice';
 import {setRequestStateFilling} from '../../utils/slices/requestStateSlice';
+import SearchErrored from './Search.Errored';
 import {
   Anket,
   GetAnketResult,
@@ -26,6 +27,7 @@ import {
   SEARCH_USERS_QUERY,
   User,
 } from './Search.graphql';
+import NoSearchResult from './Search.NoResult';
 import styles from './Search.styles';
 
 const ActiveUser = ({
@@ -148,6 +150,7 @@ const SearchUsers = () => {
   return (
     <ScrollView
       style={styles.scrollView}
+      contentContainerStyle={styles.scrollContainer}
       refreshControl={
         <RefreshControl
           onRefresh={onRefresh}
@@ -155,9 +158,14 @@ const SearchUsers = () => {
           tintColor={colors.primary}
         />
       }>
+      {data && data.searchUsers.length === 0 && !refreshing && !error && (
+        <NoSearchResult />
+      )}
+      {error && <SearchErrored />}
       <Container>
         <View style={styles.userCardsContainer}>
           {data &&
+            !error &&
             data.searchUsers.map(user => (
               <UserCard
                 user={user}

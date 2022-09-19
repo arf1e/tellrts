@@ -178,9 +178,15 @@ export default {
       profile: {
         title: 'Профиль',
         email: 'Электропочта',
+        emailHolder: 'Ждем адрес почты от сервера...',
         city: 'Город',
+        cityHolder: 'Ждем название города от сервера...',
         changePassword: 'Обновить пароль',
         logout: 'Выйти из учетной записи',
+        errorMessage: {
+          title: 'Ой!',
+          message: 'Нет подключения к серверу.',
+        },
       },
       password: {
         currentPassword: 'Текущий пароль',

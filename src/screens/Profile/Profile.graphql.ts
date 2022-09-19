@@ -37,6 +37,15 @@ export const PRIMARY_INFO_QUERY = gql`
   }
 `;
 
+export type PrimaryInfoData = {
+  me: {
+    name: string;
+    bio: string;
+    birthday: string;
+    cityTitle: string;
+  };
+};
+
 export const GET_MOST_POPULAR_IMPRESSION_QUERY = gql`
   query SImpression {
     getMostPopularImpression {

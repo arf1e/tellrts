@@ -69,7 +69,7 @@ const Link = ({children, containerStyle, textStyle, ...rest}: Props) => {
       onPress={rest.onPress}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
-      hitSlop={44}
+      hitSlop={8}
       style={pressableStyle}>
       <AnimatedText style={titleStyle}>{children}</AnimatedText>
     </Pressable>
