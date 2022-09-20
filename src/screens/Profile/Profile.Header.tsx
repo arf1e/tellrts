@@ -3,7 +3,7 @@ import React from 'react';
 import {View, Image} from 'react-native';
 import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
 
-import {PHOTO_QUERY, PRIMARY_INFO_QUERY} from './Profile.graphql';
+import {PHOTO_QUERY} from './Profile.graphql';
 import PrimaryInfo from './Profile.Info';
 import SettingsButton from './Profile.SettingsButton';
 import styles from './Profile.styles';

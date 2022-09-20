@@ -46,6 +46,7 @@ export default EStyleSheet.create({
     fontSize: '$bcMedium',
     lineHeight: 20,
     color: '$darkGray',
+    marginTop: 'auto',
   },
 
   lineCategoryText: {

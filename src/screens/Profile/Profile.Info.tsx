@@ -15,21 +15,18 @@ const PrimaryInfo = () => {
   const [isErrored, setIsErrored] = useState(false);
   const {t} = useTranslation();
   const navigation = useNavigation();
-  const {
-    loading: primaryInfoLoading,
-    data: primaryInfoData,
-    error,
-  } = useQuery<PrimaryInfoData>(PRIMARY_INFO_QUERY, {
-    onError: () => {
-      setIsErrored(true);
-    },
-  });
+  const {loading: primaryInfoLoading, data: primaryInfoData} =
+    useQuery<PrimaryInfoData>(PRIMARY_INFO_QUERY, {
+      onError: () => {
+        setIsErrored(true);
+      },
+    });
 
   const name = primaryInfoData?.me.name;
-  const birthday = primaryInfoData?.me.birthday;
+  const age = primaryInfoData?.me.age;
   const cityTitle = primaryInfoData?.me.cityTitle;
   const bio = primaryInfoData?.me.bio;
-  const age = birthday && getAge(birthday);
+
   if (primaryInfoLoading) {
     return <LoadingIndicator />;
   }

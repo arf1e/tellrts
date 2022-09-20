@@ -1,25 +1,56 @@
 import {useQuery} from '@apollo/client';
 import React, {useState} from 'react';
-import {RefreshControl, ScrollView, StatusBar} from 'react-native';
+import {RefreshControl, ScrollView, StatusBar, View} from 'react-native';
+import Reanimated, {FadeIn} from 'react-native-reanimated';
 import Lines from '../../components/Lines/Lines';
+import LoadingIndicator from '../../components/LoadingIndicator';
 import Statistics from '../../components/Statistics/Statistics';
 import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
-import colors from '../../utils/colors';
-import {PROFILE_QUERY} from './Profile.graphql';
+import {ProfileQueryResponse, PROFILE_QUERY} from './Profile.graphql';
 import ProfileHeader from './Profile.Header';
 import styles from './Profile.styles';
 
+const ReanimatedView = Reanimated.createAnimatedComponent(View);
+
+const INITIAL = 'INITIAL';
+const LOADING = 'LOADING';
+const ERROR = 'ERROR';
+const IDLE = 'IDLE';
+
+type SCREEN_STATE =
+  | typeof INITIAL
+  | typeof LOADING
+  | typeof ERROR
+  | typeof IDLE;
+
 const Profile = () => {
-  const [refreshing, setRefreshing] = useState(false);
-  const {refetch} = useQuery(PROFILE_QUERY);
+  const [screenState, setScreenState] = useState<SCREEN_STATE>(INITIAL);
+  const {refetch} = useQuery<ProfileQueryResponse>(PROFILE_QUERY, {
+    onCompleted: data => {
+      if (data.me) {
+        setScreenState(IDLE);
+        return;
+      }
+
+      setScreenState(ERROR);
+    },
+  });
   const onRefresh = async () => {
-    setRefreshing(true);
+    const prevState = screenState;
+    if (prevState === INITIAL) {
+      setScreenState(LOADING);
+    }
     try {
-      await refetch();
-      setRefreshing(false);
+      await refetch().then(({data}) => {
+        if (data.me) {
+          setScreenState(IDLE);
+          return;
+        }
+        setScreenState(ERROR);
+      });
       return;
     } catch (e) {
-      setRefreshing(false);
+      setScreenState(ERROR);
     }
   };
   return (
@@ -27,12 +58,20 @@ const Profile = () => {
       style={styles.profileContainer}
       contentContainerStyle={{paddingBottom: SCROLLABLE_PADDING_BOTTOM}}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        <RefreshControl
+          refreshing={screenState === LOADING}
+          onRefresh={onRefresh}
+        />
       }>
-      <StatusBar backgroundColor={'transparent'} />
-      <ProfileHeader />
-      <Lines />
-      <Statistics />
+      <StatusBar backgroundColor={'transparent'} translucent={true} />
+      {screenState === INITIAL && <LoadingIndicator />}
+      {screenState === IDLE && (
+        <ReanimatedView entering={FadeIn.duration(320)}>
+          <ProfileHeader />
+          <Lines />
+          <Statistics />
+        </ReanimatedView>
+      )}
     </ScrollView>
   );
 };

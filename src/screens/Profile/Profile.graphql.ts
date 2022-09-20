@@ -5,15 +5,26 @@ export const PROFILE_QUERY = gql`
     me {
       id
       name
-      birthday
+      age
       sex
       bio
       photo
       cityTitle
-      countryCode
     }
   }
 `;
+
+export type ProfileQueryResponse = {
+  me: {
+    id: number;
+    name: string;
+    age: number;
+    sex: boolean;
+    bio: string;
+    photo: string;
+    cityTitle: string;
+  };
+};
 
 export const PHOTO_QUERY = gql`
   query me {
@@ -29,7 +40,8 @@ export const PRIMARY_INFO_QUERY = gql`
     me {
       id
       name
-      birthday
+      photo
+      age
       bio
       cityTitle
       countryCode
@@ -41,7 +53,7 @@ export type PrimaryInfoData = {
   me: {
     name: string;
     bio: string;
-    birthday: string;
+    age: number;
     cityTitle: string;
   };
 };
