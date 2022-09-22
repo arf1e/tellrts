@@ -48,6 +48,11 @@ export default {
       interactionsDescription: 'За последний месяц',
       successRate: 'Правильных ответов',
       successRateDescription: 'Других пользователей во входящих анкетах',
+      errorCap: {
+        title: 'Не получилось загрузить данные профиля.',
+        description:
+          'Пожалуйста, проверьте подключение к Интернету и попробуйте ещё раз.',
+      },
     },
     chat: {
       fieldPlaceholder: 'Напиши сообщение...',

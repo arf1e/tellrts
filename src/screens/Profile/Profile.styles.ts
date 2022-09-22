@@ -1,6 +1,7 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {Dimensions} from 'react-native';
 import {AVATAR_HEIGHT} from '../../utils/photos';
+import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
 
 const {width: DEVICE_WIDTH} = Dimensions.get('screen');
 
@@ -9,7 +10,11 @@ export default EStyleSheet.create({
     backgroundColor: '$background',
     paddingBottom: 32,
   },
-  headerContainer: {},
+
+  profileContentContainer: {
+    paddingBottom: SCROLLABLE_PADDING_BOTTOM,
+    flexGrow: 1,
+  },
   headerPhoto: {
     width: DEVICE_WIDTH,
     height: AVATAR_HEIGHT,

@@ -1,11 +1,12 @@
 import {useQuery} from '@apollo/client';
 import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {RefreshControl, ScrollView, StatusBar, View} from 'react-native';
 import Reanimated, {FadeIn} from 'react-native-reanimated';
 import Lines from '../../components/Lines/Lines';
 import LoadingIndicator from '../../components/LoadingIndicator';
+import {ScreenCap} from '../../components/ScreenCap';
 import Statistics from '../../components/Statistics/Statistics';
-import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
 import {ProfileQueryResponse, PROFILE_QUERY} from './Profile.graphql';
 import ProfileHeader from './Profile.Header';
 import styles from './Profile.styles';
@@ -25,6 +26,7 @@ type SCREEN_STATE =
 
 const Profile = () => {
   const [screenState, setScreenState] = useState<SCREEN_STATE>(INITIAL);
+  const {t} = useTranslation();
   const {refetch} = useQuery<ProfileQueryResponse>(PROFILE_QUERY, {
     onCompleted: data => {
       if (data.me) {
@@ -32,6 +34,10 @@ const Profile = () => {
         return;
       }
 
+      setScreenState(ERROR);
+    },
+
+    onError: () => {
       setScreenState(ERROR);
     },
   });
@@ -56,7 +62,7 @@ const Profile = () => {
   return (
     <ScrollView
       style={styles.profileContainer}
-      contentContainerStyle={{paddingBottom: SCROLLABLE_PADDING_BOTTOM}}
+      contentContainerStyle={styles.profileContentContainer}
       refreshControl={
         <RefreshControl
           refreshing={screenState === LOADING}
@@ -71,6 +77,13 @@ const Profile = () => {
           <Lines />
           <Statistics />
         </ReanimatedView>
+      )}
+      {screenState === ERROR && (
+        <ScreenCap
+          title={t('app.profile.errorCap.title')}
+          description={t('app.profile.errorCap.description')}
+          image="error"
+        />
       )}
     </ScrollView>
   );
