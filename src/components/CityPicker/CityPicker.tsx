@@ -7,7 +7,7 @@ import FullScreenModal from '../../components/Modals';
 import Link from '../../components/Links';
 import {BodyCopy, Subtitle} from '../../components/Typography';
 
-import styles from './Register.styles';
+import styles from './CityPicker.styles';
 import Field from '../../components/Field';
 import colors from '../../utils/colors';
 import {GoogleLocationResult} from 'react-native-google-autocomplete/dist/services/Google.service';
@@ -90,7 +90,9 @@ const City = ({countrySelected, setCity, currentCity}: Props) => {
 
   return (
     <View style={styles.cityContainer}>
-      <Subtitle>{t('register.location.cityTitle')}</Subtitle>
+      <Subtitle style={styles.locationSubtitle}>
+        {t('register.location.cityTitle')}
+      </Subtitle>
       <Link onPress={() => setModalActive(true)}>{renderLinkTitle()}</Link>
       <FullScreenModal
         closeModal={() => setModalActive(false)}
@@ -100,7 +102,7 @@ const City = ({countrySelected, setCity, currentCity}: Props) => {
           apiKey={GOOGLE_API_KEY}
           debounce={300}
           minLength={2}
-          language={language}
+          language={language.toUpperCase()}
           // @ts-ignore
           components={`country:${countrySelected.toLowerCase()}`}
           queryTypes="(cities)">

@@ -215,9 +215,4 @@ export default EStyleSheet.create({
   emailModalFieldButton: {
     marginTop: 32,
   },
-
-  locationSubtitle: {
-    fontSize: '$h4',
-    marginBottom: 4,
-  },
 });

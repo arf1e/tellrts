@@ -4,8 +4,9 @@ import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
 import {Subtitle} from '../../components/Typography';
 import {REGISTER_FORM_VALUES} from './Register.types';
-import City from './Register.City';
-import Country from './Register.Country';
+import {CountryPicker} from '../../components/CountryPicker';
+import {CityPicker} from '../../components/CityPicker';
+import styles from './Register.styles';
 
 type Props = {
   formikProps: FormikProps<REGISTER_FORM_VALUES>;
@@ -29,8 +30,10 @@ const Location = ({formikProps}: Props) => {
   const {t} = useTranslation();
   return (
     <View>
-      <Subtitle>{t('register.location.countryTitle')}</Subtitle>
-      <Country
+      <Subtitle style={styles.locationSubtitle}>
+        {t('register.location.countryTitle')}
+      </Subtitle>
+      <CountryPicker
         setCountryCode={setCountryCode}
         countryTitle={formikProps.values.countryTitle}
         setcountryTitle={setcountryTitle}
@@ -38,7 +41,7 @@ const Location = ({formikProps}: Props) => {
         clearCitySelection={clearCitySelection}
       />
       {Boolean(countrySelected) && (
-        <City
+        <CityPicker
           countrySelected={countrySelected}
           setCity={setCity}
           currentCity={currentCity}

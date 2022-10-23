@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
 
 export default EStyleSheet.create({
   categoriesContainer: {
@@ -6,11 +7,11 @@ export default EStyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     flexWrap: 'wrap',
+    paddingBottom: SCROLLABLE_PADDING_BOTTOM,
   },
 
   scrollView: {
     paddingVertical: 16,
-    paddingBottom: 32,
     backgroundColor: '$background',
   },
 

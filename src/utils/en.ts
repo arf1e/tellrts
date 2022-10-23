@@ -11,6 +11,7 @@ export default {
     EDIT_ANSWER: 'Edit Answer',
     UPDATE_BIO: 'Update bio',
     UPDATE_PASSWORD: 'Update password',
+    UPDATE_CITY: 'Update city',
   },
   login: {
     description: 'The dating app for introverts and weirdos',

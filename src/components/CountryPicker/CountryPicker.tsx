@@ -1,14 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Pressable} from 'react-native';
 import Field from '../../components/Field';
-import Reanimated, {
-  FadeIn,
-  FadeOut,
-  interpolate,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Reanimated, {FadeIn, FadeOut} from 'react-native-reanimated';
 import Emoji from 'react-native-emoji';
 
 import FullScreenModal from '../../components/Modals';
@@ -18,9 +11,9 @@ import {
   getCountryNameByCode,
   Country as CountryType,
 } from '../../components/Modals/countries';
-import styles from './Register.styles';
+import styles from './CountryPicker.styles';
 import PrimaryButton from '../../components/Buttons';
-import {I18nContext, useTranslation} from 'react-i18next';
+import {useTranslation} from 'react-i18next';
 import Link from '../../components/Links/Link';
 import i18next from 'i18next';
 
@@ -54,7 +47,7 @@ const CountryItem = ({
   );
 };
 
-const Country = ({
+const CountryPicker = ({
   setCountryCode,
   countryTitle,
   setcountryTitle,
@@ -64,7 +57,7 @@ const Country = ({
   const [isModalActive, setIsModalActive] = useState(false);
   const [countriesResult, setCountriesResult] = useState<CountryType[]>([]);
   const {t} = useTranslation();
-  const language: 'ru' | 'en' = i18next.language;
+  const language = i18next.language;
 
   const handleCountryNameInput = (countryName: string) => {
     setCountryCode('');
@@ -133,4 +126,4 @@ const Country = ({
   );
 };
 
-export default Country;
+export default CountryPicker;

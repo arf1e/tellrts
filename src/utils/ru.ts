@@ -13,6 +13,7 @@ export default {
     EDIT_ANSWER: 'Обновить ответ',
     UPDATE_BIO: 'Обновить описание',
     UPDATE_PASSWORD: 'Обновить пароль',
+    UPDATE_CITY: 'Обновить город',
   },
   login: {
     description: 'Дэйтинг - это не так стрёмно как ты думаешь',
@@ -174,6 +175,17 @@ export default {
         errorMessage: {
           title: 'Не можем достучаться до сервера.',
           body: 'Не удалось обновить описание профиля.',
+        },
+      },
+      location: {
+        confirm: 'Подтвердить',
+        success: {
+          title: 'Отлично!',
+          message: 'Информация в твоем профиле обновлена.',
+        },
+        error: {
+          title: 'Ошибка!',
+          message: 'Не удалось обновить локацию. Проверьте подключение к сети.',
         },
       },
       socialLinks: {

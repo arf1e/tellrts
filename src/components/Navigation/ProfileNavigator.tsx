@@ -11,6 +11,7 @@ import UpdateBio from '../../screens/UpdateBio';
 import UpdatePassword from '../../screens/UpdatePassword';
 import UpdatePhoto from '../../screens/UpdatePhoto';
 import {useTranslation} from 'react-i18next';
+import {UpdateCity} from '../../screens/UpdateCity';
 
 const ProfileStackNavigator = createNativeStackNavigator();
 
@@ -23,6 +24,7 @@ export const EDIT_ANSWER = 'EditAnswer';
 export const UPDATE_BIO = 'Update Bio';
 export const UPDATE_PHOTO = 'Update Photo';
 export const UPDATE_PASSWORD = 'Update Password';
+export const UPDATE_CITY = 'Update City';
 
 const ProfileNavigator = () => {
   const {t} = useTranslation();
@@ -108,6 +110,17 @@ const ProfileNavigator = () => {
             <Header {...props} />
           ),
           title: t('navigation.UPDATE_PHOTO'),
+        }}
+      />
+      <ProfileStackNavigator.Screen
+        name={UPDATE_CITY}
+        component={UpdateCity}
+        options={{
+          header: props => (
+            // @ts-ignore
+            <Header {...props} />
+          ),
+          title: t('navigation.UPDATE_CITY'),
         }}
       />
     </ProfileStackNavigator.Navigator>

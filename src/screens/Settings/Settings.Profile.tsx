@@ -7,6 +7,10 @@ import {useQuery} from '@apollo/client';
 import {SETTINGS_ME_QUERY} from './Settings.graphql';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import errorCatcher from '../../utils/toasts';
+import {
+  UPDATE_CITY,
+  UPDATE_PASSWORD,
+} from '../../components/Navigation/ProfileNavigator';
 
 type Props = {
   askIfUserWantsToLogout: () => void;
@@ -42,11 +46,11 @@ const ProfileSettings = ({askIfUserWantsToLogout}: Props) => {
           title: t('app.settings.profile.city'),
           linkTitle:
             meData?.me.cityTitle || t('app.settings.profile.cityHolder'),
-          onPress: () => console.warn('City'),
+          onPress: () => navigation.navigate(UPDATE_CITY),
         },
         {
           linkTitle: t('app.settings.profile.changePassword'),
-          //@ts-ignore
+          // @ts-ignore
           onPress: () => navigation.navigate(UPDATE_PASSWORD),
         },
         {
