@@ -70,8 +70,8 @@ export const GET_ANKET_QUERY = gql`
 `;
 
 export const SEARCH_USERS_QUERY = gql`
-  query SearchUsers {
-    searchUsers {
+  query SearchUsers($location: String) {
+    searchUsers(location: $location) {
       id
       photo
       bio

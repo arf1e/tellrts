@@ -30,7 +30,7 @@ const ContactsHeader = () => {
         </Subtitle>
       </Container>
       <ContactsInput />
-      {shouldRenderNewContacts && <NewContacts />}
+      {/* {shouldRenderNewContacts && <NewContacts />} */}
     </AnimatedView>
   );
 };

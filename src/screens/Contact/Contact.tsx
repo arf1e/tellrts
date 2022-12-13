@@ -17,7 +17,9 @@ const Contact = () => {
   const route = useRoute<RouteProp<ParamList, typeof CONTACT>>();
   const {userId} = route.params;
   return (
-    <ScrollView style={styles.screenContainer}>
+    <ScrollView
+      style={styles.screenContainer}
+      contentContainerStyle={styles.scrollableContainer}>
       <StatusBar backgroundColor="transparent" translucent={true} />
       <ContactHeader userId={userId} />
       <Ankets userId={userId} />

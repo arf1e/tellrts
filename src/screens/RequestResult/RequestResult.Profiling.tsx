@@ -3,6 +3,7 @@ import ReviewSection from './ReviewSection';
 import styles from './RequestResult.styles';
 import {View} from 'react-native';
 import {BodyCopy} from '../../components/Typography';
+import {useTranslation} from 'react-i18next';
 
 export type Assumption = {
   title: string;
@@ -28,8 +29,9 @@ const ProfilingCard = ({take}: {take: Assumption}) => {
 };
 
 const ProfilingResult = ({takes}: Props) => {
+  const {t} = useTranslation();
   return (
-    <ReviewSection title="Profiling">
+    <ReviewSection title={t('app.contact.profilingTitle')}>
       {takes.map(take => (
         <ProfilingCard key={take.title} take={take} />
       ))}

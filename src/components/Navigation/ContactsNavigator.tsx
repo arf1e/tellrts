@@ -2,7 +2,6 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Contacts from '../../screens/Contacts';
 import Contact from '../../screens/Contact/Contact';
-import Header from '../Header';
 import Chat from '../../screens/Chat';
 
 const ContactsStackNavigator = createNativeStackNavigator();
@@ -27,7 +26,7 @@ const ContactsNavigator = () => (
       name={CHAT}
       component={Chat}
       options={{
-        header: props => <Header {...props} />,
+        header: () => null,
       }}
     />
   </ContactsStackNavigator.Navigator>

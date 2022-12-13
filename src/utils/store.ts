@@ -6,6 +6,7 @@ import inChatReducer from './slices/inChatSlice';
 import requestResultReducer from './slices/requestResultSlice';
 import requestStateReducer from './slices/requestStateSlice';
 import contactsInputReducer from './slices/contactsInputSlice';
+import searchSettingsReducer from './slices/searchSettingsSlice';
 import {
   persistStore,
   persistReducer,
@@ -72,6 +73,7 @@ export const store = configureStore({
     requestState: persistedRequestStateReducer,
     inChat: inChatReducer,
     contactsInput: contactsInputReducer,
+    searchSettings: searchSettingsReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

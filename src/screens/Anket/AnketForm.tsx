@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {Alert, ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import AnketHeader from '../../components/AnketHeader';
+import Reanimated, {Layout} from 'react-native-reanimated';
 import {AnketState, clearAnket} from '../../utils/slices/anketSlice';
 import {setRequestResult} from '../../utils/slices/requestResultSlice';
 import {
@@ -27,6 +28,8 @@ import {
 } from './Anket.types';
 import AnketLoading from './AnketLoading';
 import AnketProgress from './AnketProgress';
+
+const AnimatedView = Reanimated.createAnimatedComponent(View);
 
 export type ANKET_FORMIK_PROPS = FormikProps<{
   userId: number;
@@ -178,12 +181,12 @@ const AnketForm = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <AnimatedView style={styles.container}>
       <AnketHeader />
       {/* @ts-ignore */}
       <Formik initialValues={initialValues} onSubmit={console.warn}>
         {formikProps => (
-          <View style={styles.anketMainContainer}>
+          <AnimatedView style={styles.anketMainContainer}>
             <AnketProgress progress={getCurrentProgress()} />
             <ScrollView
               showsVerticalScrollIndicator={false}
@@ -192,10 +195,10 @@ const AnketForm = () => {
               {STEPS.map(step => renderStep(step, formikProps))}
               {makeRequestLoading && <AnketLoading />}
             </ScrollView>
-          </View>
+          </AnimatedView>
         )}
       </Formik>
-    </View>
+    </AnimatedView>
   );
 };
 

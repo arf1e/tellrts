@@ -1,27 +1,30 @@
 import {Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
-import {ANKET_AVATAR_HEIGHT} from '../../utils/photos';
+import {AVATAR_HEIGHT} from '../../utils/photos';
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
-const ELEMENT_HEIGHT = ANKET_AVATAR_HEIGHT;
+const ELEMENT_HEIGHT = AVATAR_HEIGHT;
 
 export default EStyleSheet.create({
   mainContainer: {
     width: '100%',
-    height: ELEMENT_HEIGHT,
+    height: AVATAR_HEIGHT,
     backgroundColor: '$background',
   },
 
   picture: {
     width: DEVICE_WIDTH,
     height: ELEMENT_HEIGHT,
+    position: 'absolute',
+    zIndex: 1,
   },
 
   slide1: {
     backgroundColor: '$background',
     width: DEVICE_WIDTH,
     flex: 1,
+    zIndex: 4,
   },
 
   descriptionSlide: {

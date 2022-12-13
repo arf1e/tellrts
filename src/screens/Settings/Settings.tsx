@@ -1,13 +1,11 @@
-import {useMutation, useQuery} from '@apollo/client';
+import {useMutation} from '@apollo/client';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {Alert, ScrollView, StatusBar} from 'react-native';
 import {useDispatch} from 'react-redux';
-import {conditionallyRenderComponent} from '../../components/LoadingIndicator';
 import {
   UPDATE_BIO,
-  UPDATE_PASSWORD,
   UPDATE_PHOTO,
 } from '../../components/Navigation/ProfileNavigator';
 import colors from '../../utils/colors';
@@ -15,11 +13,7 @@ import {clearAnket} from '../../utils/slices/anketSlice';
 import {logOut} from '../../utils/slices/authSlice';
 import {store} from '../../utils/store';
 import errorCatcher from '../../utils/toasts';
-import {
-  LogoutMutationResult,
-  LOGOUT_MUTATION,
-  SETTINGS_ME_QUERY,
-} from './Settings.graphql';
+import {LogoutMutationResult, LOGOUT_MUTATION} from './Settings.graphql';
 import ProfileSettings from './Settings.Profile';
 import styles from './Settings.styles';
 import SettingsSection from './SettingsSection';

@@ -1,13 +1,13 @@
 import {useQuery} from '@apollo/client';
 import React, {useEffect, useRef} from 'react';
-import {FlatList, Platform} from 'react-native';
+import {FlatList, KeyboardAvoidingView, Platform} from 'react-native';
 import {SeeChatResult, SEE_CHAT_QUERY} from './Chat.graphql';
 import styles from './Chat.styles';
 import Message from './Message';
 import ChatInput from './ChatInput';
-import KeyboardSpacer from 'react-native-keyboard-spacer';
 import DismissKeyboard from '../../components/DismissKeyboard';
 import {subscribeToChatUpdates} from './Chat.utils';
+import {RefreshControl} from 'react-native-gesture-handler';
 
 type Props = {
   userId: number;

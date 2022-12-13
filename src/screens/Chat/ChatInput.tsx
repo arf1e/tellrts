@@ -4,7 +4,6 @@ import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {FlatList, Platform, View} from 'react-native';
 import KeyboardSpacer from 'react-native-keyboard-spacer';
-import {SecondaryButton} from '../../components/Buttons';
 import Field from '../../components/Field';
 import Link from '../../components/Links';
 import {MutationResponse, SEND_MESSAGE_MUTATION} from './Chat.graphql';

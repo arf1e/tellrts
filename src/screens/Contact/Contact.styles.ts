@@ -1,10 +1,16 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
 import {AVATAR_HEIGHT} from '../../utils/photos';
 
 export default EStyleSheet.create({
   screenContainer: {
     backgroundColor: '$background',
   },
+
+  scrollableContainer: {
+    paddingBottom: SCROLLABLE_PADDING_BOTTOM,
+  },
+
   headerContainer: {
     height: AVATAR_HEIGHT,
     position: 'relative',
@@ -60,34 +66,84 @@ export default EStyleSheet.create({
     lineHeight: 20,
   },
 
+  anketSwitchActive: {
+    fontSize: '$h3',
+    color: '$black',
+    fontFamily: 'Roboto-Medium',
+  },
+
   anketSwitchContainer: {
     flexDirection: 'row',
-    height: 44,
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+  },
+
+  contactCardContainer: {
+    minWidth: 155,
+    minHeight: 196,
+    alignItems: 'flex-start',
     justifyContent: 'flex-start',
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-
-  anketOptionContainer: {
-    height: 44,
-    marginRight: 16,
-    paddingVertical: 8,
-    justifyContent: 'center',
-    alignItems: 'center',
     paddingHorizontal: 12,
-    borderBottomWidth: 2,
-    borderBottomColor: '$background',
+    paddingVertical: 12,
+    borderWidth: 0.5,
+    borderColor: '$secondary',
+    borderRadius: 4,
+    marginRight: 16,
   },
 
-  anketOptionText: {
-    color: '$primary',
+  cardsContainer: {
+    paddingTop: 20,
+    marginBottom: 16,
+    paddingHorizontal: 24,
   },
 
-  anketOptionTextActive: {
+  contactCardTitle: {
+    fontSize: '$bcBig',
+    fontFamily: 'Roboto-Medium',
     color: '$darkGray',
+    width: 112,
+    alignSelf: 'flex-start',
   },
 
-  anketOptionContainerActive: {
-    borderBottomColor: '$primary',
+  contactCardContent: {
+    marginTop: 'auto',
+  },
+
+  successRate: {
+    fontSize: 44,
+    fontFamily: 'Roboto-Medium',
+  },
+
+  impressionsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    width: 130,
+  },
+
+  impressionEmoji: {
+    width: 32,
+    height: 32,
+    marginRight: 4,
+    marginBottom: 4,
+    opacity: 0.85,
+  },
+
+  takeTitle: {
+    fontSize: '$bcSmall',
+    fontFamily: 'Roboto-Medium',
+    color: '$gray',
+    marginBottom: 4,
+  },
+
+  takeAnswer: {
+    fontSize: '$bcMedium',
+  },
+
+  takeAnswerCorrect: {
+    color: '$good',
+  },
+
+  takeAnswerIncorrect: {
+    color: '$bad',
   },
 });

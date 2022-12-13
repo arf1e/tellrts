@@ -1,12 +1,13 @@
 import {useQuery} from '@apollo/client';
 import React, {useState} from 'react';
 import {RefreshControl, ScrollView, View} from 'react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import Container from '../../components/Container';
 import FullScreenModal from '../../components/Modals';
 import colors from '../../utils/colors';
 import {setAnket} from '../../utils/slices/anketSlice';
 import {setRequestStateFilling} from '../../utils/slices/requestStateSlice';
+import {SearchSettingsState} from '../../utils/slices/searchSettingsSlice';
 import ActiveUser from './Search.ActiveUser';
 import SearchErrored from './Search.Errored';
 import {
@@ -28,6 +29,10 @@ const ERROR = 'ERROR';
 type SCREEN_STATE = typeof LOADING | typeof LIST | typeof EMPTY | typeof ERROR;
 
 const SearchUsers = () => {
+  // --- REDUX STORE
+  const {location} = useSelector(
+    (state: {searchSettings: SearchSettingsState}) => state.searchSettings,
+  );
   // --- SERVICE
   const dispatch = useDispatch();
   // --- STATE
@@ -38,6 +43,8 @@ const SearchUsers = () => {
   const {data, refetch: refreshUsersList} = useQuery<SearchQueryResult>(
     SEARCH_USERS_QUERY,
     {
+      variables: {location},
+      fetchPolicy: 'network-only',
       onCompleted(queryResult) {
         if (queryResult.searchUsers.length > 0) {
           setScreenState(LIST);
@@ -92,6 +99,7 @@ const SearchUsers = () => {
   return (
     <ScrollView
       style={styles.scrollView}
+      showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.scrollContainer}
       refreshControl={
         <RefreshControl

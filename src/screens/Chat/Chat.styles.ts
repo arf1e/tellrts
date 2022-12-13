@@ -1,4 +1,3 @@
-import {Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import colors from '../../utils/colors';
 
@@ -77,5 +76,14 @@ export default EStyleSheet.create({
     fontFamily: 'Roboto-Regular',
     opacity: 0.6,
     fontSize: 10,
+  },
+
+  chatContainer: {
+    flex: 1,
+  },
+
+  giftedContainer: {
+    flex: 1,
+    backgroundColor: '$background',
   },
 });

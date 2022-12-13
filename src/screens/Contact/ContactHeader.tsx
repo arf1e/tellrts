@@ -38,12 +38,18 @@ const ContactGoBack = () => {
   );
 };
 
-const ChatButton = ({userId}: {userId: number}) => {
+const ChatButton = ({
+  userId,
+  chatTitle,
+}: {
+  userId: number;
+  chatTitle: string;
+}) => {
   const navigation = useNavigation();
 
   return (
     <CircleButton
-      onPress={() => navigation.navigate(CHAT, {userId})}
+      onPress={() => navigation.navigate(CHAT, {userId, title: chatTitle})}
       icon="chatbubbles-outline"
       size={60}
       style={styles.chatButton}
@@ -75,6 +81,9 @@ const ContactHeader = ({userId}: Props) => {
     return <LoadingIndicator />;
   }
 
+  const {age, name} = data?.seeContact.user;
+  const chatTitle = `${name}, ${age}`;
+
   return (
     <View>
       <ImageBackground
@@ -83,7 +92,7 @@ const ContactHeader = ({userId}: Props) => {
         source={{uri: data.seeContact.user.photo}}>
         <ContactGoBack />
         <ContactInfo user={data?.seeContact.user} />
-        <ChatButton userId={userId} />
+        <ChatButton userId={userId} chatTitle={chatTitle} />
       </ImageBackground>
       <Container>
         <Subtitle style={styles.profileSectionTitle}>

@@ -4,11 +4,14 @@ import {BodyCopy} from '../../components/Typography';
 import Reanimated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
 import styles from './Search.styles';
 import {SecondaryButton} from '../../components/Buttons';
+import {useNavigation} from '@react-navigation/native';
+import {SEARCH_PARAMETERS} from '../../components/Navigation/SearchNavigator';
 
 const ReanimatedView = Reanimated.createAnimatedComponent(View);
 const AnimatedImage = Reanimated.createAnimatedComponent(Image);
 
 const NoSearchResult = () => {
+  const navigation = useNavigation();
   return (
     <ReanimatedView
       entering={FadeInDown.duration(240)}
@@ -29,6 +32,7 @@ const NoSearchResult = () => {
         <SecondaryButton
           style={styles.noResultButton}
           title="Открыть настройки поиска"
+          onPress={() => navigation.navigate(SEARCH_PARAMETERS)}
         />
       </View>
     </ReanimatedView>

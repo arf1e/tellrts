@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './UpdateCity.styles';
 import {Formik} from 'formik';
 import {useMutation, useQuery} from '@apollo/client';
+import Reanimated, {FadeIn, FadeOut} from 'react-native-reanimated';
 import {
   GET_MY_LOCATION_QUERY,
   MyLocationQueryResult,
@@ -18,11 +19,14 @@ import PrimaryButton from '../../components/Buttons';
 import {useTranslation} from 'react-i18next';
 import errorCatcher, {showSuccessToast} from '../../utils/toasts';
 import {PROFILE_QUERY} from '../Profile/Profile.graphql';
+import animationConstants from '../../utils/animationConstants';
 
 const validationSchema = yup.object().shape({
   countryCode: yup.string().required(),
   cityId: yup.string().required(),
 });
+
+const AnimatedView = Reanimated.createAnimatedComponent(View);
 
 const UpdateCity = () => {
   const {t} = useTranslation();
@@ -63,7 +67,7 @@ const UpdateCity = () => {
     UPDATE_CITY_MUTATION_VARIABLES
   >(UPDATE_CITY_MUTATION, {
     onCompleted: data => onMutationCompleted(data, reset),
-    refetchQueries: [PROFILE_QUERY],
+    refetchQueries: [PROFILE_QUERY, GET_MY_LOCATION_QUERY],
     onError: error => onMutationErrored(error, reset),
     fetchPolicy: 'network-only',
   });
@@ -82,12 +86,36 @@ const UpdateCity = () => {
     });
   };
 
+  const maybeRenderPrimaryButton = formikProps => {
+    const thereIsData =
+      formikProps.values.cityId?.length > 0 &&
+      formikProps.values.countryCode?.length > 0;
+    const userHasChangedCity =
+      formikProps.values.cityId !== queryData?.me.cityId;
+    const shouldRenderPrimaryButton = thereIsData && userHasChangedCity;
+    return (
+      <>
+        {shouldRenderPrimaryButton && (
+          <AnimatedView entering={FadeIn} exiting={FadeOut}>
+            <PrimaryButton
+              title={t('app.settings.location.confirm')}
+              style={styles.confirmButton}
+              onPress={formikProps.handleSubmit}
+              loading={mutationLoading}
+            />
+          </AnimatedView>
+        )}
+      </>
+    );
+  };
+
   return (
     <View style={styles.screenContainer}>
       {queryLoading && <ActivityIndicator />}
       {queryData && (
         <Container>
-          <View>
+          <AnimatedView
+            entering={FadeIn.duration(animationConstants.BUTTON_IN)}>
             <Formik
               initialValues={initialValues}
               onSubmit={handleSubmit}
@@ -95,19 +123,11 @@ const UpdateCity = () => {
               {formikProps => (
                 <>
                   <Location formikProps={formikProps} />
-                  {formikProps.values.cityId?.length > 0 &&
-                    formikProps.values.countryCode?.length > 0 && (
-                      <PrimaryButton
-                        title={t('app.settings.location.confirm')}
-                        style={styles.confirmButton}
-                        onPress={formikProps.handleSubmit}
-                        loading={mutationLoading}
-                      />
-                    )}
+                  {maybeRenderPrimaryButton(formikProps)}
                 </>
               )}
             </Formik>
-          </View>
+          </AnimatedView>
         </Container>
       )}
     </View>

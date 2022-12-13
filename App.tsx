@@ -18,16 +18,15 @@ import RootNavigator from './src/components/Navigation/RootNavigator';
 import {Provider} from 'react-redux';
 import {storePersistor, store} from './src/utils/store';
 import {PersistGate} from 'redux-persist/integration/react';
-
-import initializeI18n from './src/utils/i18n';
 import {colorVariables} from './src/utils/colors';
 import client from './src/utils/apollo';
 
 import {SEARCH} from './src/components/Navigation/AppNavigator';
-import {BodyCopy} from './src/components/Typography';
 import {PROFILE} from './src/components/Navigation/ProfileNavigator';
-import i18next from 'i18next';
 import {toastConfig} from './src/components/Toasts';
+import RNBootSplash from 'react-native-bootsplash';
+import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
+import initialiseTellrServices from './src/utils/init';
 
 const linkingConfig = {
   prefixes: ['tellr://'],
@@ -60,19 +59,15 @@ const App = () => {
   //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   // };
   useEffect(() => {
-    if (!i18next.isInitialized) {
-      initializeI18n();
-    }
-    initializeI18n();
+    initialiseTellrServices();
   }, []);
-
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={storePersistor}>
           <NavigationContainer
             linking={linkingConfig}
-            fallback={<BodyCopy>TODO: Loading...</BodyCopy>}>
+            onReady={() => RNBootSplash.hide()}>
             <>
               <RootNavigator />
               <Toast config={toastConfig} />
@@ -84,4 +79,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default gestureHandlerRootHOC(() => <App />);

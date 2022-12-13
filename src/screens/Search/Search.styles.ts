@@ -132,4 +132,16 @@ export default EStyleSheet.create({
     width: 300,
     marginTop: 16,
   },
+
+  tip: {
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    flex: 20,
+  },
+
+  tipText: {
+    color: '$gray',
+    marginTop: 12,
+  },
 });

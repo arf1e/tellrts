@@ -2,6 +2,7 @@ import React from 'react';
 import Reanimated, {
   interpolate,
   interpolateColor,
+  SharedValue,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -15,7 +16,11 @@ import animationConstants from '../../utils/animationConstants';
 import {SETTINGS} from '../../components/Navigation/ProfileNavigator';
 const ReanimatedPressable = Reanimated.createAnimatedComponent(Pressable);
 
-const SettingsButton = () => {
+const SettingsButton = ({
+  hiddenShared,
+}: {
+  hiddenShared: SharedValue<number> | undefined;
+}) => {
   const pressedShared = useSharedValue(0);
 
   const {navigate} = useNavigation();
@@ -36,6 +41,9 @@ const SettingsButton = () => {
           ),
         },
       ],
+      ...(hiddenShared && {
+        opacity: interpolate(hiddenShared.value, [0, 1], [0, 1]),
+      }),
     }),
     [pressedShared],
   );

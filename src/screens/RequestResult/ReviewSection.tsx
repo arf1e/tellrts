@@ -1,4 +1,4 @@
-import React, {ReactChildren} from 'react';
+import React from 'react';
 import {ScrollView, View} from 'react-native';
 import Container from '../../components/Container';
 import {Subtitle} from '../../components/Typography';
@@ -18,7 +18,7 @@ const ReviewSection = ({title, children}: Props) => {
       <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
-        style={styles.reviewSectionScroller}>
+        contentContainerStyle={styles.reviewSectionScroller}>
         {children}
       </ScrollView>
     </View>

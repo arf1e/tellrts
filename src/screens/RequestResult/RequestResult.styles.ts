@@ -92,27 +92,21 @@ export default EStyleSheet.create({
   },
 
   guessContainer: {
-    shadowColor: '$darkGray',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    alignContent: 'space-between',
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
-    elevation: 1,
+    borderWidth: 0.5,
+    borderColor: '$secondary',
     backgroundColor: '$background',
     padding: 12,
     marginVertical: 16,
     minHeight: 90,
-    marginHorizontal: 10,
+    marginRight: 16,
     borderRadius: 4,
     width: 272,
   },
 
   guessQuestion: {
     color: '$darkGray',
-    fontSize: '$bcMedium',
+    fontSize: '$bcBig',
+    fontFamily: 'Roboto-Medium',
     lineHeight: 20,
     marginBottom: 12,
   },
@@ -120,7 +114,13 @@ export default EStyleSheet.create({
   guessAnswer: {
     fontSize: '$bcMedium',
     lineHeight: 20,
-    marginTop: 'auto',
+    marginTop: 12,
+  },
+
+  approvedAnswer: {
+    fontSize: '$bcSmall',
+    marginTop: 2,
+    color: '$lightGray',
   },
 
   guessAnswerGood: {
@@ -132,20 +132,15 @@ export default EStyleSheet.create({
   },
 
   profilingCardContainer: {
-    shadowColor: '$darkGray',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.18,
-    shadowRadius: 1.0,
-    elevation: 1,
+    borderColor: '$light',
+    borderWidth: 0.5,
     backgroundColor: '$background',
     padding: 12,
     paddingTop: 20,
     marginVertical: 16,
     marginHorizontal: 10,
     borderRadius: 4,
+    minWidth: 80,
   },
 
   resultTipContainer: {
@@ -170,5 +165,29 @@ export default EStyleSheet.create({
     lineHeight: 18,
     textAlign: 'center',
     marginBottom: 20,
+  },
+
+  guessCorrectAnswerTitle: {
+    marginTop: 24,
+    color: '$gray',
+    fontSize: '$bcMedium',
+    marginBottom: 12,
+  },
+
+  correctAnswer: {
+    fontSize: '$bcMedium',
+    lineHeight: '$bcLarge',
+    color: '$black',
+  },
+
+  reviewSectionScroller: {
+    paddingHorizontal: 24,
+  },
+
+  correctAnswerContainer: {
+    paddingBottom: 4,
+    borderBottomWidth: 3,
+    borderBottomColor: 'rgba(89, 197, 104, 0.7)',
+    alignSelf: 'flex-start',
   },
 });

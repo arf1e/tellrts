@@ -1,6 +1,6 @@
 import {gql} from '@apollo/client';
 import {ImpressionIcon} from '../../assets/impressions';
-import {Guess} from '../Anket/Anket.types';
+import {GuessWithAnswer} from '../Anket/Anket.types';
 import {User} from '../Search/Search.graphql';
 
 export type GetContactResult = {
@@ -74,7 +74,7 @@ export type SeeRequestResult = {
     to: User;
     successRate: number;
     impressions: ImpressionIcon[];
-    guesses: Guess[];
+    guesses: GuessWithAnswer[];
   };
 };
 

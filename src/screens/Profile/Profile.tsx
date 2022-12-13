@@ -1,7 +1,7 @@
 import {useQuery} from '@apollo/client';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {RefreshControl, ScrollView, StatusBar, View} from 'react-native';
+import {ScrollView, StatusBar, View} from 'react-native';
 import Reanimated, {FadeIn} from 'react-native-reanimated';
 import Lines from '../../components/Lines/Lines';
 import LoadingIndicator from '../../components/LoadingIndicator';
@@ -41,34 +41,10 @@ const Profile = () => {
       setScreenState(ERROR);
     },
   });
-  const onRefresh = async () => {
-    const prevState = screenState;
-    if (prevState === INITIAL) {
-      setScreenState(LOADING);
-    }
-    try {
-      await refetch().then(({data}) => {
-        if (data.me) {
-          setScreenState(IDLE);
-          return;
-        }
-        setScreenState(ERROR);
-      });
-      return;
-    } catch (e) {
-      setScreenState(ERROR);
-    }
-  };
   return (
     <ScrollView
       style={styles.profileContainer}
-      contentContainerStyle={styles.profileContentContainer}
-      refreshControl={
-        <RefreshControl
-          refreshing={screenState === LOADING}
-          onRefresh={onRefresh}
-        />
-      }>
+      contentContainerStyle={styles.profileContentContainer}>
       <StatusBar backgroundColor={'transparent'} translucent={true} />
       {screenState === INITIAL && <LoadingIndicator />}
       {screenState === IDLE && (

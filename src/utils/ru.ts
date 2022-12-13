@@ -14,6 +14,7 @@ export default {
     UPDATE_BIO: 'Обновить описание',
     UPDATE_PASSWORD: 'Обновить пароль',
     UPDATE_CITY: 'Обновить город',
+    SEARCH_PARAMETERS: 'Параметры поиска',
   },
   login: {
     description: 'Дэйтинг - это не так стрёмно как ты думаешь',
@@ -33,7 +34,7 @@ export default {
       clear: 'Очистить',
     },
     profile: {
-      lines: 'Вопросы',
+      lines: 'Вопросы и ответы',
       addNewLine: 'Добавить',
       addFirstLine: 'Добавить первый ответ',
       addFirstLineDescription: 'Это не больно',
@@ -60,6 +61,17 @@ export default {
     },
     contact: {
       descriptionTitle: 'Описание профиля',
+      myRequestTitle: 'Моя анкета',
+      anketsTitle: 'Анкеты',
+      otherRequestTitle: 'Встречная анкета',
+      impressionsTitle: 'Первое впечатление',
+      profilingTitle: 'Профайлинг',
+      guessesTitle: 'Предположения',
+      takes: {
+        name: 'Имя',
+      },
+      successRateTitle: 'Правильных ответов',
+      correctAnswerTitle: 'Правильный ответ:',
     },
     anket: {
       descriptionTitle: 'Описание профиля',
@@ -262,7 +274,7 @@ export default {
     },
     sex: {
       title: 'Пол',
-      description: 'Нам уже угражают в Твиттере за этот вопрос.',
+      description: 'Нам уже угрожают в Твиттере за этот вопрос.',
       male: 'Джентельмен',
       female: 'Леди',
     },

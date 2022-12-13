@@ -23,7 +23,18 @@ export const CHAT_SUBSCRIPTION = gql`
       isMine
       createdAt
       text
+      user {
+        id
+      }
       chatId
+    }
+  }
+`;
+
+export const GET_MY_ID_QUERY = gql`
+  query me {
+    me {
+      id
     }
   }
 `;
@@ -34,6 +45,24 @@ export const SEE_CHAT_QUERY = gql`
       id
       isMine
       createdAt
+      user {
+        id
+      }
+      text
+      chatId
+    }
+  }
+`;
+
+export const UPLOAD_MORE_MESSAGES_QUERY = gql`
+  query SeeChat($userId: Int!, $cursor: Int) {
+    seeChat(userId: $userId, cursor: $cursor) {
+      id
+      isMine
+      createdAt
+      user {
+        id
+      }
       text
       chatId
     }

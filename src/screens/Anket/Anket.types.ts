@@ -13,6 +13,13 @@ export type Guess = {
   answer: string;
 };
 
+export type GuessWithAnswer = {
+  questionId: number;
+  answer: string;
+  isCorrect: boolean;
+  correct: string;
+};
+
 export const generateAnketInitialValues = (anket: Anket) => {
   return {
     userId: anket.id,

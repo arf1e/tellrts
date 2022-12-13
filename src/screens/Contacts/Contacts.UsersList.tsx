@@ -12,6 +12,7 @@ import UserLine from './Contacts.UserLine';
 import Reanimated, {Layout} from 'react-native-reanimated';
 import {useSelector} from 'react-redux';
 import {ContactsInputState} from '../../utils/slices/contactsInputSlice';
+import ContactsHeader from './Contacts.Header';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 
@@ -47,7 +48,7 @@ const UsersList = () => {
   };
 
   return (
-    <AnimatedView layout={Layout.easing()} style={styles.usersListContainer}>
+    <AnimatedView layout={Layout.springify()} style={styles.usersListContainer}>
       <FlatList
         data={getProbablyFilteredUsers()}
         onRefresh={refreshUsersList}

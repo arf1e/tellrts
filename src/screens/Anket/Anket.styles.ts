@@ -16,7 +16,7 @@ export default EStyleSheet.create({
   anketMainContainer: {
     flex: 1,
     flexGrow: 1,
-    backgroundColor: '$unsaturatedPrimary',
+    backgroundColor: '$background',
     position: 'relative',
   },
 
@@ -45,7 +45,7 @@ export default EStyleSheet.create({
 
   impressionOptionContainer: {
     width: 95,
-    padding: 12,
+    padding: 8,
     paddingBottom: 8,
     flexDirection: 'column',
     alignItems: 'flex-start',

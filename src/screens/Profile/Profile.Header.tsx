@@ -1,7 +1,8 @@
 import {useQuery} from '@apollo/client';
 import React from 'react';
-import {View, Image} from 'react-native';
-import FocusAwareStatusBar from '../../components/FocusAwareStatusBar';
+import {View} from 'react-native';
+import {SharedValue, useSharedValue} from 'react-native-reanimated';
+import {PinchablePhoto} from '../../components/PinchablePhoto';
 
 import {PHOTO_QUERY} from './Profile.graphql';
 import PrimaryInfo from './Profile.Info';
@@ -14,27 +15,26 @@ type PhotoData = {
   };
 };
 
-const ProfileImage = () => {
+const ProfileImage = ({hiddenShared}: {hiddenShared: SharedValue<number>}) => {
   const {data: photoData} = useQuery<PhotoData>(PHOTO_QUERY);
 
   return (
-    <>
-      <FocusAwareStatusBar backgroundColor="transparent" translucent={true} />
-      <Image
+    <View style={{overflow: 'hidden'}}>
+      <PinchablePhoto
         style={styles.headerPhoto}
-        defaultSource={require('../../assets/image-cap.png')}
+        hideableShared={hiddenShared}
         source={{uri: photoData?.me.photo}}
-        resizeMode="cover"
       />
-    </>
+    </View>
   );
 };
 
 const ProfileHeader = () => {
+  const shownSettingsButtonShared = useSharedValue(1);
   return (
     <View style={styles.headerContainer}>
-      <ProfileImage />
-      <SettingsButton />
+      <ProfileImage hiddenShared={shownSettingsButtonShared} />
+      <SettingsButton hiddenShared={shownSettingsButtonShared} />
       <PrimaryInfo />
     </View>
   );

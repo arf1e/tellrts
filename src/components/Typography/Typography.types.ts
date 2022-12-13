@@ -1,8 +1,5 @@
 import {TextProps} from 'react-native';
 
-interface TypographyInterface extends TextProps {
-  children: string;
-  style?: object;
-}
+interface TypographyInterface extends TextProps {}
 
 export default TypographyInterface;
