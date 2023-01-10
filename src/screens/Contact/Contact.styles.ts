@@ -11,12 +11,22 @@ export default EStyleSheet.create({
     paddingBottom: SCROLLABLE_PADDING_BOTTOM,
   },
 
+  photoContainer: {
+    marginBottom: 32,
+    zIndex: 0,
+  },
+
+  infoContainer: {
+    zIndex: 1,
+    backgroundColor: '$background',
+  },
+
   headerContainer: {
     height: AVATAR_HEIGHT,
     position: 'relative',
     paddingTop: 44,
     paddingHorizontal: 24,
-    marginBottom: 26,
+    marginBottom: 32,
   },
 
   contactGoBack: {
@@ -145,5 +155,9 @@ export default EStyleSheet.create({
 
   takeAnswerIncorrect: {
     color: '$bad',
+  },
+
+  anketsContainer: {
+    zIndex: 2,
   },
 });

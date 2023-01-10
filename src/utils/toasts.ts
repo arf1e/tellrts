@@ -2,17 +2,29 @@ import {NetworkError} from '@apollo/client/errors';
 import {GraphQLError} from 'graphql';
 import Toast from 'react-native-toast-message';
 
+export const showErrorToast = (
+  text1: string,
+  text2: string,
+  onPress?: () => void,
+) => {
+  Toast.show({
+    type: 'error',
+    text1,
+    text2,
+    onPress,
+  });
+};
+
 const errorCatcher = (
   e: NetworkError | GraphQLError | any,
   manualError?: {title: string; message: string},
   onPress?: () => void,
 ) => {
-  Toast.show({
-    type: 'error',
-    text1: e.name || manualError?.title,
-    text2: e.message || manualError?.message,
+  showErrorToast(
+    e.name || manualError?.title,
+    e.message || manualError?.message,
     onPress,
-  });
+  );
 };
 
 export const showInfoToast = (

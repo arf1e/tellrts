@@ -56,7 +56,7 @@ const Form = () => {
         validationSchema={schema}
         validateOnBlur={true}
         validateOnChange={false}>
-        {({handleChange, handleSubmit, errors, values, ...formikProps}) => (
+        {({handleChange, handleSubmit, errors, values}) => (
           <>
             {step === 0 && (
               <Email

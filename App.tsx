@@ -21,18 +21,31 @@ import {PersistGate} from 'redux-persist/integration/react';
 import {colorVariables} from './src/utils/colors';
 import client from './src/utils/apollo';
 
-import {SEARCH} from './src/components/Navigation/AppNavigator';
-import {PROFILE} from './src/components/Navigation/ProfileNavigator';
+import {
+  PROFILE_NAVIGATOR,
+  SEARCH,
+} from './src/components/Navigation/AppNavigator';
+import {
+  ATTACH_INSTAGRAM,
+  PROFILE,
+  SOCIALS,
+} from './src/components/Navigation/ProfileNavigator';
 import {toastConfig} from './src/components/Toasts';
 import RNBootSplash from 'react-native-bootsplash';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 import initialiseTellrServices from './src/utils/init';
 
 const linkingConfig = {
-  prefixes: ['tellr://'],
+  prefixes: ['tellr://', 'https://app.tellr.ru/'],
   config: {
     screens: {
-      [PROFILE]: 'profile',
+      [PROFILE_NAVIGATOR]: {
+        screens: {
+          [ATTACH_INSTAGRAM]: {
+            path: 'socials/instagram/:code',
+          },
+        },
+      },
       [SEARCH]: 'search',
     },
   },

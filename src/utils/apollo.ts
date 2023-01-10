@@ -58,7 +58,7 @@ const splitLink = split(
 );
 
 const client = new ApolloClient({
-  link: ApolloLink.from([authLink, splitLink]),
+  link: ApolloLink.from([authLink, splitLink, errorLink]),
   cache: new InMemoryCache(),
   name: 'Tellr Mobile App',
   version: '0.1',

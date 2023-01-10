@@ -25,20 +25,20 @@ export default EStyleSheet.create({
 
   addLineContainerText: {
     color: '$primary',
-    fontSize: '$h4',
-    fontFamily: 'Roboto-Regular',
+    fontSize: '$bcLarge',
+    fontFamily: 'Roboto-Medium',
     marginBottom: 12,
   },
 
   addLineDescription: {
-    color: '$darkGray',
+    color: '$primary',
   },
 
   lineQuestionText: {
     fontFamily: 'Roboto-Medium',
     fontSize: '$bcMedium',
     color: '$black',
-    lineHeight: 20,
+    lineHeight: 16,
     marginBottom: 16,
   },
 
@@ -53,6 +53,7 @@ export default EStyleSheet.create({
     color: '$black',
     fontFamily: 'Roboto-Regular',
     fontSize: '$bcSmall',
+    marginBottom: 0,
   },
 
   lineQuestionCategoryImage: {

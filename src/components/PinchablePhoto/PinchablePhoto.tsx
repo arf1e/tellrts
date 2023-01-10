@@ -1,5 +1,11 @@
-import React from 'react';
-import {Dimensions, Image, ImageProps, View} from 'react-native';
+import React, {ReactNode} from 'react';
+import {
+  Dimensions,
+  Image,
+  ImageBackground,
+  ImageProps,
+  View,
+} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Reanimated, {
   Extrapolate,
@@ -11,13 +17,14 @@ import Reanimated, {
 } from 'react-native-reanimated';
 import {AVATAR_HEIGHT} from '../../utils/photos';
 
-const ReanimatedImage = Reanimated.createAnimatedComponent(Image);
+const ReanimatedImage = Reanimated.createAnimatedComponent(ImageBackground);
 const ReanimatedView = Reanimated.createAnimatedComponent(View);
 
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
 interface Props extends ImageProps {
   height?: number;
+  children?: ReactNode;
   width?: number;
   hideableShared?: SharedValue<number>;
   interfaceTiltShared?: SharedValue<number>;
@@ -28,6 +35,7 @@ const PinchablePhoto = ({
   width = DEVICE_WIDTH,
   hideableShared,
   interfaceTiltShared,
+  children,
   ...rest
 }: Props) => {
   const MIDDLE_X = width / 2;
@@ -46,14 +54,15 @@ const PinchablePhoto = ({
       const deltaY = e.focalY - MIDDLE_Y;
       xTarget.value = -deltaX;
       yTarget.value = -deltaY;
-      if (hideableShared) {
-        hideableShared.value = withTiming(0, {duration: 240});
-      }
     })
     .onUpdate(e => {
       scale.value = e.scale < 1 ? 1 : e.scale > 3 ? 3 : e.scale;
       if (interfaceTiltShared) {
         interfaceTiltShared.value = scale.value;
+      }
+      // Hide settings button
+      if (hideableShared) {
+        hideableShared.value = withTiming(0, {duration: 240});
       }
     })
     .onEnd(() => {
@@ -108,8 +117,9 @@ const PinchablePhoto = ({
           source={rest.source}
           defaultSource={require('../../assets/image-cap.png')}
           style={[rest.style, animatedImageStyle]}
-          resizeMode="cover"
-        />
+          resizeMode="cover">
+          {children}
+        </ReanimatedImage>
       </GestureDetector>
     </ReanimatedView>
   );

@@ -9,6 +9,7 @@ const initialiseTellrServices = async () => {
   if (!i18next.isInitialized) {
     initializeI18n();
   }
+  initializeI18n();
 };
 
 export default initialiseTellrServices;

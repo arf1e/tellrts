@@ -17,6 +17,7 @@ import Reanimated, {
   FadeInLeft,
   SlideInDown,
 } from 'react-native-reanimated';
+import {PinchablePhoto} from '../../components/PinchablePhoto';
 
 type Props = {
   userId: number;
@@ -86,22 +87,26 @@ const ContactHeader = ({userId}: Props) => {
 
   return (
     <View>
-      <ImageBackground
-        style={styles.headerContainer}
-        defaultSource={require('../../assets/image-cap.png')}
-        source={{uri: data.seeContact.user.photo}}>
-        <ContactGoBack />
-        <ContactInfo user={data?.seeContact.user} />
-        <ChatButton userId={userId} chatTitle={chatTitle} />
-      </ImageBackground>
-      <Container>
-        <Subtitle style={styles.profileSectionTitle}>
-          {t('app.contact.descriptionTitle')}
-        </Subtitle>
-        <BodyCopy style={styles.profileDescription}>
-          {data?.seeContact.user.bio}
-        </BodyCopy>
-      </Container>
+      <View style={styles.photoContainer}>
+        <PinchablePhoto
+          style={styles.headerContainer}
+          defaultSource={require('../../assets/image-cap.png')}
+          source={{uri: data.seeContact.user.photo}}>
+          <ContactGoBack />
+          <ContactInfo user={data?.seeContact.user} />
+          <ChatButton userId={userId} chatTitle={chatTitle} />
+        </PinchablePhoto>
+      </View>
+      <View style={styles.infoContainer}>
+        <Container>
+          <Subtitle style={styles.profileSectionTitle}>
+            {t('app.contact.descriptionTitle')}
+          </Subtitle>
+          <BodyCopy style={styles.profileDescription}>
+            {data?.seeContact.user.bio}
+          </BodyCopy>
+        </Container>
+      </View>
     </View>
   );
 };

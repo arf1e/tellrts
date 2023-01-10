@@ -5,6 +5,7 @@ import {useTranslation} from 'react-i18next';
 import {Alert, ScrollView, StatusBar} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {
+  SOCIALS,
   UPDATE_BIO,
   UPDATE_PHOTO,
 } from '../../components/Navigation/ProfileNavigator';
@@ -80,7 +81,7 @@ const Settings = () => {
         links={[
           {
             linkTitle: t('app.settings.socialLinks.addLink'),
-            onPress: () => console.warn('Social'),
+            onPress: () => navigation.navigate(SOCIALS),
           },
         ]}
       />

@@ -54,7 +54,7 @@ const Ankets = ({userId}: Props) => {
   const {myRequest, otherRequest} = data?.seeContact;
 
   return (
-    <View style={{marginBottom: 64}}>
+    <View style={styles.anketsContainer}>
       <Container>
         <AnketSwitch
           activeAnket={currentAnket}

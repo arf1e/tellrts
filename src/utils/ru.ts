@@ -15,6 +15,8 @@ export default {
     UPDATE_PASSWORD: 'Обновить пароль',
     UPDATE_CITY: 'Обновить город',
     SEARCH_PARAMETERS: 'Параметры поиска',
+    SOCIALS: 'Аккаунты в соцсетях',
+    ATTACH_INSTAGRAM: 'Привязать аккаунт Instagram',
   },
   login: {
     description: 'Дэйтинг - это не так стрёмно как ты думаешь',
@@ -202,7 +204,14 @@ export default {
       },
       socialLinks: {
         title: 'Соцсети',
+        connectInstagramTitleBeforeUsername: 'Привязать Instagram-аккаунт ',
+        connectInstagramTitleAfterUsername: 'к профилю?',
+        connectInstagramDescription:
+          'Это действие можно будет отменить в любой момент.',
+        connectInstagramConfirm: 'Привязать',
+        connectInstagramCancel: 'Отменить',
         addLink: 'Добавить новый аккаунт',
+        noCurrentInstagramAttached: 'Привязать профиль',
       },
       profile: {
         title: 'Профиль',

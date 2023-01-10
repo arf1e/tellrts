@@ -10,14 +10,6 @@ export type Country = {
 const countries: Country[] = [
   {
     name: {
-      en: 'Afghanistan',
-      ru: 'Афганистан',
-    },
-    code: 'AF',
-    phone: '+9',
-  },
-  {
-    name: {
       en: 'Albania',
       ru: 'Албания',
     },
@@ -34,43 +26,11 @@ const countries: Country[] = [
   },
   {
     name: {
-      en: 'American Samoa',
-      ru: 'Американское Самоа',
-    },
-    code: 'AS',
-    phone: '+1',
-  },
-  {
-    name: {
-      en: 'Andorra',
-      ru: 'Андорра',
-    },
-    code: 'AD',
-    phone: '+3',
-  },
-  {
-    name: {
       en: 'Angola',
       ru: 'Ангола',
     },
     code: 'AO',
     phone: '+2',
-  },
-  {
-    name: {
-      en: 'Anguilla',
-      ru: 'Ангилья',
-    },
-    code: 'AI',
-    phone: '+1',
-  },
-  {
-    name: {
-      en: 'Antarctica',
-      ru: 'Антарктида',
-    },
-    code: 'AQ',
-    phone: '',
   },
   {
     name: {
@@ -131,7 +91,7 @@ const countries: Country[] = [
   {
     name: {
       en: 'Bahamas',
-      ru: 'Багамские Острова',
+      ru: 'Багамы',
     },
     code: 'BS',
     phone: '+1',
@@ -202,14 +162,6 @@ const countries: Country[] = [
   },
   {
     name: {
-      en: 'Bhutan',
-      ru: 'Бутан',
-    },
-    code: 'BT',
-    phone: '+9',
-  },
-  {
-    name: {
       en: 'Bolivia',
       ru: 'Боливия',
     },
@@ -234,43 +186,11 @@ const countries: Country[] = [
   },
   {
     name: {
-      en: 'Bouvet Island',
-      ru: 'Остров Буве',
-    },
-    code: 'BV',
-    phone: '+4',
-  },
-  {
-    name: {
       en: 'Brazil',
       ru: 'Бразилия',
     },
     code: 'BR',
     phone: '+5',
-  },
-  {
-    name: {
-      en: 'British Indian Ocean Territory',
-      ru: 'Британская территория в Индийском океане',
-    },
-    code: 'IO',
-    phone: '+2',
-  },
-  {
-    name: {
-      en: 'British Virgin Islands',
-      ru: 'Британские Виргинские острова',
-    },
-    code: 'VG',
-    phone: '+1',
-  },
-  {
-    name: {
-      en: 'Brunei',
-      ru: 'Бруней',
-    },
-    code: 'BN',
-    phone: '+6',
   },
   {
     name: {
@@ -286,14 +206,6 @@ const countries: Country[] = [
       ru: 'Буркина-Фасо',
     },
     code: 'BF',
-    phone: '+2',
-  },
-  {
-    name: {
-      en: 'Burundi',
-      ru: 'Бурунди',
-    },
-    code: 'BI',
     phone: '+2',
   },
   {
@@ -330,30 +242,6 @@ const countries: Country[] = [
   },
   {
     name: {
-      en: 'Caribbean Netherlands',
-      ru: 'Карибские Нидерланды',
-    },
-    code: 'BQ',
-    phone: '+5',
-  },
-  {
-    name: {
-      en: 'Cayman Islands',
-      ru: 'Каймановы острова',
-    },
-    code: 'KY',
-    phone: '+1',
-  },
-  {
-    name: {
-      en: 'Central African Republic',
-      ru: 'Центральноафриканская Республика',
-    },
-    code: 'CF',
-    phone: '+2',
-  },
-  {
-    name: {
       en: 'Chad',
       ru: 'Чад',
     },
@@ -378,22 +266,6 @@ const countries: Country[] = [
   },
   {
     name: {
-      en: 'Christmas Island',
-      ru: 'Остров Рождества',
-    },
-    code: 'CX',
-    phone: '+6',
-  },
-  {
-    name: {
-      en: 'Cocos (Keeling) Islands',
-      ru: 'Кокосовые острова',
-    },
-    code: 'CC',
-    phone: '+6',
-  },
-  {
-    name: {
       en: 'Colombia',
       ru: 'Колумбия',
     },
@@ -407,14 +279,6 @@ const countries: Country[] = [
     },
     code: 'KM',
     phone: '+2',
-  },
-  {
-    name: {
-      en: 'Cook Islands',
-      ru: 'Острова Кука',
-    },
-    code: 'CK',
-    phone: '+6',
   },
   {
     name: {
@@ -554,38 +418,6 @@ const countries: Country[] = [
   },
   {
     name: {
-      en: 'Eswatini',
-      ru: 'Свазиленд',
-    },
-    code: 'SZ',
-    phone: '+2',
-  },
-  {
-    name: {
-      en: 'Ethiopia',
-      ru: 'Эфиопия',
-    },
-    code: 'ET',
-    phone: '+2',
-  },
-  {
-    name: {
-      en: 'Falkland Islands',
-      ru: 'Фолклендские острова',
-    },
-    code: 'FK',
-    phone: '+5',
-  },
-  {
-    name: {
-      en: 'Faroe Islands',
-      ru: 'Фарерские острова',
-    },
-    code: 'FO',
-    phone: '+2',
-  },
-  {
-    name: {
       en: 'Fiji',
       ru: 'Фиджи',
     },
@@ -607,30 +439,6 @@ const countries: Country[] = [
     },
     code: 'FR',
     phone: '+3',
-  },
-  {
-    name: {
-      en: 'French Guiana',
-      ru: 'Французская Гвиана',
-    },
-    code: 'GF',
-    phone: '+5',
-  },
-  {
-    name: {
-      en: 'French Polynesia',
-      ru: 'Французская Полинезия',
-    },
-    code: 'PF',
-    phone: '+6',
-  },
-  {
-    name: {
-      en: 'French Southern and Antarctic Lands',
-      ru: 'Французские Южные и Антарктические территории',
-    },
-    code: 'TF',
-    phone: '+2',
   },
   {
     name: {
@@ -690,34 +498,10 @@ const countries: Country[] = [
   },
   {
     name: {
-      en: 'Greenland',
-      ru: 'Гренландия',
-    },
-    code: 'GL',
-    phone: '+2',
-  },
-  {
-    name: {
       en: 'Grenada',
       ru: 'Гренада',
     },
     code: 'GD',
-    phone: '+1',
-  },
-  {
-    name: {
-      en: 'Guadeloupe',
-      ru: 'Гваделупа',
-    },
-    code: 'GP',
-    phone: '+5',
-  },
-  {
-    name: {
-      en: 'Guam',
-      ru: 'Гуам',
-    },
-    code: 'GU',
     phone: '+1',
   },
   {
@@ -2002,10 +1786,10 @@ const countries: Country[] = [
   },
   {
     name: {
-      en: 'Åland Islands',
-      ru: 'Аландские острова',
+      en: 'Åland Islands (Finland)',
+      ru: 'Аландские острова (Финляндия)',
     },
-    code: 'AX',
+    code: 'FI',
     phone: '+3',
   },
 ];
