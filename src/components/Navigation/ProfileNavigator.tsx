@@ -14,6 +14,7 @@ import {useTranslation} from 'react-i18next';
 import {UpdateCity} from '../../screens/UpdateCity';
 import Socials from '../../screens/Socials';
 import AttachInstagram from '../../screens/AttachInstagram';
+import UpdateLanguage from '../../screens/UpdateLanguage';
 
 const ProfileStackNavigator = createNativeStackNavigator();
 
@@ -29,6 +30,7 @@ export const UPDATE_PASSWORD = 'Update Password';
 export const UPDATE_CITY = 'Update City';
 export const SOCIALS = 'Socials';
 export const ATTACH_INSTAGRAM = 'Attach Instagram';
+export const UPDATE_LANGUAGE = 'Update Language';
 
 const ProfileNavigator = () => {
   const {t} = useTranslation();
@@ -148,6 +150,17 @@ const ProfileNavigator = () => {
           ),
           presentation: 'modal',
           title: t('navigation.ATTACH_INSTAGRAM'),
+        }}
+      />
+      <ProfileStackNavigator.Screen
+        name={UPDATE_LANGUAGE}
+        component={UpdateLanguage}
+        options={{
+          header: props => (
+            // @ts-ignore
+            <Header {...props} />
+          ),
+          title: t('navigation.UPDATE_LANGUAGE'),
         }}
       />
     </ProfileStackNavigator.Navigator>

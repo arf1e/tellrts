@@ -34,7 +34,8 @@ const CountryItem = ({
   country: CountryType;
   onPress: () => void;
 }) => {
-  const language: 'ru' | 'en' = i18next.language;
+  const {i18n} = useTranslation();
+  const language: 'ru' | 'en' = i18n.language;
   return (
     <AnimatedPressable
       entering={FadeIn.duration(200)}
@@ -62,7 +63,10 @@ const CountryPicker = ({
   const handleCountryNameInput = (countryName: string) => {
     setCountryCode('');
     setcountryTitle(countryName);
-    const matchedCountries = getCountriesByName(countryName).slice(0, 4);
+    const matchedCountries = getCountriesByName(countryName, language).slice(
+      0,
+      4,
+    );
     setCountriesResult(matchedCountries);
   };
 
@@ -102,7 +106,7 @@ const CountryPicker = ({
     if (!countrySelected) {
       return t('register.location.countryPickModal');
     }
-    return getCountryNameByCode(countrySelected);
+    return getCountryNameByCode(countrySelected, language);
   };
 
   return (

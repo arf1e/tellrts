@@ -1,10 +1,15 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
 
 export default EStyleSheet.create({
   screenContainer: {
     flex: 1,
     paddingTop: 16,
     backgroundColor: '$background',
+  },
+
+  screenContentContainer: {
+    paddingBottom: SCROLLABLE_PADDING_BOTTOM,
   },
 
   settingsSectionContainer: {

@@ -65,7 +65,7 @@ export default ({title, onPress, isActive, pressable}: Props) => {
     });
   };
 
-  const btnStyle = [styles.btn, animatedBtnStyle];
+  const btnStyle = [styles.btn, animatedBtnStyle, pressable?.style];
   const textStyle = [styles.text, isActive && styles.textActive];
 
   return (

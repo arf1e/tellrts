@@ -29,12 +29,13 @@ const validationSchema = yup.object().shape({
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 
 const UpdateCity = () => {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const {
     error: queryError,
     loading: queryLoading,
     data: queryData,
   } = useQuery<MyLocationQueryResult>(GET_MY_LOCATION_QUERY);
+  const language = i18n.language;
 
   const onMutationCompleted = (data, reset) => {
     if (data.error) {
@@ -74,7 +75,7 @@ const UpdateCity = () => {
 
   const initialValues = {
     countryCode: queryData?.me.countryCode,
-    countryTitle: getCountryNameByCode(queryData?.me.countryCode),
+    countryTitle: getCountryNameByCode(queryData?.me.countryCode, language),
     countrySelected: queryData?.me.countryCode,
     cityId: queryData?.me.cityId,
     cityTitle: queryData?.me.cityTitle,

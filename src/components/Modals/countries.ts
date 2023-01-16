@@ -1,6 +1,6 @@
 import countries from '../../utils/countries';
 
-export const getCountriesByName = (name: string, lang: 'ru' | 'en' = 'ru') =>
+export const getCountriesByName = (name: string, lang: 'ru' | 'en' = 'en') =>
   name.trimStart().length > 0
     ? countries.filter(el =>
         el.name[lang].toLowerCase().startsWith(name.trimStart().toLowerCase()),
@@ -9,7 +9,7 @@ export const getCountriesByName = (name: string, lang: 'ru' | 'en' = 'ru') =>
 
 export const getCountryNameByCode = (
   code: string,
-  lang: 'ru' | 'en' = 'ru',
+  lang: 'ru' | 'en' = 'en',
 ) => {
   const country = countries.find(c => c.code === code);
   if (!country) {

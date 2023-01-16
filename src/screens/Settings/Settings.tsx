@@ -7,6 +7,7 @@ import {useDispatch} from 'react-redux';
 import {
   SOCIALS,
   UPDATE_BIO,
+  UPDATE_LANGUAGE,
   UPDATE_PHOTO,
 } from '../../components/Navigation/ProfileNavigator';
 import colors from '../../utils/colors';
@@ -56,7 +57,9 @@ const Settings = () => {
       ],
     );
   return (
-    <ScrollView style={styles.screenContainer}>
+    <ScrollView
+      style={styles.screenContainer}
+      contentContainerStyle={styles.screenContentContainer}>
       <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
       <SettingsSection
         title={t('app.settings.photo.title')}
@@ -86,6 +89,15 @@ const Settings = () => {
         ]}
       />
       <ProfileSettings askIfUserWantsToLogout={askIfUserWantsToLogout} />
+      <SettingsSection
+        title={t('app.settings.app.title')}
+        links={[
+          {
+            linkTitle: t('app.settings.app.language'),
+            onPress: () => navigation.navigate(UPDATE_LANGUAGE),
+          },
+        ]}
+      />
     </ScrollView>
   );
 };
