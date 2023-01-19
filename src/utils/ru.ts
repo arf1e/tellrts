@@ -175,6 +175,9 @@ export default {
         language: 'Язык интерфейса',
         about: 'О приложении',
       },
+      account: {
+        title: 'Учётные данные',
+      },
       photo: {
         title: 'Фотография',
         changePhoto: 'Изменить фотографию',

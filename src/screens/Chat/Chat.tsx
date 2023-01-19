@@ -8,6 +8,7 @@ import {useDispatch} from 'react-redux';
 import ChatHeader from '../../components/ChatHeader';
 import {CHAT} from '../../components/Navigation/ContactsNavigator';
 import {exitChat, getInChat} from '../../utils/slices/inChatSlice';
+import Comet from './Chat.Comet';
 import {GET_MY_ID_QUERY} from './Chat.graphql';
 import styles from './Chat.styles';
 import Gifted from './Gifted';
@@ -38,7 +39,8 @@ const Chat = () => {
   return (
     <View style={styles.chatContainer}>
       <ChatHeader userId={userId} />
-      <Gifted userId={userId} myId={myId} />
+      {/* <Gifted userId={userId} myId={myId} /> */}
+      <Comet />
     </View>
   );
 };

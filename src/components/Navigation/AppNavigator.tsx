@@ -15,6 +15,7 @@ import SearchNavigator from './SearchNavigator';
 import ContactsNavigator, {CHAT} from './ContactsNavigator';
 import {inChatState} from '../../utils/slices/inChatSlice';
 import {useTranslation} from 'react-i18next';
+import {loginToCometChat} from '../../utils/comet';
 
 const AppTabs = createBottomTabNavigator();
 
@@ -54,6 +55,7 @@ const AppNavigator = () => {
     });
 
     aquireDeviceTokenAndSendToApi().catch(e => errorCatcher(e));
+    loginToCometChat('SUPERHERO1');
 
     return unsubscribe;
   }, [dispatch, sendTokenToApi]);
