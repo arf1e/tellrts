@@ -15,7 +15,6 @@ import {clearAnket} from '../../utils/slices/anketSlice';
 import {logOut} from '../../utils/slices/authSlice';
 import {store} from '../../utils/store';
 import errorCatcher from '../../utils/toasts';
-import AccountSettings from './Settings.Account';
 import {LogoutMutationResult, LOGOUT_MUTATION} from './Settings.graphql';
 import ProfileSettings from './Settings.Profile';
 import styles from './Settings.styles';
@@ -62,7 +61,24 @@ const Settings = () => {
       style={styles.screenContainer}
       contentContainerStyle={styles.screenContentContainer}>
       <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
-      <ProfileSettings />
+      <SettingsSection
+        title={t('app.settings.photo.title')}
+        links={[
+          {
+            linkTitle: t('app.settings.photo.changePhoto'),
+            onPress: () => navigation.navigate(UPDATE_PHOTO),
+          },
+        ]}
+      />
+      <SettingsSection
+        title={t('app.settings.bio.title')}
+        links={[
+          {
+            linkTitle: t('app.settings.bio.changeBio'),
+            onPress: () => navigation.navigate(UPDATE_BIO),
+          },
+        ]}
+      />
       <SettingsSection
         title={t('app.settings.socialLinks.title')}
         links={[
@@ -72,6 +88,7 @@ const Settings = () => {
           },
         ]}
       />
+      <ProfileSettings askIfUserWantsToLogout={askIfUserWantsToLogout} />
       <SettingsSection
         title={t('app.settings.app.title')}
         links={[
@@ -81,7 +98,6 @@ const Settings = () => {
           },
         ]}
       />
-      <AccountSettings askIfUserWantsToLogout={askIfUserWantsToLogout} />
     </ScrollView>
   );
 };

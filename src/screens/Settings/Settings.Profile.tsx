@@ -2,17 +2,21 @@ import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import SettingsSection from './SettingsSection';
+import styles from './Settings.styles';
 import {useQuery} from '@apollo/client';
 import {SETTINGS_ME_QUERY} from './Settings.graphql';
 import LoadingIndicator from '../../components/LoadingIndicator';
 import errorCatcher from '../../utils/toasts';
 import {
-  UPDATE_BIO,
   UPDATE_CITY,
-  UPDATE_PHOTO,
+  UPDATE_PASSWORD,
 } from '../../components/Navigation/ProfileNavigator';
 
-const ProfileSettings = () => {
+type Props = {
+  askIfUserWantsToLogout: () => void;
+};
+
+const ProfileSettings = ({askIfUserWantsToLogout}: Props) => {
   const {t} = useTranslation();
   const navigation = useNavigation();
   const {data: meData, loading: meLoading} = useQuery<{
@@ -34,18 +38,25 @@ const ProfileSettings = () => {
       title={t('app.settings.profile.title')}
       links={[
         {
-          linkTitle: t('app.settings.photo.changePhoto'),
-          onPress: () => navigation.navigate(UPDATE_PHOTO),
-        },
-        {
-          linkTitle: t('app.settings.bio.changeBio'),
-          onPress: () => navigation.navigate(UPDATE_BIO),
+          title: t('app.settings.profile.email'),
+          linkTitle: meData?.me.email || t('app.settings.profile.emailHolder'),
+          onPress: () => console.warn('Email'),
         },
         {
           title: t('app.settings.profile.city'),
           linkTitle:
             meData?.me.cityTitle || t('app.settings.profile.cityHolder'),
           onPress: () => navigation.navigate(UPDATE_CITY),
+        },
+        {
+          linkTitle: t('app.settings.profile.changePassword'),
+          // @ts-ignore
+          onPress: () => navigation.navigate(UPDATE_PASSWORD),
+        },
+        {
+          linkTitle: t('app.settings.profile.logout'),
+          onPress: askIfUserWantsToLogout,
+          additionalStyle: styles.logoutLink,
         },
       ]}
     />
