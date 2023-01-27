@@ -1,4 +1,4 @@
-import React, {ReactNode, useEffect} from 'react';
+import React, {ReactNode, useCallback, useEffect} from 'react';
 import {BackHandler, View} from 'react-native';
 import {BodyCopy, Subtitle} from '../../components/Typography';
 import Reanimated, {SlideInDown, SlideOutDown} from 'react-native-reanimated';
@@ -30,16 +30,6 @@ const AnketStep = ({
   buttonDisabled,
 }: Props) => {
   const {t} = useTranslation();
-  useEffect(() => {
-    const onBackPress = () => {
-      navigation.setPreviousStep();
-      return true;
-    };
-    BackHandler.addEventListener('hardwareBackPress', onBackPress);
-
-    return () =>
-      BackHandler.removeEventListener('hardwareBackPress', onBackPress);
-  });
   return (
     <AnimatedView
       style={styles.stepContainer}

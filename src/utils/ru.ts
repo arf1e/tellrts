@@ -18,6 +18,7 @@ export default {
     SOCIALS: 'Аккаунты в соцсетях',
     ATTACH_INSTAGRAM: 'Привязать аккаунт Instagram',
     UPDATE_LANGUAGE: 'Изменить язык интерфейса',
+    ATTACH_TELEGRAM: 'Привязать аккаунт Telegram',
   },
   login: {
     description: 'Дэйтинг - это не так стрёмно как ты думаешь',
@@ -158,7 +159,7 @@ export default {
       questions: {
         title: 'Вопросы',
         description:
-          'Как бы человек на фотографии мог ответить на эти вопросы?',
+          'Как бы человек на фотографии мог ответить на эти вопросы?\nВ каждом вопросе один вариант ответа - правильный, а остальные два - либо ответы других пользователей, либо сгенерированы нейросетью.',
       },
     },
     navigation: {
@@ -222,6 +223,14 @@ export default {
         connectInstagramCancel: 'Отменить',
         addLink: 'Добавить новый аккаунт',
         noCurrentInstagramAttached: 'Привязать профиль',
+        telegram: {
+          networkError: 'Не удалось подключиться к серверу.',
+          networkErrorDescription:
+            'Пожалуйста, проверьте подключение к Интернету.',
+          humanReadableError: 'Произошла ошибка при генерации кода',
+          errorHeading: 'Не удалось сгенерировать код для Telegram',
+          retryButtonTitle: 'Попробовать ещё раз',
+        },
       },
       profile: {
         title: 'Профиль',

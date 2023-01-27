@@ -15,6 +15,7 @@ import {UpdateCity} from '../../screens/UpdateCity';
 import Socials from '../../screens/Socials';
 import AttachInstagram from '../../screens/AttachInstagram';
 import UpdateLanguage from '../../screens/UpdateLanguage';
+import AttachTelegram from '../../screens/AttachTelegram';
 
 const ProfileStackNavigator = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ export const UPDATE_CITY = 'Update City';
 export const SOCIALS = 'Socials';
 export const ATTACH_INSTAGRAM = 'Attach Instagram';
 export const UPDATE_LANGUAGE = 'Update Language';
+export const ATTACH_TELEGRAM = 'Attach Telegram';
 
 const ProfileNavigator = () => {
   const {t} = useTranslation();
@@ -161,6 +163,17 @@ const ProfileNavigator = () => {
             <Header {...props} />
           ),
           title: t('navigation.UPDATE_LANGUAGE'),
+        }}
+      />
+      <ProfileStackNavigator.Screen
+        name={ATTACH_TELEGRAM}
+        component={AttachTelegram}
+        options={{
+          header: props => (
+            // @ts-ignore
+            <Header {...props} />
+          ),
+          title: t('navigation.ATTACH_TELEGRAM'),
         }}
       />
     </ProfileStackNavigator.Navigator>

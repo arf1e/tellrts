@@ -14,6 +14,7 @@ import {subscribeToChatUpdates} from './Chat.utils';
 import {giftedMessageAdapter} from './messageAdapter';
 import styles from './Chat.styles';
 import GiftedMessage from './GiftedMessage';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   userId: number;
@@ -22,6 +23,7 @@ type Props = {
 
 const Gifted = ({userId, myId}: Props) => {
   const [messages, setMessages] = useState<IMessage[]>([]);
+  const {i18n} = useTranslation();
   const [sendMessageToChat] = useMutation<
     MutationResponse,
     {userId: number; text: string}
@@ -61,13 +63,17 @@ const Gifted = ({userId, myId}: Props) => {
         messages={messages}
         isLoadingEarlier={moreLoading}
         loadEarlier={true}
-        scrollToBottom
+        scrollToBottom={true}
+        locale={i18n.language}
+        // timeFormat={}
+        renderBubble={GiftedMessage}
         onLoadEarlier={() =>
           uploadMore({variables: {userId, cursor: messages[0]._id}})
         }
         inverted={false}
         renderAvatar={() => null}
         alignTop={true}
+        wrapInSafeArea={true}
         onSend={msgs => {
           sendMessageToChat({variables: {userId, text: msgs[0].text}});
         }}

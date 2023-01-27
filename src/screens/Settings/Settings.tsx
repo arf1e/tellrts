@@ -62,7 +62,7 @@ const Settings = () => {
       contentContainerStyle={styles.screenContentContainer}>
       <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
       <SettingsSection
-        title={t('app.settings.photo.title')}
+        title={t('app.settings.profile.title')}
         links={[
           {
             linkTitle: t('app.settings.photo.changePhoto'),
@@ -88,7 +88,6 @@ const Settings = () => {
           },
         ]}
       />
-      <ProfileSettings askIfUserWantsToLogout={askIfUserWantsToLogout} />
       <SettingsSection
         title={t('app.settings.app.title')}
         links={[
@@ -98,6 +97,7 @@ const Settings = () => {
           },
         ]}
       />
+      <ProfileSettings askIfUserWantsToLogout={askIfUserWantsToLogout} />
     </ScrollView>
   );
 };

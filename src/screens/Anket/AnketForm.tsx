@@ -1,8 +1,8 @@
 import {useMutation} from '@apollo/client';
 import {Formik, FormikProps} from 'formik';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, ScrollView, View} from 'react-native';
+import {Alert, BackHandler, ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import AnketHeader from '../../components/AnketHeader';
 import Reanimated, {Layout} from 'react-native-reanimated';
@@ -28,6 +28,8 @@ import {
 } from './Anket.types';
 import AnketLoading from './AnketLoading';
 import AnketProgress from './AnketProgress';
+import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {useBackHandler} from '@react-native-community/hooks';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 
@@ -83,11 +85,9 @@ const AnketForm = () => {
   const [activeStep, setActiveStep] = useState<STEP>(IMPRESSIONS);
   const anket = useSelector((state: {anket: AnketState}) => state.anket.anket);
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
 
-  const getCurrentStepIndex = useCallback(
-    () => STEPS.indexOf(activeStep),
-    [activeStep],
-  );
+  const getCurrentStepIndex = () => STEPS.indexOf(activeStep);
 
   const getCurrentProgress = () => {
     const totalSteps = STEPS.length;
@@ -102,13 +102,6 @@ const AnketForm = () => {
       setActiveStep(STEPS[currentIndex + 1]);
     }
   };
-
-  const setPreviousStep = useCallback(() => {
-    const currentIndex = getCurrentStepIndex();
-    if (currentIndex - 1 > -1) {
-      setActiveStep(STEPS[currentIndex - 1]);
-    }
-  }, [getCurrentStepIndex]);
 
   const handleQuitForm = () => {
     Alert.alert(
@@ -131,6 +124,14 @@ const AnketForm = () => {
       ],
     );
   };
+  const setPreviousStep = () => {
+    const currentIndex = getCurrentStepIndex();
+    if (currentIndex - 1 > -1) {
+      setActiveStep(STEPS[currentIndex - 1]);
+      return;
+    }
+    handleQuitForm();
+  };
 
   const initialValues = anket && generateAnketInitialValues(anket);
 
@@ -138,6 +139,14 @@ const AnketForm = () => {
     setNextStep: setNextStep,
     setPreviousStep: setPreviousStep,
   };
+
+  useBackHandler(() => {
+    if (isFocused) {
+      setPreviousStep();
+      return true;
+    }
+    return false;
+  });
 
   if (!anket) {
     dispatch(setRequestStateIdle());

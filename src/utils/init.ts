@@ -1,5 +1,6 @@
 import i18next from 'i18next';
 import initializeI18n from './i18n';
+import 'dayjs/locale/ru';
 
 const initialiseTellrServices = async () => {
   /**

@@ -1,5 +1,7 @@
-import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import React, {useEffect} from 'react';
 import {useTranslation} from 'react-i18next';
+import {BackHandler} from 'react-native';
 import {toggleArrayElement} from '../../utils/arrays';
 import {ANKET_FORMIK_PROPS} from './AnketForm';
 import AnketStep from './AnketStep';

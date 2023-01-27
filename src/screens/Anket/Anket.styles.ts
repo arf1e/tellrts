@@ -117,8 +117,8 @@ export default EStyleSheet.create({
   },
 
   lineQuestion: {
-    fontSize: '$bcLarge',
-    color: '$darkGray',
+    fontSize: '$bcBig',
+    color: '$black',
   },
 
   profileLineHeadingContainer: {

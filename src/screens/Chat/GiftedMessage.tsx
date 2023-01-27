@@ -1,15 +1,43 @@
 import React from 'react';
 import {View} from 'react-native';
-import {IMessage} from 'react-native-gifted-chat';
-import {BodyCopy} from '../../components/Typography';
-import styles from './Chat.styles';
+import {Bubble, BubbleProps, IMessage} from 'react-native-gifted-chat';
+import Reanimated, {FadeInDown, Layout} from 'react-native-reanimated';
+import colors from '../../utils/colors';
 
-const GiftedMessage = (props: IMessage) => {
+const AnimatedBubble = Reanimated.createAnimatedComponent(View);
+
+const GiftedMessage = (
+  props: Readonly<BubbleProps<IMessage>> &
+    Readonly<{
+      children?: React.ReactNode;
+    }>,
+) => {
   return (
-    <View style={{width: 300, height: 100}}>
-      <BodyCopy style={{color: 'black'}}>{props.text}</BodyCopy>
-      <BodyCopy>{props.text}</BodyCopy>
-    </View>
+    <AnimatedBubble entering={FadeInDown.duration(140)} layout={Layout}>
+      <Bubble
+        {...props}
+        wrapperStyle={{
+          left: {
+            backgroundColor: colors.darkGray,
+            padding: 4,
+            borderRadius: 8,
+            borderBottomLeftRadius: 0,
+          },
+          right: {
+            backgroundColor: colors.primary,
+            paddingHorizontal: 4,
+            paddingVertical: 2,
+            borderRadius: 8,
+            borderBottomRightRadius: 0,
+          },
+        }}
+        textStyle={{
+          left: {
+            color: colors.background,
+          },
+        }}
+      />
+    </AnimatedBubble>
   );
 };
 
