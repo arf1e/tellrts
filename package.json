@@ -48,6 +48,7 @@
     "react-native-keyboard-spacer": "^0.4.1",
     "react-native-localize": "^2.2.1",
     "react-native-reanimated": "^2.6.0",
+    "react-native-rename": "^3.2.11",
     "react-native-safe-area-context": "^4.2.4",
     "react-native-screens": "^3.13.1",
     "react-native-text-input-mask": "^3.1.4",
