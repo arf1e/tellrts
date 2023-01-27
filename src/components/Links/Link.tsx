@@ -14,6 +14,8 @@ import Reanimated, {
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import Feather from 'react-native-vector-icons/Feather';
 import animationConstants from '../../utils/animationConstants';
 import colors from '../../utils/colors';
 import styles from './Link.styles';
@@ -24,9 +26,10 @@ interface Props extends PressableProps {
   children: string;
   containerStyle?: StyleProp<ViewStyle>;
   textStyle?: StyleProp<TextStyle>;
+  icon?: string;
 }
 
-const Link = ({children, containerStyle, textStyle, ...rest}: Props) => {
+const Link = ({children, containerStyle, textStyle, icon, ...rest}: Props) => {
   const pressedShared = useSharedValue(0);
 
   const onPressIn = () => {
@@ -39,6 +42,31 @@ const Link = ({children, containerStyle, textStyle, ...rest}: Props) => {
     pressedShared.value = withTiming(0, {
       duration: animationConstants.BUTTON_OUT,
     });
+  };
+
+  const renderIcon = () => {
+    if (!icon) {
+      return null;
+    }
+    if (icon.startsWith('ionicons/')) {
+      const iconName = icon.split('/')[1];
+      return (
+        <Ionicons
+          name={iconName}
+          size={20}
+          color={colors.primary}
+          style={styles.linkIcon}
+        />
+      );
+    }
+    return (
+      <Feather
+        name={icon}
+        size={20}
+        color={colors.primary}
+        style={styles.linkIcon}
+      />
+    );
   };
 
   const animatedStyle = useAnimatedStyle(
@@ -71,6 +99,7 @@ const Link = ({children, containerStyle, textStyle, ...rest}: Props) => {
       onPressOut={onPressOut}
       hitSlop={8}
       style={pressableStyle}>
+      {icon && renderIcon()}
       <AnimatedText style={titleStyle}>{children}</AnimatedText>
     </Pressable>
   );

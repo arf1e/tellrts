@@ -174,11 +174,12 @@ export default {
       app: {
         title: 'Приложение',
         language: 'Язык интерфейса',
+        email: 'E-mail',
         about: 'О приложении',
       },
       photo: {
         title: 'Фотография',
-        changePhoto: 'Изменить фотографию',
+        changePhoto: 'Фотографии',
         successMessage: {
           title: 'Отлично!',
           body: 'Фотография обновлена.',
@@ -190,7 +191,7 @@ export default {
       },
       bio: {
         title: 'Описание',
-        changeBio: 'Обновить описание профиля',
+        changeBio: 'Описание профиля',
         placeholder: 'Краткость - сестра таланта',
         btnTitle: 'Обновить описание',
         successMessage: {
@@ -215,6 +216,7 @@ export default {
       },
       socialLinks: {
         title: 'Соцсети',
+        navigate: 'Социальные сети',
         connectInstagramTitleBeforeUsername: 'Привязать Instagram-аккаунт ',
         connectInstagramTitleAfterUsername: 'к профилю?',
         connectInstagramDescription:
@@ -233,7 +235,11 @@ export default {
         },
       },
       profile: {
-        title: 'Профиль',
+        settingsTitle: 'Профиль',
+        photos: 'Фотографии',
+        bio: 'Описание профиля',
+        profession: 'Профессия',
+        socialLinks: 'Социальные сети',
         email: 'Электропочта',
         emailHolder: 'Ждем адрес почты от сервера...',
         city: 'Город',

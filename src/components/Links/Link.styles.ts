@@ -24,4 +24,8 @@ export default EStyleSheet.create({
   arrowBack: {
     marginRight: 4,
   },
+
+  linkIcon: {
+    marginRight: 8,
+  },
 });

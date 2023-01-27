@@ -7,6 +7,7 @@ import Container from '../../components/Container';
 
 type SettingsLink = {
   title?: string;
+  icon?: string;
   linkTitle: string;
   onPress: () => void;
   additionalStyle?: StyleProp<Text>;
@@ -21,13 +22,9 @@ const SettingsSection = ({title, links}: Props) => {
   const renderLink = (link: SettingsLink) => {
     return (
       <View style={styles.settingsSectionLink} key={link.linkTitle}>
-        {link.title && (
-          <BodyCopy style={styles.settingsSectionLinkTitle}>
-            {link.title}
-          </BodyCopy>
-        )}
         <Link
           onPress={link.onPress}
+          icon={link.icon}
           containerStyle={link.additionalStyle}
           textStyle={styles.settingsSectionLinkText}>
           {link.linkTitle}

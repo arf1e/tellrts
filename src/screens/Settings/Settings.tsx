@@ -1,4 +1,4 @@
-import {useMutation} from '@apollo/client';
+import {useMutation, useQuery} from '@apollo/client';
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
@@ -7,7 +7,9 @@ import {useDispatch} from 'react-redux';
 import {
   SOCIALS,
   UPDATE_BIO,
+  UPDATE_CITY,
   UPDATE_LANGUAGE,
+  UPDATE_PASSWORD,
   UPDATE_PHOTO,
 } from '../../components/Navigation/ProfileNavigator';
 import colors from '../../utils/colors';
@@ -15,8 +17,11 @@ import {clearAnket} from '../../utils/slices/anketSlice';
 import {logOut} from '../../utils/slices/authSlice';
 import {store} from '../../utils/store';
 import errorCatcher from '../../utils/toasts';
-import {LogoutMutationResult, LOGOUT_MUTATION} from './Settings.graphql';
-import ProfileSettings from './Settings.Profile';
+import {
+  LogoutMutationResult,
+  LOGOUT_MUTATION,
+  SETTINGS_ME_QUERY,
+} from './Settings.graphql';
 import styles from './Settings.styles';
 import SettingsSection from './SettingsSection';
 
@@ -62,28 +67,35 @@ const Settings = () => {
       contentContainerStyle={styles.screenContentContainer}>
       <StatusBar backgroundColor={colors.background} barStyle="dark-content" />
       <SettingsSection
-        title={t('app.settings.profile.title')}
+        title={t('app.settings.profile.settingsTitle')}
         links={[
           {
-            linkTitle: t('app.settings.photo.changePhoto'),
+            linkTitle: t('app.settings.profile.photos'),
+            icon: 'image',
+            //@ts-ignore
             onPress: () => navigation.navigate(UPDATE_PHOTO),
           },
-        ]}
-      />
-      <SettingsSection
-        title={t('app.settings.bio.title')}
-        links={[
           {
-            linkTitle: t('app.settings.bio.changeBio'),
+            linkTitle: t('app.settings.profile.bio'),
+            icon: 'ionicons/text',
+            //@ts-ignore
             onPress: () => navigation.navigate(UPDATE_BIO),
           },
-        ]}
-      />
-      <SettingsSection
-        title={t('app.settings.socialLinks.title')}
-        links={[
           {
-            linkTitle: t('app.settings.socialLinks.addLink'),
+            linkTitle: t('app.settings.profile.profession'),
+            icon: 'briefcase',
+            onPress: () => console.warn('Profession'),
+          },
+          {
+            linkTitle: t('app.settings.profile.city'),
+            icon: 'map-pin',
+            //@ts-ignore
+            onPress: () => navigation.navigate(UPDATE_CITY),
+          },
+          {
+            linkTitle: t('app.settings.profile.socialLinks'),
+            icon: 'share-2',
+            //@ts-ignore
             onPress: () => navigation.navigate(SOCIALS),
           },
         ]}
@@ -93,11 +105,25 @@ const Settings = () => {
         links={[
           {
             linkTitle: t('app.settings.app.language'),
+            // @ts-ignore
             onPress: () => navigation.navigate(UPDATE_LANGUAGE),
+          },
+          {
+            linkTitle: t('app.settings.app.email'),
+            onPress: () => console.warn('Email'),
+          },
+          {
+            linkTitle: t('app.settings.profile.changePassword'),
+            // @ts-ignore
+            onPress: () => navigation.navigate(UPDATE_PASSWORD),
+          },
+          {
+            linkTitle: t('app.settings.profile.logout'),
+            onPress: askIfUserWantsToLogout,
+            additionalStyle: styles.logoutLink,
           },
         ]}
       />
-      <ProfileSettings askIfUserWantsToLogout={askIfUserWantsToLogout} />
     </ScrollView>
   );
 };
