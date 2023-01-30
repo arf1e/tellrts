@@ -5,7 +5,7 @@ $RNFirebaseAsStaticFramework = true
 platform :ios, '11.0'
 install! 'cocoapods', :deterministic_uuids => false
 
-target 'tellrts' do
+target 'tellr' do
   config = use_native_modules!
   use_frameworks!
 
@@ -23,7 +23,7 @@ target 'tellrts' do
 
 
 
-  target 'tellrtsTests' do
+  target 'tellrTests' do
     inherit! :complete
     # Pods for testing
   end

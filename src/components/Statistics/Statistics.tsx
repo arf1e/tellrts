@@ -1,5 +1,4 @@
 import {useQuery} from '@apollo/client';
-import {useNavigation} from '@react-navigation/core';
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
@@ -10,7 +9,6 @@ import StatisticsDetails from './Statistics.Details';
 import styles from './Statistics.styles';
 
 export default () => {
-  const navigation = useNavigation();
   const {t} = useTranslation();
   const {data, loading} = useQuery<{shouldGetStatistics: boolean}>(
     SHOULD_GET_STATISTICS_QUERY,

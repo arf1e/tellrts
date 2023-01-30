@@ -16,7 +16,7 @@ import {ApolloProvider} from '@apollo/client';
 
 import RootNavigator from './src/components/Navigation/RootNavigator';
 import {Provider} from 'react-redux';
-import {storePersistor, store} from './src/utils/store';
+import {persistor, store} from './src/utils/store';
 import {PersistGate} from 'redux-persist/integration/react';
 import {colorVariables} from './src/utils/colors';
 import client from './src/utils/apollo';
@@ -25,11 +25,7 @@ import {
   PROFILE_NAVIGATOR,
   SEARCH,
 } from './src/components/Navigation/AppNavigator';
-import {
-  ATTACH_INSTAGRAM,
-  PROFILE,
-  SOCIALS,
-} from './src/components/Navigation/ProfileNavigator';
+import {ATTACH_INSTAGRAM} from './src/components/Navigation/ProfileNavigator';
 import {toastConfig} from './src/components/Toasts';
 import RNBootSplash from 'react-native-bootsplash';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
@@ -77,7 +73,7 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={storePersistor}>
+        <PersistGate loading={null} persistor={persistor}>
           <NavigationContainer
             linking={linkingConfig}
             onReady={() => RNBootSplash.hide()}>

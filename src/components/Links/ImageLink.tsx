@@ -61,7 +61,7 @@ const ImageLink = ({size, onPress, imageStyle, uri}: Props) => {
       onPressIn={onPressIn}
       onPressOut={onPressOut}
       onPress={onPress}>
-      <Image source={{uri}} style={imageStyles} />
+      <Image source={{uri}} style={imageStyles} testID="ImageLink.image" />
     </AnimatedPressable>
   );
 };

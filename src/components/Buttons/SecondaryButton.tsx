@@ -72,6 +72,7 @@ const SecondaryButton = ({title, ...rest}: ButtonProps) => {
   };
   return (
     <AnimatedPressable
+      testID="SecondaryButton.container"
       {...rest}
       style={btnStyles}
       onPressIn={pressIn}

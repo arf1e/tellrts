@@ -6,7 +6,7 @@ import CenterContainer from '../Container/CenterContainer';
 const LoadingIndicator = () => {
   return (
     <CenterContainer>
-      <ActivityIndicator size="large" color={colors.primary} />
+      <ActivityIndicator size="large" color={colors.primary} testID="loader" />
     </CenterContainer>
   );
 };

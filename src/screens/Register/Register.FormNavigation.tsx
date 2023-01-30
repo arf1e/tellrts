@@ -110,6 +110,7 @@ const RegisterFormNavigation = ({
             </BodyCopy>
             <Datefield
               mask="[00]-[00]-[0000]"
+              testID="Register.birthday.BirthdayInput"
               placeholder={t('register.birthday.placeholder')}
               onChangeText={value => {
                 formikProps.handleChange('birthdayInput')(value);

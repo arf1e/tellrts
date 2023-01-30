@@ -8,7 +8,6 @@ import {createUploadLink} from 'apollo-upload-client';
 import {store} from './store';
 import {getMainDefinition} from '@apollo/client/utilities';
 import i18next from 'i18next';
-import {useTranslation} from 'react-i18next';
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
   if (graphQLErrors) {
@@ -33,7 +32,6 @@ const authLink = setContext((_, {headers}) => {
     },
   };
 });
-
 const wsLink = new GraphQLWsLink(
   createClient({
     url: WS_URL,

@@ -52,6 +52,7 @@ const Link = ({children, containerStyle, textStyle, icon, ...rest}: Props) => {
       const iconName = icon.split('/')[1];
       return (
         <Ionicons
+          testID="Link.ionicons.icon"
           name={iconName}
           size={20}
           color={colors.primary}
@@ -61,6 +62,7 @@ const Link = ({children, containerStyle, textStyle, icon, ...rest}: Props) => {
     }
     return (
       <Feather
+        testID="Link.feather.icon"
         name={icon}
         size={20}
         color={colors.primary}

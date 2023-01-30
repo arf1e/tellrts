@@ -1,12 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
 import {Subtitle} from '../../components/Typography';
-import styles from './Statistics.styles';
 
-export default ({}) => {
+export default function Statistics({}) {
   return (
-    <View>
+    <View testID="statistics">
       <Subtitle>Statistics Screen</Subtitle>
     </View>
   );
-};
+}

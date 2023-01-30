@@ -25,12 +25,14 @@ export default ({
         title={t('register.controls.back')}
         onPress={secondaryAction}
         style={styles.utilSecondary}
+        testID="Register.ControlPanel.back"
       />
       <PrimaryButton
         title={t('register.controls.next')}
         onPress={primaryAction}
         style={styles.utilPrimary}
         disabled={disabled}
+        testID="Register.ControlPanel.next"
       />
     </View>
   );

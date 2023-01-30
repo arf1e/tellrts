@@ -90,6 +90,7 @@ const PrimaryButton = ({title, ...rest}: ButtonProps) => {
 
   return (
     <MyPressable
+      testID="PrimaryButton.container"
       {...rest}
       style={styles}
       onPressOut={pressOut}

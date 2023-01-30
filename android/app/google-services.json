@@ -8,6 +8,42 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:493564099498:android:bef576de8d96bb2f2649d3",
+        "android_client_info": {
+          "package_name": "com.tellr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493564099498-e935pnsrj4dsd75vvgc8kodrgvqt1q3e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZMm2VdIzIjf1VTxy0RFnqBFSfW-s_J_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493564099498-e935pnsrj4dsd75vvgc8kodrgvqt1q3e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "493564099498-o0rj66mmngt26q1tr1kq0b0t470okuh2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.tellrts"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:493564099498:android:df17c30bebb2b1392649d3",
         "android_client_info": {
           "package_name": "com.tellrts"
@@ -30,6 +66,13 @@
             {
               "client_id": "493564099498-e935pnsrj4dsd75vvgc8kodrgvqt1q3e.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "493564099498-o0rj66mmngt26q1tr1kq0b0t470okuh2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.tellrts"
+              }
             }
           ]
         }

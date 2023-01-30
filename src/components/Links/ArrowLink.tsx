@@ -76,6 +76,7 @@ const ArrowLink = ({
   return (
     <AnimatedPressable
       style={containerStyles}
+      testID="ArrowLink.pressable"
       onPress={onPress}
       onPressIn={onPressIn}
       onPressOut={onPressOut}>
@@ -84,6 +85,7 @@ const ArrowLink = ({
         name={`chevron-${arrowPosition}`}
         size={24}
         style={arrowStyles}
+        testID="ArrowLink.arrow"
       />
       <BodyCopy style={textStyles}>{children}</BodyCopy>
     </AnimatedPressable>

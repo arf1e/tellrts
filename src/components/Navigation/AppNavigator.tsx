@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Contacts from '../../screens/Contacts';
 import ProfileNavigator from './ProfileNavigator';
 import NavigationIcon from './NavigationIcon';
 import NavigationStyles from './NavigationStyles';
@@ -12,7 +11,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {saveToken} from '../../utils/slices/firebaseTokenSlice';
 import Toast from 'react-native-toast-message';
 import SearchNavigator from './SearchNavigator';
-import ContactsNavigator, {CHAT} from './ContactsNavigator';
+import ContactsNavigator from './ContactsNavigator';
 import {inChatState} from '../../utils/slices/inChatSlice';
 import {useTranslation} from 'react-i18next';
 
@@ -63,7 +62,7 @@ const AppNavigator = () => {
   const {t} = useTranslation();
   return (
     <AppTabs.Navigator
-      screenOptions={({navigation, route}) => {
+      screenOptions={() => {
         return {
           header: () => null,
           tabBarHideOnKeyboard: true,

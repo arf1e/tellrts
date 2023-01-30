@@ -1,0 +1,339 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Register Screen Renders 1`] = `
+Array [
+  <RCTSafeAreaView
+    accessible={true}
+    emulateUnlessSupported={true}
+    focusable={true}
+    onClick={[Function]}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+  >
+    <View>
+      <View
+        animatedStyle={
+          Object {
+            "value": Object {},
+          }
+        }
+        collapsable={false}
+        style={Object {}}
+      >
+        <View>
+          <View>
+            <View
+              style={
+                Array [
+                  undefined,
+                  undefined,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  undefined,
+                  null,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  undefined,
+                  null,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  undefined,
+                  null,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  undefined,
+                  null,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  undefined,
+                  null,
+                ]
+              }
+            />
+            <View
+              style={
+                Array [
+                  undefined,
+                  null,
+                ]
+              }
+            />
+          </View>
+        </View>
+        <View
+          animatedStyle={
+            Object {
+              "value": Object {},
+            }
+          }
+          collapsable={false}
+          entering={
+            FadeInDown {
+              "build": [Function],
+              "delayV": 240,
+              "durationV": 240,
+              "randomizeDelay": false,
+            }
+          }
+          exiting={
+            FadeOutDown {
+              "build": [Function],
+              "durationV": 240,
+              "randomizeDelay": false,
+            }
+          }
+        >
+          <Text
+            style={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            register.name.title
+          </Text>
+          <Text
+            style={
+              Array [
+                undefined,
+                undefined,
+              ]
+            }
+          >
+            register.name.description
+          </Text>
+          <View>
+            <Text
+              style={
+                Array [
+                  undefined,
+                  undefined,
+                ]
+              }
+            >
+              register.name.fieldTitle
+            </Text>
+            <TextInput
+              animatedStyle={
+                Object {
+                  "value": Object {
+                    "borderColor": "rgba(188, 216, 221, 1)",
+                  },
+                }
+              }
+              collapsable={false}
+              onBlur={[Function]}
+              onChangeText={[Function]}
+              onFocus={[Function]}
+              placeholder="register.name.fieldPlaceholder"
+              style={
+                Object {
+                  "borderColor": "rgba(188, 216, 221, 1)",
+                }
+              }
+              testID="Field.TextInput"
+              value=""
+            />
+          </View>
+        </View>
+        <View
+          style={
+            Array [
+              undefined,
+              null,
+            ]
+          }
+        >
+          <View
+            accessible={true}
+            animatedStyle={
+              Object {
+                "value": Object {
+                  "borderColor": "rgba(22, 147, 165, 1)",
+                  "borderWidth": 1,
+                  "transform": Array [
+                    Object {
+                      "scale": 1,
+                    },
+                  ],
+                },
+              }
+            }
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "borderColor": "rgba(22, 147, 165, 1)",
+                "borderWidth": 1,
+                "transform": Array [
+                  Object {
+                    "scale": 1,
+                  },
+                ],
+              }
+            }
+            testID="Register.ControlPanel.back"
+          >
+            <Text
+              animatedStyle={
+                Object {
+                  "value": Object {
+                    "color": "rgba(22, 147, 165, 1)",
+                  },
+                }
+              }
+              collapsable={false}
+              style={
+                Object {
+                  "color": "rgba(22, 147, 165, 1)",
+                }
+              }
+            >
+              register.controls.back
+            </Text>
+          </View>
+          <View
+            accessibilityState={
+              Object {
+                "disabled": true,
+              }
+            }
+            accessible={true}
+            animatedStyle={
+              Object {
+                "value": Object {
+                  "backgroundColor": "rgba(22, 147, 165, 1)",
+                  "transform": Array [
+                    Object {
+                      "scale": 1,
+                    },
+                  ],
+                },
+              }
+            }
+            collapsable={false}
+            focusable={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onFocus={[Function]}
+            onResponderGrant={[Function]}
+            onResponderMove={[Function]}
+            onResponderRelease={[Function]}
+            onResponderTerminate={[Function]}
+            onResponderTerminationRequest={[Function]}
+            onStartShouldSetResponder={[Function]}
+            style={
+              Object {
+                "backgroundColor": "rgba(22, 147, 165, 1)",
+                "transform": Array [
+                  Object {
+                    "scale": 1,
+                  },
+                ],
+              }
+            }
+            testID="Register.ControlPanel.next"
+          >
+            <Text
+              animatedStyle={
+                Object {
+                  "value": Object {
+                    "opacity": 1,
+                    "transform": Array [
+                      Object {
+                        "translateY": 0,
+                      },
+                    ],
+                  },
+                }
+              }
+              collapsable={false}
+              style={
+                Object {
+                  "opacity": 1,
+                  "transform": Array [
+                    Object {
+                      "translateY": 0,
+                    },
+                  ],
+                }
+              }
+            >
+              register.controls.next
+            </Text>
+            <View
+              animatedStyle={
+                Object {
+                  "value": Object {
+                    "display": "none",
+                    "opacity": 0,
+                    "position": "absolute",
+                    "transform": Array [
+                      Object {
+                        "translateY": 20,
+                      },
+                    ],
+                  },
+                }
+              }
+              collapsable={false}
+              style={
+                Object {
+                  "display": "none",
+                  "opacity": 0,
+                  "position": "absolute",
+                  "transform": Array [
+                    Object {
+                      "translateY": 20,
+                    },
+                  ],
+                }
+              }
+            >
+              <ActivityIndicator
+                color="#FDFFFF"
+                size={24}
+              />
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RCTSafeAreaView>,
+  " ",
+]
+`;

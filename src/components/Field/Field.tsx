@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {
   NativeSyntheticEvent,
   TextInput,
@@ -63,6 +63,7 @@ const Field = ({isInvalid, ...rest}: FieldProps) => {
   return (
     <ReanimatedTextInput
       {...rest}
+      testID="Field.TextInput"
       style={inputStyle}
       onFocus={handleFocus}
       onBlur={handleBlur}
