@@ -24,12 +24,30 @@ jest.mock('react-i18next', () => ({
       t: str => str,
       i18n: {
         changeLanguage: () => new Promise(() => {}),
+        language: 'en',
       },
     };
   },
 }));
 jest.mock('react-native-image-crop-picker', () => ({
-  openPicker: () => new Promise(() => {}),
+  openPicker: () =>
+    new Promise.resolve({
+      width: 1000,
+      height: 1000,
+      size: 1024,
+      path: 'test/test.jpg',
+      mime: 'image/jpeg',
+      filename: 'test/test.jpg',
+    }),
+  openCamera: () =>
+    new Promise.resolve({
+      width: 1000,
+      height: 1000,
+      size: 1024,
+      path: 'test/test.jpg',
+      mime: 'image/jpeg',
+      filename: 'test/test.jpg',
+    }),
 }));
 jest.mock('react-native-text-input-mask', () => 'TextInputMask');
 

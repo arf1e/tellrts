@@ -23,6 +23,7 @@ const Password = ({formikProps}: Props) => {
           {t('register.password.passwordInputTitle')}
         </BodyCopy>
         <Field
+          testID="Register.Password.Password"
           secureTextEntry
           value={formikProps.values.password}
           onChangeText={formikProps.handleChange('password')}
@@ -33,6 +34,7 @@ const Password = ({formikProps}: Props) => {
           {t('register.password.passwordConfirmTitle')}
         </BodyCopy>
         <Field
+          testID="Register.Password.PasswordConfirm"
           secureTextEntry
           value={formikProps.values.passwordConfirm}
           onChangeText={formikProps.handleChange('passwordConfirm')}

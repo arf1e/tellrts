@@ -91,6 +91,7 @@ const CountryPicker = ({
 
   const renderConfirmButton = () => (
     <PrimaryButton
+      testID="Register.CountryPicker.ConfirmCountryButton"
       onPress={() => setIsModalActive(false)}
       title={t('register.location.apply')}
       style={styles.countryConfirmBtn}>
@@ -117,6 +118,7 @@ const CountryPicker = ({
         closeModal={() => setIsModalActive(false)}
         title={t('register.location.countryPickModal')}>
         <Field
+          testID="Register.CountryPicker.Field"
           placeholder="Start typing..."
           onChangeText={handleCountryNameInput}
           style={styles.countryTitle}

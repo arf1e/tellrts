@@ -69,6 +69,7 @@ const Photo = ({formikProps}: Props) => {
         <View style={styles.activePhotoContainer}>
           <Pressable
             disabled={changePhotoActive}
+            testID="Register.Photo.TakeAnother"
             onPress={() => setChangePhotoActive(true)}>
             <Image source={{uri: photoPath}} style={styles.photoPreview} />
           </Pressable>
