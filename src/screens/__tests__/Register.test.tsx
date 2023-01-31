@@ -1,13 +1,22 @@
-import {render, fireEvent} from '@testing-library/react-native';
+import {render, fireEvent, waitFor} from '@testing-library/react-native';
 import React from 'react';
 import {Alert, TextInput} from 'react-native';
 import {act} from 'react-test-renderer';
+import colors from '../../utils/colors';
 import {renderWithProviders} from '../../utils/test-utils';
 import Register from '../Register';
 
 const unknownUserEmail = 'testinguser@tellr.dating';
 const RegisterNewUser = () => (
-  <Register route={{name: 'Signup', params: {email: unknownUserEmail}}} />
+  <Register
+    route={{name: 'Signup', params: {email: unknownUserEmail}}}
+    initialFormikTestingValues={{
+      countryCode: 'FI',
+      countryTitle: 'Finland',
+      cityId: 'testingCityId',
+      cityTitle: 'Lappeenranta',
+    }}
+  />
 );
 const nextStepTestId = 'Register.ControlPanel.next';
 const previousStepTestId = 'Register.ControlPanel.back';
@@ -91,4 +100,50 @@ test('Register process', async () => {
   fireEvent.press(view.getByTestId(nextStepTestId));
   expect(birthdayTitle).not.toBeOnTheScreen();
   const photoTitle = view.getByText('register.photo.title');
+  expect(photoTitle).toBeOnTheScreen();
+  const cameraBtn = view.getByText('register.photo.camera');
+  await act(async () => {
+    await fireEvent.press(cameraBtn);
+  });
+  const takeAnotherPhoto = view.getByTestId('Register.Photo.TakeAnother');
+  expect(view.getByTestId('Register.Photo.TakeAnother')).toBeOnTheScreen();
+  fireEvent.press(takeAnotherPhoto);
+  const galleryBtn = view.getByText('register.photo.gallery');
+  await act(async () => {
+    await fireEvent.press(galleryBtn);
+  });
+  expect(view.getByTestId('Register.Photo.TakeAnother')).toBeOnTheScreen();
+  fireEvent.press(view.getByTestId(nextStepTestId));
+
+  expect(view.getByText('register.location.title')).toBeOnTheScreen();
+  expect(view.getByText('Finland')).toBeOnTheScreen();
+  expect(view.getByText('Lappeenranta')).toBeOnTheScreen();
+  fireEvent.press(view.getByTestId(nextStepTestId));
+
+  expect(view.getByText('register.password.title')).toBeOnTheScreen();
+  const passwordField = view.getByTestId('Register.Password.Password');
+  const passwordConfirmField = view.getByTestId(
+    'Register.Password.PasswordConfirm',
+  );
+
+  const fillPasswords = async (password: string) => {
+    await act(async () => {
+      await fireEvent.changeText(passwordField, password);
+      await fireEvent.changeText(passwordConfirmField, password);
+    });
+  };
+
+  const pass1 = 'wrongPassword';
+  await fillPasswords(pass1);
+
+  fireEvent.press(view.getByTestId(nextStepTestId));
+  expect(view.getByText('register.password.title')).toBeOnTheScreen();
+
+  const pass2 = 'corr3ctPassword';
+  await fillPasswords(pass2);
+
+  fireEvent.press(view.getByTestId(nextStepTestId));
+  expect(view.queryByText('register.password.title')).toBeNull();
+
+  expect(view.getByText('register.check.title')).toBeOnTheScreen();
 });

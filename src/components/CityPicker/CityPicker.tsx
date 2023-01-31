@@ -12,7 +12,6 @@ import Field from '../../components/Field';
 import colors from '../../utils/colors';
 import {GoogleLocationResult} from 'react-native-google-autocomplete/dist/services/Google.service';
 import PrimaryButton from '../../components/Buttons';
-import i18next from 'i18next';
 
 const GOOGLE_API_KEY = 'AIzaSyDw6jMkY0hQFicfxsmzU1bKn-sFAHWUgS0';
 
@@ -45,10 +44,10 @@ const CityResult = ({city, onPress}: CityResultProps) => {
 };
 
 const City = ({countrySelected, setCity, currentCity}: Props) => {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const [modalActive, setModalActive] = useState(false);
   const [cityValue, setCityValue] = useState(currentCity.title || '');
-  const language = i18next.language;
+  const language = i18n.language;
 
   const handleChooseCity = (
     id: string,
@@ -123,7 +122,11 @@ const City = ({countrySelected, setCity, currentCity}: Props) => {
               />
               <View>
                 {isSearching && cityValue.length > 2 && (
-                  <ActivityIndicator size="small" color={colors.primary} />
+                  <ActivityIndicator
+                    size="small"
+                    color={colors.primary}
+                    testID="Register.Location.CityLoader"
+                  />
                 )}
                 {Boolean(locationResults) &&
                   handleLocationResults(locationResults, clearSearch)}

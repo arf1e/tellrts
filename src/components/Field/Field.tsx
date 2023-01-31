@@ -62,8 +62,8 @@ const Field = ({isInvalid, ...rest}: FieldProps) => {
   };
   return (
     <ReanimatedTextInput
-      {...rest}
       testID="Field.TextInput"
+      {...rest}
       style={inputStyle}
       onFocus={handleFocus}
       onBlur={handleBlur}

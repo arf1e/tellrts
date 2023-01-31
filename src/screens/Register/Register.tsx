@@ -23,13 +23,21 @@ import {logIn} from '../../utils/slices/authSlice';
 import {useDispatch} from 'react-redux';
 import {REGISTER_MUTATION} from './Register.graphql';
 import {GraphQLError} from 'graphql';
-import {REGISTER_FORM_VALUES} from './Register.types';
+import {
+  REGISTER_FORM_TEST_VALUES,
+  REGISTER_FORM_VALUES,
+} from './Register.types';
 import RegisterFormNavigation from './Register.FormNavigation';
+
+interface RegisterProps extends NativeStackScreenProps<ParamListBase> {
+  initialFormikTestingValues?: REGISTER_FORM_TEST_VALUES;
+}
 
 const Register = ({
   navigation,
   route,
-}: NativeStackScreenProps<ParamListBase>) => {
+  initialFormikTestingValues,
+}: RegisterProps) => {
   const [step, setStep] = useState(0);
   const nextStep = () => setStep(step + 1);
   const dispatch = useDispatch();
@@ -133,6 +141,7 @@ const Register = ({
           <Formik
             initialValues={{
               ...REGISTER_FORM_INITIAL_VALUES,
+              ...initialFormikTestingValues,
               // @ts-ignore
               email: route.params?.email || '',
             }}
