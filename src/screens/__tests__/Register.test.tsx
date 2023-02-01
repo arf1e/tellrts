@@ -1,19 +1,29 @@
-import {render, fireEvent, waitFor} from '@testing-library/react-native';
+import {render, fireEvent} from '@testing-library/react-native';
 import React from 'react';
-import {Alert, TextInput} from 'react-native';
+import {Alert} from 'react-native';
 import {act} from 'react-test-renderer';
-import colors from '../../utils/colors';
 import {renderWithProviders} from '../../utils/test-utils';
 import Register from '../Register';
+import {REGISTER_MUTATION} from '../Register/Register.graphql';
 
-const unknownUserEmail = 'testinguser@tellr.dating';
+const testUserRegisterData = {
+  name: 'Egor',
+  birthday: '16-10-1997',
+  sex: true,
+  photo: 'test-photo',
+  countryCode: 'FI',
+  cityId: 'testingCityId',
+  password: 'corr3ctPassword',
+  email: 'testinguser@tellr.dating',
+};
+
 const RegisterNewUser = () => (
   <Register
-    route={{name: 'Signup', params: {email: unknownUserEmail}}}
+    route={{name: 'Signup', params: {email: testUserRegisterData.email}}}
     initialFormikTestingValues={{
-      countryCode: 'FI',
+      countryCode: testUserRegisterData.countryCode,
       countryTitle: 'Finland',
-      cityId: 'testingCityId',
+      cityId: testUserRegisterData.cityId,
       cityTitle: 'Lappeenranta',
     }}
   />
@@ -50,7 +60,27 @@ test('Pressing next without value causes no effect', () => {
 });
 
 test('Next step becomes available after name input', async () => {
-  const view = render(renderWithProviders(<RegisterNewUser />));
+  const view = render(
+    renderWithProviders(<RegisterNewUser />, {
+      mocks: [
+        {
+          request: {
+            query: REGISTER_MUTATION,
+            variables: testUserRegisterData,
+          },
+          result: {
+            data: {
+              createAccount: {
+                ok: true,
+                error: 'woah',
+                token: 'jwt-test-token',
+              },
+            },
+          },
+        },
+      ],
+    }),
+  );
   const nameInput = await view.findByPlaceholderText(
     'register.name.fieldPlaceholder',
   );
@@ -58,7 +88,7 @@ test('Next step becomes available after name input', async () => {
   expect(nameTitle).toBeOnTheScreen();
   const nextButton = view.getByTestId(nextStepTestId);
   await act(async () => {
-    await fireEvent.changeText(nameInput, 'George');
+    await fireEvent.changeText(nameInput, testUserRegisterData.name);
   });
   fireEvent.press(nextButton);
   expect(nameTitle).not.toBeOnTheScreen();
@@ -74,7 +104,7 @@ test('Register process', async () => {
     'register.name.fieldPlaceholder',
   );
   await act(async () => {
-    await fireEvent.changeText(nameInput, 'George');
+    await fireEvent.changeText(nameInput, testUserRegisterData.name);
   });
   fireEvent.press(view.getByTestId(nextStepTestId));
   const maleButton = view.getByText('register.sex.male');
@@ -95,7 +125,7 @@ test('Register process', async () => {
   expect(birthdayTitle).toBeOnTheScreen();
   expect(birthdayInput).toBeOnTheScreen();
   await act(async () => {
-    await fireEvent.changeText(birthdayInput, '16-10-1997');
+    await fireEvent.changeText(birthdayInput, testUserRegisterData.birthday);
   });
   fireEvent.press(view.getByTestId(nextStepTestId));
   expect(birthdayTitle).not.toBeOnTheScreen();
@@ -139,11 +169,27 @@ test('Register process', async () => {
   fireEvent.press(view.getByTestId(nextStepTestId));
   expect(view.getByText('register.password.title')).toBeOnTheScreen();
 
-  const pass2 = 'corr3ctPassword';
-  await fillPasswords(pass2);
+  await fillPasswords(testUserRegisterData.password);
 
   fireEvent.press(view.getByTestId(nextStepTestId));
   expect(view.queryByText('register.password.title')).toBeNull();
+  expect(view.getByText('register.check.title')).toBeOnTheScreen();
+  expect(view.getByText('register.check.nameTitle')).toBeOnTheScreen();
+  expect(view.getByText(testUserRegisterData.name)).toBeOnTheScreen();
+  expect(view.getByText('register.check.dobTitle')).toBeOnTheScreen();
+  expect(view.getByText(testUserRegisterData.birthday)).toBeOnTheScreen();
+  expect(view.getByText('register.check.sexTitle')).toBeOnTheScreen();
+
+  await act(async () => {
+    await fireEvent.press(view.getByText(testUserRegisterData.name));
+  });
+
+  expect(view.getByText('register.name.title')).toBeOnTheScreen();
+  expect(view.getByText('register.controls.check')).toBeOnTheScreen();
+
+  await act(async () => {
+    await fireEvent.press(view.getByText('register.controls.check'));
+  });
 
   expect(view.getByText('register.check.title')).toBeOnTheScreen();
 });

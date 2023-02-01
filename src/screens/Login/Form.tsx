@@ -14,7 +14,7 @@ import errorCatcher from '../../utils/toasts';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 
-const CHECK_EMAIL_QUERY = gql`
+export const CHECK_EMAIL_QUERY = gql`
   query emailExists($email: String!) {
     checkEmail(email: $email) {
       ok
@@ -24,7 +24,7 @@ const CHECK_EMAIL_QUERY = gql`
 `;
 
 const schema = yup.object({
-  email: yup.string().required().email(),
+  email: yup.string().required().email('login.email.errors.incorrectEmail'),
 });
 
 const initialValues = {
@@ -36,7 +36,13 @@ const Form = () => {
   const [step, setStep] = useState<0 | 1>(0);
   const [checkEmail, {data, loading: checkEmailLoading}] = useLazyQuery(
     CHECK_EMAIL_QUERY,
-    {fetchPolicy: 'network-only'},
+    {
+      fetchPolicy: 'network-only',
+      onCompleted: () => {
+        setStep(1);
+      },
+      onError: errorCatcher,
+    },
   );
   return (
     <AnimatedView
@@ -46,12 +52,9 @@ const Form = () => {
       <Subtitle style={LoginStyles.formTitle}>{t('login.form.title')}</Subtitle>
       <Formik
         initialValues={initialValues}
-        onSubmit={async ({email}) => {
-          try {
-            await checkEmail({variables: {email}}).then(() => setStep(1));
-          } catch (e) {
-            errorCatcher(e);
-          }
+        onSubmit={({email}) => {
+          console.log({email});
+          // await checkEmail({variables: {email}});
         }}
         validationSchema={schema}
         validateOnBlur={true}

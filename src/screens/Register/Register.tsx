@@ -14,6 +14,8 @@ import {
   validateSchema,
   schema,
   REGISTER_FORM_INITIAL_VALUES,
+  getStepIndex,
+  CHECK_STEP,
 } from './Register.utils';
 import {useTranslation} from 'react-i18next';
 import {useMutation} from '@apollo/client';
@@ -53,7 +55,10 @@ const Register = ({
   const [isReviewing, setIsReviewing] = useState(false);
 
   const {t} = useTranslation();
-  const getToReviewStep = () => setStep(6);
+  const getToReviewStep = () => {
+    const index = getStepIndex(CHECK_STEP);
+    setStep(index);
+  };
 
   const navigateFormDuringReview = (index: number) => {
     setIsReviewing(true);
@@ -115,17 +120,18 @@ const Register = ({
   const handleRegister = async (values: REGISTER_FORM_VALUES) => {
     const {birthdayInput} = values;
     const photoFile = await generateRNFile(values.photo);
+    const mutationVariables = {
+      name: values.name,
+      email: values.email,
+      birthday: birthdayInput,
+      sex: values.sex,
+      photo: photoFile,
+      countryCode: values.countryCode,
+      cityId: values.cityId,
+      password: values.password,
+    };
     await register({
-      variables: {
-        name: values.name,
-        email: values.email,
-        birthday: birthdayInput,
-        sex: values.sex,
-        photo: photoFile,
-        countryCode: values.countryCode,
-        cityId: values.cityId,
-        password: values.password,
-      },
+      variables: mutationVariables,
       fetchPolicy: 'no-cache',
     });
   };

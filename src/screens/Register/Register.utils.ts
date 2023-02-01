@@ -126,3 +126,35 @@ export const schema = yup.object().shape({
   passwordConfirm: yup.string().required(),
   email: yup.string().email().required(),
 });
+
+export const NAME_STEP = 'NAME';
+export const SEX_STEP = 'SEX';
+export const BIRTHDAY_STEP = 'BIRTHDAY';
+export const PHOTO_STEP = 'PHOTO';
+export const LOCATION_STEP = 'LOCATION';
+export const PASSWORD_STEP = 'PASSWORD';
+export const CHECK_STEP = 'CHECK';
+
+export type FORM_STEP =
+  | typeof NAME_STEP
+  | typeof SEX_STEP
+  | typeof BIRTHDAY_STEP
+  | typeof PHOTO_STEP
+  | typeof LOCATION_STEP
+  | typeof PASSWORD_STEP
+  | typeof CHECK_STEP;
+
+const FORM_STEPS = [
+  NAME_STEP,
+  SEX_STEP,
+  BIRTHDAY_STEP,
+  PHOTO_STEP,
+  LOCATION_STEP,
+  PASSWORD_STEP,
+  CHECK_STEP,
+];
+
+export const getStepIndex = (step: FORM_STEP): number =>
+  FORM_STEPS.indexOf(step);
+
+export const getStepByIndex = (index: number) => FORM_STEPS[index];

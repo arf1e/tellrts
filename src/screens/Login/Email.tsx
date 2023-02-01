@@ -1,11 +1,7 @@
 import React from 'react';
 import {useTranslation} from 'react-i18next';
 import {View} from 'react-native';
-import Reanimated, {
-  FadeInLeft,
-  FadeOutLeft,
-  SlideInLeft,
-} from 'react-native-reanimated';
+import Reanimated, {FadeInLeft, FadeOutLeft} from 'react-native-reanimated';
 import PrimaryButton from '../../components/Buttons';
 import ErrorDisplay from '../../components/ErrorDisplay';
 import Field from '../../components/Field';
@@ -50,6 +46,7 @@ const Email = ({
       />
       {error && <ErrorDisplay error={error} />}
       <PrimaryButton
+        testID="Login.CheckEmailBtn"
         title={t('login.form.btnTitle')}
         onPress={handleSubmit}
         loading={loading}

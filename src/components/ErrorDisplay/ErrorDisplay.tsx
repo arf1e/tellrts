@@ -1,4 +1,5 @@
 import React from 'react';
+import {useTranslation} from 'react-i18next';
 import {View, ViewProps} from 'react-native';
 import Reanimated, {
   ComplexAnimationBuilder,
@@ -18,14 +19,14 @@ interface Props extends ViewProps {
 
 const ErrorDisplay = ({error, ...rest}: Props) => {
   const viewStyles = [styles.errorContainer, rest.style];
-
+  const {t} = useTranslation();
   return (
     <AnimatedView
       {...rest}
       entering={rest.entering || FadeInDown.duration(230)}
       exiting={rest.exiting || FadeOutDown.duration(230)}
       style={viewStyles}>
-      <BodyCopy style={styles.errorText}>{error}</BodyCopy>
+      <BodyCopy style={styles.errorText}>{t(error)}</BodyCopy>
     </AnimatedView>
   );
 };

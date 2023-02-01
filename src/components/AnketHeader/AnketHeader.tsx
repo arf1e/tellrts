@@ -10,7 +10,6 @@ import {
 import Reanimated, {
   Extrapolate,
   interpolate,
-  Layout,
   useAnimatedStyle,
   useSharedValue,
 } from 'react-native-reanimated';

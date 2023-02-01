@@ -9,6 +9,7 @@ import {FormikProps} from 'formik';
 import {REGISTER_FORM_VALUES} from './Register.types';
 import StepTracker from './Register.StepTracker';
 import Link from '../../components/Links';
+import {useTranslation} from 'react-i18next';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 
@@ -41,6 +42,7 @@ const StepHeader = ({
   currentStep,
   formikProps,
 }: StepHeaderProps) => {
+  const {t} = useTranslation();
   return (
     <View style={styles.stepHeader}>
       <StepTracker
@@ -50,7 +52,7 @@ const StepHeader = ({
       />
       {isReviewing && (
         <Link onPress={toReview} containerStyle={styles.reviewLinkContainer}>
-          Check
+          {t('register.controls.check')}
         </Link>
       )}
     </View>

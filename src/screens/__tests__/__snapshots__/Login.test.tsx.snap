@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login Screen Renders 1`] = `
+exports[`Login Screen Login Screen renders 1`] = `
 Array [
   <View
     accessible={true}
@@ -148,7 +148,7 @@ Array [
                 ],
               }
             }
-            testID="PrimaryButton.container"
+            testID="Login.CheckEmailBtn"
           >
             <Text
               animatedStyle={

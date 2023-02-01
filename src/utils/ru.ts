@@ -31,6 +31,11 @@ export default {
       loginBtn: 'Войти',
       passwordFieldTitle: 'Пароль',
     },
+    email: {
+      errors: {
+        incorrectEmail: 'Введен неправильный адрес почты',
+      },
+    },
   },
   app: {
     contacts: {
