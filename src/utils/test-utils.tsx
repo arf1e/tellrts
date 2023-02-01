@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {MockedProvider} from '@apollo/client/testing';
+import {MockedProvider, MockedResponse} from '@apollo/client/testing';
 import {Provider} from 'react-redux';
 import {NavigationContainer} from '@react-navigation/native';
 import {configureStore} from '@reduxjs/toolkit';
@@ -21,17 +21,24 @@ const reducer = {
   searchSettings: searchSettingsSliceReducer,
 };
 
+type TRenderParams = {
+  mocks?: readonly MockedResponse<Record<string, any>>[] | undefined;
+  preloadedState?: any;
+};
+
 export function renderWithProviders(
   ui: ReactNode,
-  {
-    preloadedState = {},
-    mocks = [],
-    store = configureStore({reducer, preloadedState}),
-    ...renderOptions
-  } = {},
+  params: TRenderParams = {
+    mocks: [],
+    preloadedState: {},
+  },
 ) {
+  const store = configureStore({
+    reducer,
+    preloadedState: params.preloadedState || {},
+  });
   return (
-    <MockedProvider mocks={mocks}>
+    <MockedProvider mocks={params.mocks} addTypename={false}>
       <Provider store={store}>
         <NavigationContainer>{ui} </NavigationContainer>
       </Provider>

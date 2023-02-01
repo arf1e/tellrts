@@ -51,8 +51,10 @@ jest.mock('react-native-image-crop-picker', () => ({
 }));
 jest.mock('react-native-text-input-mask', () => 'TextInputMask');
 
-jest.mock('./src/utils/apollo.ts', () => ({default: jest.fn()}));
-
+jest.mock('./src/utils/apollo.ts', () => ({}));
+jest.mock('./src/utils/photo.ts', () => ({
+  generateRNFile: () => Promise.resolve('test-photo'),
+}));
 // Silence the warning: Animated: `useNativeDriver` is not supported because the native animated module is missing
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 

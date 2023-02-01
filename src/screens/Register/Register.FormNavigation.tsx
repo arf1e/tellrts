@@ -4,7 +4,19 @@ import {View} from 'react-native';
 import styles from './Register.styles';
 import {BodyCopy} from '../../components/Typography';
 import Field from '../../components/Field';
-import {REGISTER_FORM_FORMIK_TYPE, schema} from './Register.utils';
+import {
+  BIRTHDAY_STEP,
+  CHECK_STEP,
+  getCurrentStep,
+  getStepByIndex,
+  LOCATION_STEP,
+  NAME_STEP,
+  PASSWORD_STEP,
+  PHOTO_STEP,
+  REGISTER_FORM_FORMIK_TYPE,
+  schema,
+  SEX_STEP,
+} from './Register.utils';
 import Step from './Register.Step';
 import {useTranslation} from 'react-i18next';
 import {stepMapper} from './Register.utils';
@@ -41,9 +53,10 @@ const RegisterFormNavigation = ({
   registerLoading,
 }: Props) => {
   const {t} = useTranslation();
+  const currentStep = getStepByIndex(step);
   return (
     <>
-      {step === 0 && (
+      {currentStep === NAME_STEP && (
         <Step
           title={t('register.name.title')}
           description={t('register.name.description')}
@@ -70,7 +83,7 @@ const RegisterFormNavigation = ({
           </View>
         </Step>
       )}
-      {step === 1 && (
+      {currentStep === SEX_STEP && (
         <Step
           steps={stepMapper}
           formikProps={formikProps}
@@ -90,7 +103,7 @@ const RegisterFormNavigation = ({
           </View>
         </Step>
       )}
-      {step === 2 && (
+      {currentStep === BIRTHDAY_STEP && (
         <Step
           steps={stepMapper}
           formikProps={formikProps}
@@ -125,7 +138,7 @@ const RegisterFormNavigation = ({
           </View>
         </Step>
       )}
-      {step === 3 && (
+      {currentStep === PHOTO_STEP && (
         <Step
           steps={stepMapper}
           formikProps={formikProps}
@@ -144,7 +157,7 @@ const RegisterFormNavigation = ({
           <Photo formikProps={formikProps} />
         </Step>
       )}
-      {step === 4 && (
+      {currentStep === LOCATION_STEP && (
         <Step
           steps={stepMapper}
           formikProps={formikProps}
@@ -169,7 +182,7 @@ const RegisterFormNavigation = ({
           <Location formikProps={formikProps} />
         </Step>
       )}
-      {step === 5 && (
+      {currentStep === PASSWORD_STEP && (
         <Step
           steps={stepMapper}
           formikProps={formikProps}
@@ -189,7 +202,7 @@ const RegisterFormNavigation = ({
           <Password formikProps={formikProps} />
         </Step>
       )}
-      {step === 6 && (
+      {currentStep === CHECK_STEP && (
         <Step
           steps={stepMapper}
           formikProps={formikProps}

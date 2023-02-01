@@ -11,6 +11,15 @@ import Link, {ImageLink} from '../../components/Links';
 import {useTranslation} from 'react-i18next';
 import colors from '../../utils/colors';
 import PrimaryButton from '../../components/Buttons';
+import {
+  BIRTHDAY_STEP,
+  FORM_STEP,
+  getStepIndex,
+  LOCATION_STEP,
+  NAME_STEP,
+  PHOTO_STEP,
+  SEX_STEP,
+} from './Register.utils';
 
 type Props = {
   formikProps: FormikProps<REGISTER_FORM_VALUES>;
@@ -38,26 +47,34 @@ const CheckTextField = ({title, value, onValuePress}: CheckFieldProps) => {
 const Check = ({formikProps, navigateForm, registerLoading}: Props) => {
   const [isEmailModalActive, setIsEmailModalActive] = useState(false);
   const {t} = useTranslation();
+  const getToFormStep = (step: FORM_STEP) => {
+    const index = getStepIndex(step);
+    navigateForm(index);
+  };
   return (
     <View>
       {registerLoading ? (
-        <ActivityIndicator size="large" color={colors.secondary} />
+        <ActivityIndicator
+          size="large"
+          color={colors.secondary}
+          testID="Register.Check.Loading"
+        />
       ) : (
         <View style={styles.checkFields}>
           <ImageLink
-            onPress={() => navigateForm(3)}
+            onPress={() => getToFormStep(PHOTO_STEP)}
             size={150}
             uri={formikProps.values.photo.path}
           />
           <CheckTextField
             title={t('register.check.nameTitle')}
             value={formikProps.values.name}
-            onValuePress={() => navigateForm(0)}
+            onValuePress={() => getToFormStep(NAME_STEP)}
           />
           <CheckTextField
             title={t('register.check.dobTitle')}
             value={formikProps.values.birthdayInput}
-            onValuePress={() => navigateForm(1)}
+            onValuePress={() => getToFormStep(BIRTHDAY_STEP)}
           />
           <CheckTextField
             title={t('register.check.sexTitle')}
@@ -66,12 +83,12 @@ const Check = ({formikProps, navigateForm, registerLoading}: Props) => {
                 ? t('register.sex.male')
                 : t('register.sex.female')
             }
-            onValuePress={() => navigateForm(2)}
+            onValuePress={() => getToFormStep(SEX_STEP)}
           />
           <CheckTextField
             title={t('register.check.cityTitle')}
             value={formikProps.values.cityTitle}
-            onValuePress={() => navigateForm(4)}
+            onValuePress={() => getToFormStep(LOCATION_STEP)}
           />
           <CheckTextField
             title={t('register.check.emailTitle')}

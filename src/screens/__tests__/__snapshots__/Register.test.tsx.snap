@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Register Screen Renders 1`] = `
+exports[`Register Screen Register Screen Renders 1`] = `
 Array [
   <RCTSafeAreaView
     accessible={true}

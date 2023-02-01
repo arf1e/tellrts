@@ -1,11 +1,11 @@
 import {useMutation} from '@apollo/client';
 import {Formik, FormikProps} from 'formik';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Alert, BackHandler, ScrollView, View} from 'react-native';
+import {Alert, ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import AnketHeader from '../../components/AnketHeader';
-import Reanimated, {Layout} from 'react-native-reanimated';
+import Reanimated from 'react-native-reanimated';
 import {AnketState, clearAnket} from '../../utils/slices/anketSlice';
 import {setRequestResult} from '../../utils/slices/requestResultSlice';
 import {
@@ -28,7 +28,7 @@ import {
 } from './Anket.types';
 import AnketLoading from './AnketLoading';
 import AnketProgress from './AnketProgress';
-import {useIsFocused, useNavigation} from '@react-navigation/native';
+import {useIsFocused} from '@react-navigation/native';
 import {useBackHandler} from '@react-native-community/hooks';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
