@@ -19,7 +19,7 @@ export default ({}) => {
             {t('navigation.SEARCH')}
           </Subtitle>
           <Link onPress={() => navigation.navigate(SEARCH_PARAMETERS)}>
-            Параметры
+            {t('app.search.params.link')}
           </Link>
         </View>
       </Container>

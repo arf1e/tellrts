@@ -6,12 +6,14 @@ import Reanimated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
 const ReanimatedView = Reanimated.createAnimatedComponent(View);
 
 import styles from './Search.styles';
+import {useTranslation} from 'react-i18next';
 
 type Props = {
   error?: string;
 };
 
 const SearchErrored = ({error}: Props) => {
+  const {t} = useTranslation();
   return (
     <ReanimatedView
       entering={FadeInDown.duration(240)}
@@ -24,11 +26,10 @@ const SearchErrored = ({error}: Props) => {
           resizeMode="contain"
         />
         <BodyCopy style={styles.noResultTitle}>
-          Нет соединения с сервером.
+          {t('app.search.error.title')}
         </BodyCopy>
         <BodyCopy style={styles.noResultDescription}>
-          Мы не получили ответа от сервера. Пожалуйста, проверьте подключение к
-          Интернету, а потом потяните вниз, чтобы обновить список пользователей.
+          {t('app.search.error.description')}
         </BodyCopy>
       </View>
     </ReanimatedView>
