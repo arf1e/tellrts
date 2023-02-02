@@ -12,8 +12,7 @@ import Field from '../../components/Field';
 import colors from '../../utils/colors';
 import {GoogleLocationResult} from 'react-native-google-autocomplete/dist/services/Google.service';
 import PrimaryButton from '../../components/Buttons';
-
-const GOOGLE_API_KEY = 'AIzaSyDw6jMkY0hQFicfxsmzU1bKn-sFAHWUgS0';
+import {GOOGLE_API_KEY} from '../../../apis';
 
 type Props = {
   countrySelected: string | null;
