@@ -280,6 +280,11 @@ export default {
     },
     questions: {
       answerPlaceholder: 'Whatever you think. Really',
+      deleteAnswer: 'Delete answer',
+      saveAnswer: 'Confirm',
+      notificationTitle: 'Got it!',
+      notificationDescription:
+        'Your answer is already available in your profile.',
     },
     search: {
       modalTitle: 'User',
