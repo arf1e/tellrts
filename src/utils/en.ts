@@ -1,3 +1,5 @@
+import {MIN_PWD_LENGTH} from '../screens/Register/Register.utils';
+
 export default {
   navigation: {
     PROFILE_NAVIGATOR: 'Profile',
@@ -12,6 +14,11 @@ export default {
     UPDATE_BIO: 'Update bio',
     UPDATE_PASSWORD: 'Update password',
     UPDATE_CITY: 'Update city',
+    SEARCH_PARAMETERS: 'Search Parameters',
+    SOCIALS: 'Social Networks Accounts',
+    ATTACH_INSTAGRAM: 'Connect Instagram',
+    UPDATE_LANGUAGE: 'Interface Language',
+    ATTACH_TELEGRAM: 'Connect Telegram',
   },
   login: {
     description: 'The dating app for introverts and weirdos',
@@ -24,8 +31,21 @@ export default {
       loginBtn: 'Sign In',
       passwordFieldTitle: 'Password',
     },
+    email: {
+      errors: {
+        incorrectEmail: 'Incorrect email',
+      },
+    },
   },
   app: {
+    updateLanguage: {
+      description:
+        'Updating language means your Questions will need to be updated too.',
+    },
+    contacts: {
+      search: 'Search by name...',
+      clear: 'Clear',
+    },
     profile: {
       lines: 'Questions',
       addNewLine: 'Add',
@@ -43,12 +63,27 @@ export default {
       interactionsDescription: 'In the last month',
       successRate: 'Correct guesses',
       successRateDescription: 'In incoming requests',
+      errorCap: {
+        title: 'Failed to get your profile data',
+        description: 'Check your internet connection and try again please.',
+      },
     },
     chat: {
       fieldPlaceholder: 'Write a message...',
     },
     contact: {
       descriptionTitle: 'Profile Description',
+      myRequestTitle: 'My guesses',
+      anketsTitle: 'Ankets',
+      otherRequestTitle: 'Incoming guesses',
+      impressionsTitle: 'First Impression',
+      profilingTitle: 'Profiling',
+      guessesTitle: 'Guesses',
+      takes: {
+        name: 'Name',
+      },
+      successRateTitle: 'Correct guesses',
+      correctAnswerTitle: 'Correct answer:',
     },
     anket: {
       descriptionTitle: 'Profile Description',
@@ -127,7 +162,7 @@ export default {
       },
       questions: {
         title: 'Questions',
-        description: 'Questions description',
+        description: 'How this person would answer these answers?',
       },
     },
     navigation: {
@@ -138,9 +173,23 @@ export default {
       confirmLogoutDesc: 'Please confirm logout',
       cancelLogout: 'Cancel',
       confirmLogout: 'Logout',
+      app: {
+        title: 'App',
+        language: 'Interface Language',
+        email: 'E-mail <coming soon!>',
+        about: 'About',
+      },
       photo: {
         title: 'Photo',
         changePhoto: 'Change Photo',
+        successMessage: {
+          title: 'Great!',
+          body: 'Your photo was updated',
+        },
+        errorMessage: {
+          title: 'We could not reach the server',
+          body: 'Failed to update your photo',
+        },
       },
       bio: {
         title: 'Bio',
@@ -151,17 +200,57 @@ export default {
           title: 'Success!',
           body: 'Your bio was updated!',
         },
+        errorMessage: {
+          title: 'We could not reach the server',
+          body: 'Failed to update your bio.',
+        },
+      },
+      location: {
+        confirm: 'Confirm',
+        success: {
+          title: 'Success!',
+          message: 'Your location was updated.',
+        },
+        error: {
+          title: 'Uh oh!',
+          message: 'Failed to update your location.',
+        },
       },
       socialLinks: {
-        title: 'Social Links',
-        addLink: 'Connect new social account',
+        title: 'Social Networks Accounts',
+        navigate: 'Social Networks',
+        connectInstagramTitleBeforeUsername: 'Connect Instagram account ',
+        connectInstagramTitleAfterUsername: 'to your tellr profile?',
+        connectInstagramDescription:
+          'This action can be reverted at any moment',
+        connectInstagramConfirm: 'Connect',
+        connectInstagramCancel: 'Cancel',
+        addLink: 'Connect new account',
+        noCurrentInstagramAttached: 'Connect account',
+        telegram: {
+          networkError: 'Could not reach the server',
+          networkErrorDescription: 'Please, check your internet connection',
+          humanReadableError: 'Failed to generate the code',
+          errorHeading: 'We could not generate Telegram code',
+          retryButtonTitle: 'Try again',
+        },
       },
       profile: {
-        title: 'Profile',
+        settingsTitle: 'Profile',
+        photos: 'Photo',
+        bio: 'Bio',
+        profession: 'Job <coming soon!>',
+        socialLinks: 'Social Networks',
         email: 'E-mail',
+        emailHolder: 'Waiting for the server response...',
         city: 'City',
-        changePassword: 'Change Password',
-        logout: 'Logout',
+        cityHolder: 'Ждем название города от сервера...',
+        changePassword: 'Update password',
+        logout: 'Log Out',
+        errorMessage: {
+          title: 'Oh!',
+          message: 'We could not reach the server.',
+        },
       },
       password: {
         currentPassword: 'Current Password',
@@ -170,6 +259,23 @@ export default {
         apply: 'Change Password',
         description:
           'You have to enter your current password in order to update it.',
+        schema: {
+          currentRequired: 'Enter your password',
+          minPassword: `Мin password length is ${MIN_PWD_LENGTH} symbols.`,
+          newRequired: 'Enter your new password',
+          newMinUppercase:
+            'Password should contain at least one uppercase letter.',
+          confirmNewRequired: 'Enter your new password once again',
+          shouldMatch: 'New password and its confirmation should match',
+        },
+        errorMessage: {
+          title: 'Не удалось обновить пароль',
+          message: 'Проверьте введенные данные.',
+        },
+        successMessage: {
+          title: 'Отлично!',
+          body: 'Пароль обновлён.',
+        },
       },
     },
     questions: {
@@ -180,6 +286,25 @@ export default {
       modalBio: 'Bio',
       modalGoBack: 'Cancel',
       modalStart: 'Start',
+      params: {
+        link: 'Parameters',
+        location: {
+          title: 'Location',
+          description: 'Search for users..',
+          local: 'From my city',
+        },
+      },
+      error: {
+        title: 'We could not reach the server.',
+        description:
+          'No response from the server. Please check your internet connection and swipe down to try again.',
+      },
+      noResult: {
+        title: 'We could not find anyone.',
+        description:
+          'There is no users in our database matching your search params. You can update those params in Search Parameters.',
+        btnTitle: 'Open Search Params',
+      },
     },
   },
   register: {

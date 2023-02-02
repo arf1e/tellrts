@@ -6,12 +6,14 @@ import styles from './Search.styles';
 import {SecondaryButton} from '../../components/Buttons';
 import {useNavigation} from '@react-navigation/native';
 import {SEARCH_PARAMETERS} from '../../components/Navigation/SearchNavigator';
+import {useTranslation} from 'react-i18next';
 
 const ReanimatedView = Reanimated.createAnimatedComponent(View);
 const AnimatedImage = Reanimated.createAnimatedComponent(Image);
 
 const NoSearchResult = () => {
   const navigation = useNavigation();
+  const {t} = useTranslation();
   return (
     <ReanimatedView
       entering={FadeInDown.duration(240)}
@@ -23,15 +25,15 @@ const NoSearchResult = () => {
           resizeMode="contain"
           style={styles.noResultImage}
         />
-        <BodyCopy style={styles.noResultTitle}>Совсем никого нет!</BodyCopy>
+        <BodyCopy style={styles.noResultTitle}>
+          {t('app.search.noResult.title')}
+        </BodyCopy>
         <BodyCopy style={styles.noResultDescription}>
-          Мы не смогли найти никого по заданным параметрам поиска. Вы можете
-          изменить их, перейдя в настройки, или подождать, пока наше приложение
-          станет чуть более популярным.
+          {t('app.search.noResult.description')}
         </BodyCopy>
         <SecondaryButton
           style={styles.noResultButton}
-          title="Открыть настройки поиска"
+          title={t('app.search.noResult.btnTitle')}
           onPress={() => navigation.navigate(SEARCH_PARAMETERS)}
         />
       </View>

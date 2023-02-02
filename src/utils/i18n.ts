@@ -5,8 +5,8 @@ import ru from './ru';
 
 const initialize = () =>
   i18n.use(initReactI18next).init({
-    lng: 'ru',
     debug: true,
+    lng: 'en',
     fallbackLng: 'en',
     compatibilityJSON: 'v3',
     interpolation: {

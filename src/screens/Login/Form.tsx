@@ -52,9 +52,8 @@ const Form = () => {
       <Subtitle style={LoginStyles.formTitle}>{t('login.form.title')}</Subtitle>
       <Formik
         initialValues={initialValues}
-        onSubmit={({email}) => {
-          console.log({email});
-          // await checkEmail({variables: {email}});
+        onSubmit={async ({email}) => {
+          await checkEmail({variables: {email}});
         }}
         validationSchema={schema}
         validateOnBlur={true}
