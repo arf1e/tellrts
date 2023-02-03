@@ -47,8 +47,7 @@ const ActiveUser = ({
         </BodyCopy>
         <ScrollView style={styles.activeUserModalBioContainer}>
           <BodyCopy style={styles.activeUserModalBio}>
-            {user.bio ||
-              'lorem ipsum dolor sit amet lorem ipsum dolor sit amet'}
+            {user.bio || t('app.search.modalBioPlaceholder')}
           </BodyCopy>
         </ScrollView>
       </View>
