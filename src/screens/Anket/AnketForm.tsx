@@ -12,7 +12,10 @@ import {
   setRequestStateIdle,
   setRequestStateReviewing,
 } from '../../utils/slices/requestStateSlice';
-import errorCatcher, {showInfoToast} from '../../utils/toasts';
+import errorCatcher, {
+  showInfoToast,
+  showSuccessToast,
+} from '../../utils/toasts';
 import {SendRequestResponse, SEND_REQUEST_MUTATION} from './Anket.graphql';
 import Impressions from './Anket.Impressions';
 import Profiling from './Anket.Profiling';
@@ -56,7 +59,10 @@ const AnketForm = () => {
       return;
     }
     if (isMatch) {
-      showInfoToast('Match!', 'in my ass');
+      showSuccessToast(
+        t('app.anket.matchMessage.title'),
+        t('app.anket.matchMessage.description'),
+      );
     }
     // REMOVE ACTIVE ANKET, SET ACTIVE REQUEST RESULT
     dispatch(setRequestResult({requestResult: makeRequest}));

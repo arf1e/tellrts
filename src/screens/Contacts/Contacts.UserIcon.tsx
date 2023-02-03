@@ -8,7 +8,7 @@ import styles from './Contacts.styles';
 
 const AnimatedPressable = Reanimated.createAnimatedComponent(Pressable);
 
-const UserLine = ({user, onPress}: {user: User; onPress: () => void}) => {
+const UserIcon = ({user, onPress}: {user: User; onPress: () => void}) => {
   return (
     <AnimatedPressable
       layout={Layout.springify()}
@@ -29,4 +29,4 @@ const UserLine = ({user, onPress}: {user: User; onPress: () => void}) => {
   );
 };
 
-export default UserLine;
+export default UserIcon;

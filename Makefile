@@ -1,11 +1,13 @@
 install:
-		yarn install
+	yarn install
 
-android:
-		yarn android
+run-android:
+	yarn android
 
-ios:
-		yarn ios
+run-ios:
+	yarn ios
 
 test:
-		yarn test
+	yarn test
+
+.PHONY: test

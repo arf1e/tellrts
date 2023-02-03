@@ -1,4 +1,5 @@
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
 
 export default EStyleSheet.create({
   scrollView: {
@@ -10,6 +11,7 @@ export default EStyleSheet.create({
   questionsGrid: {
     flex: 1,
     flexDirection: 'column',
+    paddingBottom: SCROLLABLE_PADDING_BOTTOM,
   },
 
   questionContainer: {

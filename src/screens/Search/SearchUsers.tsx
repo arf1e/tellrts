@@ -1,15 +1,16 @@
 import {useQuery} from '@apollo/client';
 import React, {useState} from 'react';
+import {useTranslation} from 'react-i18next';
 import {RefreshControl, ScrollView, View} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Container from '../../components/Container';
+import ErrorWithImage from '../../components/ErrorWithImage';
 import FullScreenModal from '../../components/Modals';
 import colors from '../../utils/colors';
 import {setAnket} from '../../utils/slices/anketSlice';
 import {setRequestStateFilling} from '../../utils/slices/requestStateSlice';
 import {SearchSettingsState} from '../../utils/slices/searchSettingsSlice';
 import ActiveUser from './Search.ActiveUser';
-import SearchErrored from './Search.Errored';
 import {
   Anket,
   SearchQueryResult,
@@ -35,6 +36,7 @@ const SearchUsers = () => {
   );
   // --- SERVICE
   const dispatch = useDispatch();
+  const {t} = useTranslation();
   // --- STATE
   const [screenState, setScreenState] = useState<SCREEN_STATE>(LOADING);
   const [isUserModalActive, setIsUserModalActive] = useState(false);
@@ -111,7 +113,12 @@ const SearchUsers = () => {
         />
       }>
       {screenState === EMPTY && <NoSearchResult />}
-      {screenState === ERROR && <SearchErrored />}
+      {screenState === ERROR && (
+        <ErrorWithImage
+          title={t('app.search.error.title')}
+          description={t('app.search.error.description')}
+        />
+      )}
       <Container>
         {screenState === LIST && (
           <View style={styles.userCardsContainer}>

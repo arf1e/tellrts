@@ -45,6 +45,14 @@ export default {
     contacts: {
       search: 'Search by name...',
       clear: 'Clear',
+      contactsList: {
+        error: {
+          title: 'We could not reach the server.',
+          description:
+            'Please make sure you are connected to the internet and try again.',
+          retryBtnTitle: 'Try again',
+        },
+      },
     },
     profile: {
       lines: 'Questions',
@@ -87,6 +95,10 @@ export default {
     },
     anket: {
       descriptionTitle: 'Profile Description',
+      matchMessage: {
+        title: "That's a Match!",
+        description: 'You can find this user on your Contacts screen now.',
+      },
       rate: {
         low: {
           title: 'At least you tried',
@@ -291,6 +303,7 @@ export default {
       modalBio: 'Bio',
       modalGoBack: 'Cancel',
       modalStart: 'Start',
+      modalBioPlaceholder: 'This user has no bio.',
       params: {
         link: 'Parameters',
         location: {
