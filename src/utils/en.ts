@@ -63,6 +63,7 @@ export default {
       statistics: 'Statistics',
       seeDetails: 'Details',
       displayImpression: 'Most popular first impression',
+      interactionTitle: 'Interactions',
       interactionTitle_0: 'Interaction',
       interactionTitle_1: 'Interactions',
       interactionTitle_2: 'Interactions',
@@ -174,7 +175,7 @@ export default {
       },
       questions: {
         title: 'Questions',
-        description: 'How this person would answer these answers?',
+        description: 'How this person would answer these questions?',
       },
     },
     navigation: {
