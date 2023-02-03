@@ -27,6 +27,21 @@ You can guess 100% right, you can guess 100% wrong, the match will be created ei
   <li>Requests/Matches frontend logic: Ankets, Lines (combination of Question and Answer), Requests and Matches.</li>
 </ul>
 
+<h2>Screens/Flows</h2>
+
+<h4>Sign Up</h4>
+<a href="https://user-images.githubusercontent.com/22895289/216567710-81c410ac-a475-431e-a0e8-69c9fcab2b02.mp4" target="_blank"><img src="https://user-images.githubusercontent.com/22895289/216567348-6f3b5da7-dac4-45b8-839c-86181d1e0527.gif" height="600"/></a>
+
+<h4>Create Line (user Answer / Question pair)</h4>
+<a href="https://user-images.githubusercontent.com/22895289/216577338-1f35155f-ccb0-45d5-b9ba-d2f0e0f97021.mp4" target="_blank"><img src="https://user-images.githubusercontent.com/22895289/216569123-e93e02d5-8d35-4a9b-9131-9df147973eaa.gif" height="600"/></a>
+
+<h4>Request/Match Flow</h4>
+<a href="https://user-images.githubusercontent.com/22895289/216575506-5726a769-5843-419a-bf59-086fe7188124.mp4" target="_blank"><img src="https://user-images.githubusercontent.com/22895289/216575353-c597276a-6263-40b0-8296-687fe7e1d3a8.gif" height="600"/></a>
+
+<h4>Chat Flow</h4>
+<a href="https://user-images.githubusercontent.com/22895289/216577153-e22ee79b-6f19-4970-a425-5da4516fc768.mp4" target="_blank"><img src="https://user-images.githubusercontent.com/22895289/216576942-7fcdd9ef-b2e7-45fb-95b4-b8cd127ebafa.gif" height="600"/></a>
+
+
 <h2>Technology choices</h2>
 <ul>
   <li>
@@ -78,3 +93,10 @@ To run this project on a device or a simulator, you are going to need <a href="h
 
 <h5>Run app on Android Device/Simulator (requires Android Studio)</h5>
 <code>make run-android</code>
+
+
+
+
+
+
+
