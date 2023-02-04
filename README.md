@@ -25,6 +25,7 @@ You can guess 100% right, you can guess 100% wrong, the match will be created ei
   <li>Integration with social networks: Instagram (Facebook API) and Telegram (Bot)</li>
   <li>Push Notifications using Firebase</p>
   <li>Requests/Matches frontend logic: Ankets, Lines (combination of Question and Answer), Requests and Matches.</li>
+  <li>Internationalization using react-i18next</li>
 </ul>
 
 <h2>Screens/Flows</h2>
