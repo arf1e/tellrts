@@ -70,7 +70,7 @@ const AttachTelegram = () => {
 
   const retryGenerateCode = async () => {
     setLoading();
-    refetch()
+    await refetch()
       .then(refetchResult => handleCompleted(refetchResult.data))
       .catch(() =>
         handleError(
