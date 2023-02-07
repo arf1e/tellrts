@@ -48,10 +48,6 @@ const LineCard = ({line, onPress}: {line: Line; onPress: () => void}) => {
     <Pressable onPress={onPress}>
       <View style={styles.lineContainer}>
         <View style={styles.lineQuestionBadge}>
-          {/* <Image
-            source={{uri: line.question.category.image}}
-            style={styles.lineQuestionCategoryImage}
-          /> */}
           <BodyCopy style={styles.lineCategoryText}>
             {line.question.category.title}
           </BodyCopy>

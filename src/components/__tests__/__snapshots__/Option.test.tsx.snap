@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Option works as expected 1`] = `
+<View
+  accessible={true}
+  animatedStyle={
+    Object {
+      "value": Object {
+        "borderColor": "rgba(188, 216, 221, 1)",
+        "padding": 12,
+        "transform": Array [
+          Object {
+            "scale": 1,
+          },
+        ],
+      },
+    }
+  }
+  collapsable={false}
+  focusable={true}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onResponderGrant={[Function]}
+  onResponderMove={[Function]}
+  onResponderRelease={[Function]}
+  onResponderTerminate={[Function]}
+  onResponderTerminationRequest={[Function]}
+  onStartShouldSetResponder={[Function]}
+  style={
+    Object {
+      "borderColor": "rgba(188, 216, 221, 1)",
+      "padding": 12,
+      "transform": Array [
+        Object {
+          "scale": 1,
+        },
+      ],
+    }
+  }
+>
+  <Text
+    style={
+      Array [
+        undefined,
+        Array [
+          undefined,
+          undefined,
+        ],
+      ]
+    }
+  >
+    Test Option
+  </Text>
+</View>
+`;

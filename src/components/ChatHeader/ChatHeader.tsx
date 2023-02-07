@@ -18,13 +18,13 @@ type Props = {
 
 const ChatHeader = ({userId}: Props) => {
   const navigation = useNavigation();
-
   const {data, error, loading} = useQuery<GET_NAME_AND_PHOTO_QUERY_RESPONSE>(
     GET_NAME_AND_PHOTO_QUERY,
-    {variables: {userId}},
+    {
+      variables: {userId},
+    },
   );
 
-  const {user} = data?.seeContact;
   return (
     <View style={styles.chatHeaderContainer}>
       <Container>
@@ -34,10 +34,13 @@ const ChatHeader = ({userId}: Props) => {
             onPress={() => navigation.goBack()}>
             <Icon name="chevron-left" color={colors.primary} size={32} />
             <Image
-              source={{uri: user.photo}}
+              source={{uri: data?.seeContact.user.photo}}
               style={styles.chatHeaderUserPhoto}
+              testID="ChatHeader.UserImage"
             />
-            <Subtitle style={styles.chatHeaderUserName}>{user.name}</Subtitle>
+            <Subtitle style={styles.chatHeaderUserName}>
+              {data?.seeContact.user.name}
+            </Subtitle>
           </Pressable>
           <Pressable>
             <Icon name="more-vertical" size={24} color={colors.primary} />

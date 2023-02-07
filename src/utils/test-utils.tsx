@@ -38,7 +38,7 @@ export function renderWithProviders(
     preloadedState: params.preloadedState || {},
   });
   return (
-    <MockedProvider mocks={params.mocks} addTypename={false}>
+    <MockedProvider mocks={params.mocks} addTypename={true}>
       <Provider store={store}>
         <NavigationContainer>{ui} </NavigationContainer>
       </Provider>
