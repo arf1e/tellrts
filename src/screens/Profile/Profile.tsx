@@ -1,7 +1,8 @@
 import {useQuery} from '@apollo/client';
 import React, {useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {ScrollView, StatusBar, View} from 'react-native';
+import {SafeAreaView, StatusBar, View} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import Reanimated, {FadeIn} from 'react-native-reanimated';
 import Lines from '../../components/Lines/Lines';
 import LoadingIndicator from '../../components/LoadingIndicator';
@@ -42,26 +43,29 @@ const Profile = () => {
     },
   });
   return (
-    <ScrollView
-      style={styles.profileContainer}
-      contentContainerStyle={styles.profileContentContainer}>
-      <StatusBar backgroundColor={'transparent'} translucent={true} />
-      {screenState === INITIAL && <LoadingIndicator />}
-      {screenState === IDLE && (
-        <ReanimatedView entering={FadeIn.duration(320)}>
-          <ProfileHeader />
-          <Lines />
-          <Statistics />
-        </ReanimatedView>
-      )}
-      {screenState === ERROR && (
-        <ScreenCap
-          title={t('app.profile.errorCap.title')}
-          description={t('app.profile.errorCap.description')}
-          image="error"
-        />
-      )}
-    </ScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView
+        canCancelContentTouches={false}
+        style={styles.profileContainer}
+        contentContainerStyle={styles.profileContentContainer}>
+        <StatusBar backgroundColor={'transparent'} translucent={true} />
+        {screenState === INITIAL && <LoadingIndicator />}
+        {screenState === IDLE && (
+          <ReanimatedView entering={FadeIn.duration(320)}>
+            <ProfileHeader />
+            <Lines />
+            <Statistics />
+          </ReanimatedView>
+        )}
+        {screenState === ERROR && (
+          <ScreenCap
+            title={t('app.profile.errorCap.title')}
+            description={t('app.profile.errorCap.description')}
+            image="error"
+          />
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 

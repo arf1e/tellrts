@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import EStyleSheet from 'react-native-extended-stylesheet';
@@ -30,9 +20,10 @@ import {toastConfig} from './src/components/Toasts';
 import RNBootSplash from 'react-native-bootsplash';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 import initialiseTellrServices from './src/utils/init';
+import {BottomSheetModalProvider} from '@gorhom/bottom-sheet/src';
 
 const linkingConfig = {
-  prefixes: ['tellr://', 'https://app.tellr.ru/'],
+  prefixes: ['tellr://', 'https://app.tellr.ru/', 'https://app.tellr.dating/'],
   config: {
     screens: {
       [PROFILE_NAVIGATOR]: {
@@ -62,11 +53,6 @@ EStyleSheet.build({
 });
 
 const App = () => {
-  // const isDarkMode = useColorScheme() === 'dark';
-
-  // const backgroundStyle = {
-  //   backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  // };
   useEffect(() => {
     initialiseTellrServices();
   }, []);
@@ -74,14 +60,16 @@ const App = () => {
     <ApolloProvider client={client}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <NavigationContainer
-            linking={linkingConfig}
-            onReady={() => RNBootSplash.hide()}>
-            <>
-              <RootNavigator />
-              <Toast config={toastConfig} />
-            </>
-          </NavigationContainer>
+          <BottomSheetModalProvider>
+            <NavigationContainer
+              linking={linkingConfig}
+              onReady={() => RNBootSplash.hide()}>
+              <>
+                <RootNavigator />
+                <Toast config={toastConfig} />
+              </>
+            </NavigationContainer>
+          </BottomSheetModalProvider>
         </PersistGate>
       </Provider>
     </ApolloProvider>

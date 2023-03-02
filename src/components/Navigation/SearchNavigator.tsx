@@ -13,6 +13,7 @@ import {
 import SearchParameters from '../../screens/SearchParameters';
 import Header from '../Header';
 import {t} from 'i18next';
+import IncomingRequests from '../../screens/IncomingRequests';
 
 const SearchStackNavigator = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ export const SEARCH = 'Search Index';
 export const ANKET = 'Anket';
 export const REQUEST_RESULT = 'Request Result';
 export const SEARCH_PARAMETERS = 'Search Parameters';
+export const INCOMING_REQUESTS = 'Incoming Requests';
 
 const SearchNavigator = () => {
   const requestState = useSelector(
@@ -41,6 +43,14 @@ const SearchNavigator = () => {
             options={{
               header: props => <Header {...props} />,
               title: t('navigation.SEARCH_PARAMETERS'),
+            }}
+          />
+          <SearchStackNavigator.Screen
+            name={INCOMING_REQUESTS}
+            component={IncomingRequests}
+            options={{
+              header: props => <Header {...props} />,
+              title: t('navigation.INCOMING_REQUESTS'),
             }}
           />
         </SearchStackNavigator.Group>

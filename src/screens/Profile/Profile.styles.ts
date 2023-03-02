@@ -49,4 +49,8 @@ export default EStyleSheet.create({
     fontSize: '$bcMedium',
     lineHeight: '$h4',
   },
+
+  safeArea: {
+    backgroundColor: '$background',
+  },
 });

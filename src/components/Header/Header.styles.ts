@@ -21,6 +21,11 @@ export default EStyleSheet.create({
     }),
   },
 
+  optionContainer: {
+    alignSelf: 'flex-start',
+    marginTop: 4,
+  },
+
   topLineContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -34,7 +34,14 @@ export default EStyleSheet.create({
   },
 
   stepInfo: {
-    marginBottom: 20,
+    marginBottom: 16,
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+  },
+
+  stepDescriptionButton: {
+    marginLeft: 16,
+    opacity: 0.8,
   },
 
   impressionPickerContainer: {

@@ -1,12 +1,13 @@
-import React, {ReactNode, useCallback, useEffect} from 'react';
-import {BackHandler, View} from 'react-native';
-import {BodyCopy, Subtitle} from '../../components/Typography';
+import React, {ReactNode} from 'react';
+import {Alert, Pressable, View} from 'react-native';
+import {Subtitle} from '../../components/Typography';
 import Reanimated, {SlideInDown, SlideOutDown} from 'react-native-reanimated';
+import Icon from 'react-native-vector-icons/Feather';
 
 import styles from './Anket.styles';
 import PrimaryButton, {SecondaryButton} from '../../components/Buttons';
-import {useNavigation} from '@react-navigation/native';
 import {useTranslation} from 'react-i18next';
+import colors from '../../utils/colors';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 type Props = {
@@ -22,6 +23,15 @@ type Props = {
   buttonDisabled?: boolean;
 };
 
+const AnketStepInfo = ({onPress}: {onPress: () => void}) => (
+  <Pressable
+    onPress={onPress}
+    style={styles.stepDescriptionButton}
+    hitSlop={16}>
+    <Icon size={24} name="info" color={colors.primary} />
+  </Pressable>
+);
+
 const AnketStep = ({
   heading,
   description,
@@ -30,6 +40,10 @@ const AnketStep = ({
   buttonDisabled,
 }: Props) => {
   const {t} = useTranslation();
+  const showDescription = () =>
+    Alert.alert(heading, description, [
+      {text: t('app.anket.controls.descriptionOk'), onPress: () => null},
+    ]);
   return (
     <AnimatedView
       style={styles.stepContainer}
@@ -37,7 +51,7 @@ const AnketStep = ({
       exiting={SlideOutDown.duration(480).delay(120)}>
       <View style={styles.stepInfo}>
         <Subtitle style={styles.stepTitle}>{heading}</Subtitle>
-        <BodyCopy style={styles.stepDescription}>{description}</BodyCopy>
+        <AnketStepInfo onPress={showDescription} />
       </View>
       {children}
       <View style={styles.stepControls}>
