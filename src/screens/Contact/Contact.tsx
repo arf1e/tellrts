@@ -1,6 +1,7 @@
 import {RouteProp, useRoute} from '@react-navigation/native';
 import React from 'react';
-import {ScrollView, StatusBar} from 'react-native';
+import {StatusBar} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {CONTACT} from '../../components/Navigation/ContactsNavigator';
 import Ankets from './Contact.Ankets';
 

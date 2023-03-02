@@ -1,11 +1,5 @@
 import React, {ReactNode} from 'react';
-import {
-  Dimensions,
-  Image,
-  ImageBackground,
-  ImageProps,
-  View,
-} from 'react-native';
+import {Dimensions, ImageBackground, ImageProps, View} from 'react-native';
 import {Gesture, GestureDetector} from 'react-native-gesture-handler';
 import Reanimated, {
   Extrapolate,
@@ -26,6 +20,7 @@ interface Props extends ImageProps {
   height?: number;
   children?: ReactNode;
   width?: number;
+  pinchable?: boolean;
   hideableShared?: SharedValue<number>;
   interfaceTiltShared?: SharedValue<number>;
 }
@@ -34,6 +29,7 @@ const PinchablePhoto = ({
   height = AVATAR_HEIGHT,
   width = DEVICE_WIDTH,
   hideableShared,
+  pinchable = true,
   interfaceTiltShared,
   children,
   ...rest
@@ -111,17 +107,31 @@ const PinchablePhoto = ({
     ),
   }));
   return (
-    <ReanimatedView style={[{height, width}, animatedViewStyle]}>
-      <GestureDetector gesture={pinchGesture}>
-        <ReanimatedImage
-          source={rest.source}
-          defaultSource={require('../../assets/image-cap.png')}
-          style={[rest.style, animatedImageStyle]}
-          resizeMode="cover">
-          {children}
-        </ReanimatedImage>
-      </GestureDetector>
-    </ReanimatedView>
+    <>
+      {pinchable ? (
+        <GestureDetector gesture={pinchGesture}>
+          <ReanimatedView style={[{height, width}, animatedViewStyle]}>
+            <ReanimatedImage
+              source={rest.source}
+              defaultSource={require('../../assets/image-cap.png')}
+              style={[rest.style, animatedImageStyle]}
+              resizeMode="cover">
+              {children}
+            </ReanimatedImage>
+          </ReanimatedView>
+        </GestureDetector>
+      ) : (
+        <ReanimatedView style={[{height, width}, animatedViewStyle]}>
+          <ReanimatedImage
+            source={rest.source}
+            defaultSource={require('../../assets/image-cap.png')}
+            style={[rest.style, animatedImageStyle]}
+            resizeMode="cover">
+            {children}
+          </ReanimatedImage>
+        </ReanimatedView>
+      )}
+    </>
   );
 };
 

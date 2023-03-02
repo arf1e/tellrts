@@ -12,12 +12,12 @@ import colors from '../../utils/colors';
 import ButtonsStyles from './Buttons.styles';
 import ButtonProps from './Buttons.types';
 import useColorAnimation from './useColorAnimation';
+import Icon from 'react-native-vector-icons/Feather';
 
 const MyPressable = Reanimated.createAnimatedComponent(Pressable);
 const AnimatedText = Reanimated.createAnimatedComponent(Text);
-const AnimatedActivityIndicatorContainer =
-  Reanimated.createAnimatedComponent(View);
-const PrimaryButton = ({title, ...rest}: ButtonProps) => {
+const AnimatedView = Reanimated.createAnimatedComponent(View);
+const PrimaryButton = ({title, icon, ...rest}: ButtonProps) => {
   const {pressIn, pressOut, animatedStyle} = useColorAnimation(
     colors.primary,
     colors.unsaturatedPrimary,
@@ -51,7 +51,7 @@ const PrimaryButton = ({title, ...rest}: ButtonProps) => {
     [loadingShared],
   );
 
-  const textAnimatedStyles = useAnimatedStyle(
+  const contentAnimatedStyles = useAnimatedStyle(
     () => ({
       transform: [
         {
@@ -86,7 +86,7 @@ const PrimaryButton = ({title, ...rest}: ButtonProps) => {
     rest.style,
   ];
 
-  const textStyles = [ButtonsStyles.btnText, textAnimatedStyles];
+  const contentStyles = [contentAnimatedStyles, ButtonsStyles.buttonContent];
 
   return (
     <MyPressable
@@ -96,11 +96,20 @@ const PrimaryButton = ({title, ...rest}: ButtonProps) => {
       onPressOut={pressOut}
       onPressIn={pressIn}
       disabled={rest.disabled || rest.loading}>
-      <AnimatedText style={textStyles}>{title}</AnimatedText>
-      <AnimatedActivityIndicatorContainer
-        style={activityIndicatorContainerStyles}>
+      <AnimatedView style={contentStyles}>
+        {icon && (
+          <Icon
+            name="check"
+            size={16}
+            style={ButtonsStyles.icon}
+            color={colors.background}
+          />
+        )}
+        <AnimatedText style={ButtonsStyles.btnText}>{title}</AnimatedText>
+      </AnimatedView>
+      <AnimatedView style={activityIndicatorContainerStyles}>
         <ActivityIndicator size={24} color={colors.background} />
-      </AnimatedActivityIndicatorContainer>
+      </AnimatedView>
       {rest.children}
     </MyPressable>
   );

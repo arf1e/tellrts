@@ -26,10 +26,10 @@ const useFiniteState = (): useFiniteStateReturn => {
   const [currentError, setCurrentError] = useState<string>('');
 
   const setLoading = () => {
-    console.log('set loading');
     setCurrentError('');
     setState(LOADING);
   };
+
   const setError = (error: string = 'UNKNOWN ERROR') => {
     setState(ERROR);
     setCurrentError(error);

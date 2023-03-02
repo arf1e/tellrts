@@ -1,4 +1,4 @@
-import {ApolloClient, ApolloLink, InMemoryCache, split} from '@apollo/client';
+import {ApolloClient, ApolloLink, split} from '@apollo/client';
 import {API_URL, WS_URL} from './config';
 import {setContext} from '@apollo/client/link/context';
 import {onError} from '@apollo/client/link/error';
@@ -8,6 +8,7 @@ import {createUploadLink} from 'apollo-upload-client';
 import {store} from './store';
 import {getMainDefinition} from '@apollo/client/utilities';
 import i18next from 'i18next';
+import cache from './cache';
 
 const errorLink = onError(({graphQLErrors, networkError}) => {
   if (graphQLErrors) {
@@ -60,7 +61,7 @@ const splitLink = split(
 
 const client = new ApolloClient({
   link: ApolloLink.from([authLink, splitLink, errorLink]),
-  cache: new InMemoryCache(),
+  cache,
   name: 'Tellr Mobile App',
   version: '0.1',
 });

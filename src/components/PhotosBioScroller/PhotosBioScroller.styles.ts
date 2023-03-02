@@ -1,8 +1,8 @@
-import {Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import {Dimensions} from 'react-native';
 import {AVATAR_HEIGHT} from '../../utils/photos';
 
-const DEVICE_WIDTH = Dimensions.get('window').width;
+const DEVICE_WIDTH = Dimensions.get('screen').width;
 
 const ELEMENT_HEIGHT = AVATAR_HEIGHT;
 
@@ -28,7 +28,7 @@ export default EStyleSheet.create({
   },
 
   descriptionSlide: {
-    backgroundColor: '$primary',
+    backgroundColor: '$background',
     width: DEVICE_WIDTH,
     paddingVertical: 48,
   },
@@ -36,20 +36,11 @@ export default EStyleSheet.create({
   descriptionContainer: {
     marginHorizontal: 24,
     backgroundColor: '$background',
-    paddingHorizontal: 16,
+    padding: 16,
     paddingTop: 20,
-    paddingBottom: 16,
+    borderWidth: 1,
+    borderColor: '$secondary',
     borderRadius: 4,
-    flexGrow: 1,
-    shadowColor: '$darkGray',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-
-    elevation: 2,
   },
 
   descriptionTitle: {

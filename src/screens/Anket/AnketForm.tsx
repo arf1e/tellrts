@@ -12,10 +12,7 @@ import {
   setRequestStateIdle,
   setRequestStateReviewing,
 } from '../../utils/slices/requestStateSlice';
-import errorCatcher, {
-  showInfoToast,
-  showSuccessToast,
-} from '../../utils/toasts';
+import errorCatcher, {showSuccessToast} from '../../utils/toasts';
 import {SendRequestResponse, SEND_REQUEST_MUTATION} from './Anket.graphql';
 import Impressions from './Anket.Impressions';
 import Profiling from './Anket.Profiling';
@@ -33,6 +30,8 @@ import AnketLoading from './AnketLoading';
 import AnketProgress from './AnketProgress';
 import {useIsFocused} from '@react-navigation/native';
 import {useBackHandler} from '@react-native-community/hooks';
+import client from '../../utils/apollo';
+import {INCOMING_REQUESTS_QUERY} from '../IncomingRequests/IncomingRequests.graphql';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 
@@ -67,6 +66,7 @@ const AnketForm = () => {
     // REMOVE ACTIVE ANKET, SET ACTIVE REQUEST RESULT
     dispatch(setRequestResult({requestResult: makeRequest}));
     dispatch(setRequestStateReviewing());
+    client.refetchQueries(INCOMING_REQUESTS_QUERY);
     reset(); // Reset mutation loading/error state
     return;
   };

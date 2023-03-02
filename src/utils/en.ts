@@ -19,6 +19,7 @@ export default {
     ATTACH_INSTAGRAM: 'Connect Instagram',
     UPDATE_LANGUAGE: 'Interface Language',
     ATTACH_TELEGRAM: 'Connect Telegram',
+    INCOMING_REQUESTS: 'Incoming Requests',
   },
   login: {
     description: 'The dating app for introverts and weirdos',
@@ -137,6 +138,7 @@ export default {
           'Please, confirm this action!\nAll the progress will be lost, and the users list on the initial screen will completely update if you quit.',
         quitConfirm: 'Reset form',
         quitCancel: 'Continue form submitting',
+        descriptionOk: 'Got it',
       },
       impressions: {
         title: 'First Impression',

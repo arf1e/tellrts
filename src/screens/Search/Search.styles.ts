@@ -10,6 +10,10 @@ export default EStyleSheet.create({
     flex: 1,
   },
 
+  pager: {
+    flex: 1,
+  },
+
   container: {
     flex: 1,
     backgroundColor: '$background',

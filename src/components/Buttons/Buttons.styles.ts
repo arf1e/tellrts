@@ -29,7 +29,7 @@ export default StyleSheet.create({
   },
 
   secondaryBtnText: {
-    color: '$primary',
+    color: '$bad',
     fontFamily: 'Roboto-Medium',
   },
 
@@ -37,5 +37,17 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '$primary',
+  },
+
+  icon: {
+    marginTop: 2,
+    alignSelf: 'center',
+    marginRight: 8,
+  },
+
+  buttonContent: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });
