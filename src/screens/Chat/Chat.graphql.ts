@@ -39,6 +39,22 @@ export const GET_MY_ID_QUERY = gql`
   }
 `;
 
+export const GET_MY_BASIC_INFO = gql`
+  query Me {
+    me {
+      id
+      name
+      streamToken
+    }
+  }
+`;
+
+export type TChatUser = {
+  id: number;
+  name: string;
+  streamToken: string;
+};
+
 export const SEE_CHAT_QUERY = gql`
   query SeeChat($userId: Int!) {
     seeChat(userId: $userId) {

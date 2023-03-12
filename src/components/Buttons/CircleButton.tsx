@@ -3,6 +3,7 @@ import {Pressable, PressableProps} from 'react-native';
 import styles from './Buttons.styles';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Reanimated, {
+  BaseAnimationBuilder,
   interpolate,
   useAnimatedStyle,
   useSharedValue,
@@ -19,6 +20,8 @@ interface Props extends PressableProps {
   iconSize?: number;
   onPress: () => void;
   iconColor?: string;
+  entering?: BaseAnimationBuilder;
+  exiting?: BaseAnimationBuilder;
 }
 
 const CircleButton = ({
@@ -27,6 +30,7 @@ const CircleButton = ({
   iconSize = 24,
   iconColor = colors.background,
   onPress,
+  entering,
   ...rest
 }: Props) => {
   const pressedShared = useSharedValue(0);
@@ -62,7 +66,8 @@ const CircleButton = ({
       onPress={onPress}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
-      style={pressableStyles}>
+      style={pressableStyles}
+      entering={entering}>
       <Icon name={icon} size={iconSize} color={iconColor} />
     </AnimatedPressable>
   );

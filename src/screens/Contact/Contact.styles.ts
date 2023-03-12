@@ -1,6 +1,9 @@
+import {Dimensions} from 'react-native';
 import EStyleSheet from 'react-native-extended-stylesheet';
 import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
 import {AVATAR_HEIGHT} from '../../utils/photos';
+
+const DEVICE_WIDTH = Dimensions.get('screen').width;
 
 export default EStyleSheet.create({
   screenContainer: {
@@ -12,12 +15,13 @@ export default EStyleSheet.create({
   },
 
   photoContainer: {
-    marginBottom: 32,
+    marginBottom: 26,
     zIndex: 0,
   },
 
   infoContainer: {
-    zIndex: 1,
+    paddingTop: 6,
+    zIndex: 2,
     backgroundColor: '$background',
   },
 
@@ -35,7 +39,7 @@ export default EStyleSheet.create({
 
   chatButton: {
     position: 'absolute',
-    right: 24,
+    right: 0,
     bottom: -26,
     zIndex: 5,
   },
@@ -71,9 +75,9 @@ export default EStyleSheet.create({
 
   profileDescription: {
     marginBottom: 24,
+    marginTop: 0,
     color: '$gray',
     fontSize: '$bcMedium',
-    lineHeight: 20,
   },
 
   anketSwitchActive: {
@@ -159,5 +163,16 @@ export default EStyleSheet.create({
 
   anketsContainer: {
     zIndex: 2,
+    backgroundColor: '$background',
+  },
+
+  contactHeaderPlaceholder: {
+    width: DEVICE_WIDTH,
+    height: AVATAR_HEIGHT,
+    backgroundColor: '$secondary',
+    marginBottom: 32,
+    position: 'relative',
+    padding: 24,
+    paddingTop: 48,
   },
 });

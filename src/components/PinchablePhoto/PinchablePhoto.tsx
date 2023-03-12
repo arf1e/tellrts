@@ -106,6 +106,13 @@ const PinchablePhoto = ({
       Extrapolate.CLAMP,
     ),
   }));
+
+  const childrenContainerStyle = useAnimatedStyle(() => ({
+    opacity: interpolate(scale.value, [1, 1.5, 3], [1, 0, 0]),
+    flex: 1,
+    flexGrow: 1,
+  }));
+
   return (
     <>
       {pinchable ? (
@@ -116,7 +123,9 @@ const PinchablePhoto = ({
               defaultSource={require('../../assets/image-cap.png')}
               style={[rest.style, animatedImageStyle]}
               resizeMode="cover">
-              {children}
+              <ReanimatedView style={childrenContainerStyle}>
+                {children}
+              </ReanimatedView>
             </ReanimatedImage>
           </ReanimatedView>
         </GestureDetector>

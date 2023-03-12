@@ -52,7 +52,7 @@ const RequestPreview = ({request}: {request: TIncomingRequest}) => {
               First Impression
             </Subtitle>
             <ImpressionsPreview
-              impressions={['pretty', 'cute', 'hot', 'shy', 'art', 'party']}
+              impressions={request.impressions}
               sex={request.to.sex}
             />
           </View>

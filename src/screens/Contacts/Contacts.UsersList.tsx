@@ -12,7 +12,6 @@ import {ContactsInputState} from '../../utils/slices/contactsInputSlice';
 import UserIcon from './Contacts.UserIcon';
 import {useTranslation} from 'react-i18next';
 import ErrorWithImage from '../../components/ErrorWithImage';
-import LoadingIndicator from '../../components/LoadingIndicator';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
 
@@ -24,21 +23,20 @@ type SCREEN_STATE = typeof LOADING | typeof LIST | typeof ERROR;
 
 const UsersList = () => {
   const [screenState, setScreenState] = useState<SCREEN_STATE>(LOADING);
-  const {
-    data,
-    loading,
-    refetch: refreshUsersList,
-  } = useQuery<GetContactsResult>(GET_CONTACTS_QUERY, {
-    onCompleted: () => {
-      setScreenState(LIST);
-    },
+  const {data, refetch: refreshUsersList} = useQuery<GetContactsResult>(
+    GET_CONTACTS_QUERY,
+    {
+      onCompleted: () => {
+        setScreenState(LIST);
+      },
 
-    onError: () => {
-      setScreenState(ERROR);
-    },
+      onError: () => {
+        setScreenState(ERROR);
+      },
 
-    notifyOnNetworkStatusChange: true,
-  });
+      notifyOnNetworkStatusChange: true,
+    },
+  );
 
   const navigation = useNavigation();
   const {t} = useTranslation();
@@ -81,14 +79,13 @@ const UsersList = () => {
   return (
     <AnimatedView layout={Layout.springify()} style={styles.usersListContainer}>
       {screenState === ERROR && renderError()}
-      {screenState === LOADING && <LoadingIndicator />}
-      {screenState === LIST && (
+      {screenState !== ERROR && (
         <FlatList
           data={getProbablyFilteredUsers()}
           onRefresh={handleRefresh}
-          style={{flex: 1, flexGrow: 1}}
+          refreshing={screenState === LOADING}
+          style={styles.usersListContainer}
           contentContainerStyle={styles.listScrollable}
-          refreshing={loading}
           renderItem={({item: user}) => (
             <UserIcon
               user={user}

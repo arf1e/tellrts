@@ -7,8 +7,8 @@ export default EStyleSheet.create({
     paddingTop: 48,
     paddingBottom: 12,
     zIndex: 10,
-    ...(Platform.OS === 'ios' && {marginBottom: -40}),
-    ...(Platform.OS === 'android' && {marginBottom: -20}),
+    // ...(Platform.OS === 'ios' && {marginBottom: -40}),
+    // ...(Platform.OS === 'android' && {marginBottom: -20}),
   },
 
   chatHeaderUserPhoto: {

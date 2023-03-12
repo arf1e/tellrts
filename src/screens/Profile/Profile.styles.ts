@@ -52,5 +52,6 @@ export default EStyleSheet.create({
 
   safeArea: {
     backgroundColor: '$background',
+    flex: 1,
   },
 });

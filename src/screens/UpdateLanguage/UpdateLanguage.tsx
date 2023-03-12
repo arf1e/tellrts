@@ -5,6 +5,7 @@ import Container from '../../components/Container';
 import Option from '../../components/Option/Option';
 import {BodyCopy} from '../../components/Typography';
 import client from '../../utils/apollo';
+import {streami18n} from '../../utils/i18n';
 import styles from './UpdateLanguage.styles';
 
 const UpdateLanguage = () => {
@@ -12,6 +13,7 @@ const UpdateLanguage = () => {
 
   const setLanguage = async (language: 'en' | 'ru') => {
     i18n.changeLanguage(language);
+    streami18n.setLanguage(language);
     await client.refetchQueries({
       include: 'active',
     });

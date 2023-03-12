@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image} from 'react-native';
 import {BodyCopy} from '../../components/Typography';
-import Reanimated, {FadeInDown, FadeOutDown} from 'react-native-reanimated';
+import Reanimated, {FadeIn, FadeOut} from 'react-native-reanimated';
 import styles from './ScreenCap.styles';
 
 const ReanimatedView = Reanimated.createAnimatedComponent(View);
@@ -21,8 +21,8 @@ type Props = {
 const SearchErrored = ({error, title, description, image}: Props) => {
   return (
     <ReanimatedView
-      entering={FadeInDown.duration(240)}
-      exiting={FadeOutDown.duration(240)}
+      entering={FadeIn.duration(240)}
+      exiting={FadeOut.duration(240)}
       style={styles.noResultContainer}>
       <View style={styles.noResultContent}>
         <Image

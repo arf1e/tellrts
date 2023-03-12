@@ -1,9 +1,8 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Contacts from '../../screens/Contacts';
 import Contact from '../../screens/Contact/Contact';
 import Chat from '../../screens/Chat';
-
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 const ContactsStackNavigator = createNativeStackNavigator();
 
 export const CONTACT_LIST = 'Contact List';

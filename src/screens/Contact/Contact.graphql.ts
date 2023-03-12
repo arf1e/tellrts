@@ -16,6 +16,7 @@ export type GetContactInfoResult = {
   seeContact: {
     id: number;
     user: User;
+    chatId: string;
   };
 };
 
@@ -32,6 +33,7 @@ export const GET_CONTACT_INFO_QUERY = gql`
         age
         photo
       }
+      chatId
     }
   }
 `;
@@ -124,6 +126,7 @@ export const GET_CONTACT_QUERY = gql`
         id
         successRate
       }
+      chatId
     }
   }
 `;

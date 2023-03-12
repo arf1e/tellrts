@@ -10,6 +10,7 @@ export default EStyleSheet.create({
 
   usersListContainer: {
     flex: 1,
+    flexGrow: 1,
   },
 
   listScrollable: {
@@ -19,7 +20,6 @@ export default EStyleSheet.create({
   userLineContainer: {
     paddingVertical: 4,
     marginBottom: 8,
-    zIndex: 200,
   },
 
   userLineContent: {
@@ -28,8 +28,8 @@ export default EStyleSheet.create({
   },
 
   userLinePhoto: {
-    width: 64,
-    height: 64,
+    width: 52,
+    height: 52,
     borderRadius: 32,
     marginRight: 16,
   },
@@ -61,7 +61,8 @@ export default EStyleSheet.create({
   },
 
   contactsSearchField: {
-    marginVertical: 12,
+    marginBottom: 12,
+    marginTop: 16,
     flexGrow: 1,
   },
 

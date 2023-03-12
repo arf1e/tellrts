@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
+import {Streami18n} from 'stream-chat-react-native';
 import en from './en';
 import ru from './ru';
 
@@ -21,5 +22,7 @@ const initialize = () =>
       },
     },
   });
+
+export const streami18n = new Streami18n();
 
 export default initialize;
