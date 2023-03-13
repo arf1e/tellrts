@@ -10,8 +10,6 @@ const initialiseTellrServices = async () => {
   if (!i18next.isInitialized) {
     initializeI18n();
   }
-
-  streami18n.setLanguage(i18next.language);
 };
 
 export default initialiseTellrServices;

@@ -24,8 +24,8 @@ const AnimatedView = Reanimated.createAnimatedComponent(View);
 const ClearButton = ({onPress, text}: {text: string; onPress: () => void}) => {
   return (
     <AnimatedView
-      entering={FadeInRight.duration(300).easing()}
-      exiting={FadeOutRight.duration(240).easing()}
+      entering={FadeInRight.duration(300)}
+      exiting={FadeOutRight.duration(240)}
       style={{marginLeft: 12}}>
       <Link hitSlop={44} onPress={onPress}>
         {text}

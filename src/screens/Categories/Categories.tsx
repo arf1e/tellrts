@@ -47,8 +47,10 @@ const CategoryCard = ({
 };
 
 export default () => {
-  const {loading, error, data} =
-    useQuery<GetCategoriesQueryData>(GET_CATEGORIES_QUERY);
+  const {loading, error, data} = useQuery<GetCategoriesQueryData>(
+    GET_CATEGORIES_QUERY,
+    {fetchPolicy: 'cache-and-network'},
+  );
 
   const navigation = useNavigation();
 

@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {ActivityIndicator, View} from 'react-native';
+import {ActivityIndicator, Platform, View} from 'react-native';
 import {BodyCopy} from '../Typography';
 import styles from './Statistics.styles';
 
@@ -17,7 +17,9 @@ type Props = {
 
 const StatisticsCard = ({loading, children, title, description}: Props) => {
   return (
-    <AnimatedView style={styles.cardContainer} layout={Layout}>
+    <AnimatedView
+      style={styles.cardContainer}
+      layout={Platform.OS === 'android' ? undefined : Layout}>
       {loading ? (
         <ActivityIndicator size="large" color={colors.primary} />
       ) : (

@@ -4,20 +4,15 @@ import {View} from 'react-native';
 import Container from '../../components/Container';
 import Option from '../../components/Option/Option';
 import {BodyCopy} from '../../components/Typography';
-import client from '../../utils/apollo';
-import {streami18n} from '../../utils/i18n';
+import {
+  LANGUAGE_ENGLISH,
+  LANGUAGE_RUSSIAN,
+  setLanguage,
+} from '../../utils/i18n';
 import styles from './UpdateLanguage.styles';
 
 const UpdateLanguage = () => {
   const {t, i18n} = useTranslation();
-
-  const setLanguage = async (language: 'en' | 'ru') => {
-    i18n.changeLanguage(language);
-    streami18n.setLanguage(language);
-    await client.refetchQueries({
-      include: 'active',
-    });
-  };
 
   return (
     <View style={styles.screenContainer}>
@@ -26,7 +21,7 @@ const UpdateLanguage = () => {
         <View style={styles.languageControls}>
           <Option
             title="English"
-            isActive={i18n.language === 'en'}
+            isActive={i18n.language === LANGUAGE_ENGLISH}
             pressable={{
               style: styles.languageOption,
             }}
@@ -34,7 +29,7 @@ const UpdateLanguage = () => {
           />
           <Option
             title="Русский"
-            isActive={i18n.language === 'ru'}
+            isActive={i18n.language === LANGUAGE_RUSSIAN}
             pressable={{
               style: styles.languageOption,
             }}

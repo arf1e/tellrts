@@ -1,7 +1,7 @@
 import {useQuery} from '@apollo/client';
 import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, FlatListProps} from 'react-native';
 import {CONTACT} from '../../components/Navigation/ContactsNavigator';
 import {GetContactsResult, GET_CONTACTS_QUERY} from './Contacts.graphql';
 import styles from './Contacts.styles';
@@ -12,8 +12,11 @@ import {ContactsInputState} from '../../utils/slices/contactsInputSlice';
 import UserIcon from './Contacts.UserIcon';
 import {useTranslation} from 'react-i18next';
 import ErrorWithImage from '../../components/ErrorWithImage';
+import {User} from '../Search/Search.graphql';
 
 const AnimatedView = Reanimated.createAnimatedComponent(View);
+const AnimatedFlatList =
+  Reanimated.createAnimatedComponent<FlatListProps<User>>(FlatList);
 
 const LOADING = 'LOADING';
 const LIST = 'LIST';
@@ -80,7 +83,7 @@ const UsersList = () => {
     <AnimatedView layout={Layout.springify()} style={styles.usersListContainer}>
       {screenState === ERROR && renderError()}
       {screenState !== ERROR && (
-        <FlatList
+        <AnimatedFlatList
           data={getProbablyFilteredUsers()}
           onRefresh={handleRefresh}
           refreshing={screenState === LOADING}

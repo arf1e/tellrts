@@ -2,14 +2,14 @@ import i18next from 'i18next';
 import ImagePicker, {ImageOrVideo} from 'react-native-image-crop-picker';
 
 export const pickerOptions = {
-  width: 1000,
-  height: 1000,
+  width: 800,
+  height: 850,
   cropping: true,
   cropperToolbarColor: '#FDFFFF',
   cropperStatusBarColor: '#1693A5',
   cropperToolbarWidgetColor: '#1D2C2E',
   cropperActiveWidgetColor: '#1693A5',
-  cropperCircleOverlay: true,
+  cropperCircleOverlay: false,
   cropperToolbarTitle: i18next.t('register.photo.editPhoto'),
 };
 

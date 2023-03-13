@@ -1,5 +1,6 @@
 import {Platform} from 'react-native';
-import EStyleSheet, {hairlineWidth} from 'react-native-extended-stylesheet';
+import EStyleSheet from 'react-native-extended-stylesheet';
+import {SCROLLABLE_PADDING_BOTTOM} from '../../utils/animationConstants';
 
 export default EStyleSheet.create({
   container: {
@@ -11,6 +12,7 @@ export default EStyleSheet.create({
   usersListContainer: {
     flex: 1,
     flexGrow: 1,
+    paddingBottom: SCROLLABLE_PADDING_BOTTOM,
   },
 
   listScrollable: {
@@ -18,7 +20,7 @@ export default EStyleSheet.create({
   },
 
   userLineContainer: {
-    paddingVertical: 4,
+    paddingVertical: 0,
     marginBottom: 8,
   },
 
@@ -37,7 +39,7 @@ export default EStyleSheet.create({
   userLineName: {
     fontSize: '$bcLarge',
     color: '$darkGray',
-    marginBottom: 8,
+    marginBottom: 4,
   },
 
   userLineCity: {
@@ -48,7 +50,6 @@ export default EStyleSheet.create({
   newContactsHeading: {
     color: '$black',
     fontSize: '$h4',
-    marginBottom: 12,
   },
 
   newContactHolder: {
@@ -61,13 +62,14 @@ export default EStyleSheet.create({
   },
 
   contactsSearchField: {
-    marginBottom: 12,
-    marginTop: 16,
+    marginTop: 20,
     flexGrow: 1,
   },
 
   screenHeader: {
-    paddingBottom: 4,
+    ...(Platform.OS === 'android' && {
+      paddingBottom: 24,
+    }),
   },
 
   inputAndClearContainer: {

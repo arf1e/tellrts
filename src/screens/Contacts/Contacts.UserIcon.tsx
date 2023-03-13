@@ -1,14 +1,12 @@
 import React from 'react';
 import Reanimated, {
-  FadeIn,
-  FadeOut,
   interpolate,
   Layout,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {Image, ImageBackground, Pressable, View} from 'react-native';
+import {Image, Pressable, View} from 'react-native';
 import Container from '../../components/Container';
 import {BodyCopy} from '../../components/Typography';
 import {User} from '../Search/Search.graphql';
@@ -35,12 +33,12 @@ const UserIcon = ({user, onPress}: {user: User; onPress: () => void}) => {
   };
 
   const photoAnimatedStyle = useAnimatedStyle(() => ({
-    transform: [{scale: interpolate(isPressedShared.value, [0, 1], [1, 1.2])}],
+    transform: [{scale: interpolate(isPressedShared.value, [0, 1], [1, 1.05])}],
   }));
 
   const textAnimatedStyle = useAnimatedStyle(() => ({
     transform: [
-      {translateX: interpolate(isPressedShared.value, [0, 1], [0, 8])},
+      {translateX: interpolate(isPressedShared.value, [0, 1], [0, 4])},
     ],
   }));
 
@@ -48,7 +46,6 @@ const UserIcon = ({user, onPress}: {user: User; onPress: () => void}) => {
   const infoStyles = [textAnimatedStyle, styles.userLineInfo];
   return (
     <AnimatedPressable
-      layout={Layout}
       onPressIn={onPressIn}
       onPressOut={onPressOut}
       onPress={onPress}
